@@ -1,0 +1,30 @@
+@import '../inputs.module';
+.container {
+  @extend %basic-container;
+
+  input {
+    @extend %basic-input;
+  }
+
+  .inputWrapper {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    .button {
+      position: absolute;
+      right: 10px;
+      top: 25%;
+
+      background: none;
+      border: none;
+      height: 20px;
+      width: 20px;
+
+      .icon {
+        height: 22px;
+        width: 22px;
+      }
+    }
+  }
+}

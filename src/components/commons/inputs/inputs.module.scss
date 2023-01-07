@@ -1,0 +1,14 @@
+%basic-container {
+  display: flex;
+  flex-direction: column;
+  font-size: 17px;
+}
+
+%basic-input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  height: 42px;
+  padding: 0.5rem;
+  margin-top: 3px;
+}

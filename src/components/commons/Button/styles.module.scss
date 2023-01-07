@@ -1,0 +1,19 @@
+$primary-color: #F5EE40;
+$secondary-color: #F93030;
+$tertiary-color: #F37F14;
+
+.button {
+  height: 42px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  padding: 0 5rem;
+  margin-top: 8px;
+  background-color: $primary-color;
+  transition: background-color 0.3s;
+
+    &:hover {
+        background-color: $tertiary-color;
+    }
+}

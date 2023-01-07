@@ -1,0 +1,35 @@
+$primary-color: #F5EE40;
+$secondary-color: #F93030;
+$tertiary-color: #F37F14;
+$background-color: #F2F1F1;
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0 30px;
+  min-height: 85px;
+
+  .logo {
+    width: 200px;
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  .search {
+    margin: auto;
+    width: 500px;
+  }
+
+  .menu {
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    font-weight: 500;
+    font-size: 1.2em;
+  }
+}

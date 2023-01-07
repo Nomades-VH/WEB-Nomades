@@ -1,0 +1,15 @@
+@import '../inputs.module';
+
+.container {
+  @extend %basic-container;
+
+  input {
+    @extend %basic-input;
+  }
+
+  .error {
+    color: red;
+    font-size: 15px;
+    margin: 3px;
+  }
+}
