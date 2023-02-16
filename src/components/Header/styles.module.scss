@@ -9,6 +9,8 @@ $background-color: #F2F1F1;
   align-items: center;
   margin: 0 30px;
   min-height: 85px;
+  // space-between
+  justify-content: space-between;
 
   .logo {
     width: 200px;

@@ -1,15 +1,17 @@
 import styles from './index.module.scss'
+import Footer from "../components/footer";
+import Link from 'next/link';
+import Menu from "../components/commons/Menu";
 
-export default function Home() {
+export default function Home(props) {
 
   return (
-    <div className={styles.main}>
-        <div className={styles.container}>
-            <h2>
-                Seja bem-vindo aos Nômades do Vale Histórico
-            </h2>
+    <>
+        <div className={styles.main}>
+            <div className={styles.container}>
+                <Menu />
+            </div>
         </div>
-
-    </div>
+    </>
   )
 }

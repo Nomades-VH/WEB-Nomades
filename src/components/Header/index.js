@@ -2,11 +2,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './styles.module.scss';
 import InputSearch from '../commons/inputs/InputSearch';
-import { useSelector } from 'react-redux';
-import logo from '../../public/images/Logo.jpeg'
+import logo from '../../public/images/LogoAtual-removebg-preview.png'
 import { useRouter } from 'next/router';
 
-export default function Header() {
+export default function Header(props) {
     const router = useRouter();
 
     return (
@@ -17,14 +16,20 @@ export default function Header() {
                 </Link>
             </div>
 
-            <div className={styles.search}>
-                <InputSearch placeholder='Pesquisar' onSubmit={(value) => router.push('/search?q=' + value)} />
-            </div>
+            {
+                props.user ? (
+                    <div>
+                        <div>
+                            {props.user.name}
+                        </div>
+                    </div>
+                ) : (
+                    <div className={styles.menu}>
+                        <Link href='/login'>Entrar</Link>
+                    </div>
+                )
+            }
 
-            <div className={styles.menu}>
-                <Link href='/login'>Entrar</Link>
-                <Link href='#'>Criar conta</Link>
-            </div>
         </header>
     );
 }
