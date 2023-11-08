@@ -6,7 +6,7 @@ export default function Menu(props) {
     return (
         <div className={styles.container}>
             <Link href={'/store'}>Loja</Link>
-            <Link href={'/'}>Poomsae</Link>
+            <Link href={'poomsae/'}>Poomsae</Link>
             <Link href={'/'}>Kibon Donjak</Link>
             <Link href={'/'}>Tchagui Sool</Link>
             <Link href={'/'}>Kiorugui</Link>
