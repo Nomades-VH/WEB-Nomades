@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import Footer from "../components/footer";
 import Link from 'next/link';
-import Menu from "../components/commons/Menu";
+import HomeComponent from "../components/commons/Home";
 
 export default function Home(props) {
 
@@ -9,7 +9,7 @@ export default function Home(props) {
     <>
         <div className={styles.main}>
             <div className={styles.container}>
-                <Menu />
+                <HomeComponent />
             </div>
         </div>
     </>

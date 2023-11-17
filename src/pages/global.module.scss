@@ -1,0 +1,21 @@
+* {
+  a.default {
+    padding: 15px;
+    font-size: 20px;
+    border-radius: 10px;
+    transition: 0.5s;
+    border: 0.5px solid white;
+    // separar os botoes
+    margin: 15px;
+
+    &:hover {
+      background-color: #ea8e21;
+      color: black;
+      transform: translateY(-15px);
+    }
+  }
+
+  .container {
+
+  }
+}

@@ -3,20 +3,33 @@ $secondary-color: #F93030;
 $tertiary-color: #F37F14;
 $background-color: #F2F1F1;
 
+@import "src/pages/global.module";
+
 .container {
   display: flex;
-  flex-direction: row;
   align-items: center;
-  margin: 0 30px;
-  min-height: 85px;
   // space-between
   justify-content: space-between;
+  margin-bottom: 30px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 2px 2px 8px 2px grey;
+
+
+
+  .itens {
+    display: flex;
+    width: auto;
+    margin: 20px;
+  }
 
   .logo {
     width: 200px;
+    display: flex;
+    justify-content: center;
 
     img {
       cursor: pointer;
+      margin: 30px;
     }
   }
 
