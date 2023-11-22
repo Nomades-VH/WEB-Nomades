@@ -13,8 +13,6 @@ $background-color: #F2F1F1;
   border-radius: 0 0 10px 10px;
   box-shadow: 2px 2px 8px 2px grey;
 
-
-
   .itens {
     display: flex;
     width: auto;
@@ -25,6 +23,7 @@ $background-color: #F2F1F1;
     width: 200px;
     display: flex;
     justify-content: center;
+    position: relative;
 
     img {
       cursor: pointer;
@@ -46,5 +45,27 @@ $background-color: #F2F1F1;
 
     font-weight: 500;
     font-size: 1.2em;
+
+    .dropdown {
+      background-color: #ea8e21;
+      margin-right: 50px;
+      border-radius: 10px;
+
+      a {
+        color: white;
+      }
+
+      div {
+        background-color: #ea8e21;
+
+        a {
+          color: white;
+          transition: 0.5s;
+        }:hover {
+          color: black;
+        background-color: #ea8e21;
+                 }
+      }
+    }
   }
 }

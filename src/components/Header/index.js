@@ -12,7 +12,7 @@ export default function Header(props) {
         <header className={styles.container}>
             <div className={styles.logo}>
                 <Link href='/'>
-                    <Image src={logo} width={80} height={80} />
+                    <Image src={logo} width={80} height={80} alt="Logo da equipe Nômades" />
                 </Link>
             </div>
             <div className={styles.itens}>
@@ -32,12 +32,12 @@ export default function Header(props) {
                         <Navbar expand="lg">
                             <Container>
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                                    <Nav className="me-auto">
+                                    <Nav>
                                         <div className={styles.menu}>
                                             <Nav.Link className={styles.default} href='/login'>Entrar</Nav.Link>
-                                            <NavDropdown title="Opções" className="me-4">
-                                                    <NavDropdown.Item href="/band">Apostila</NavDropdown.Item>
-                                                    <NavDropdown.Item href="/polo">Seu Polo</NavDropdown.Item>
+                                            <NavDropdown title="Opções" className={styles.dropdown}>
+                                                <NavDropdown.Item href="/band">Apostila</NavDropdown.Item>
+                                                <NavDropdown.Item href="/polo">Seu Polo</NavDropdown.Item>
                                             </NavDropdown>
                                         </div>
                                     </Nav>
