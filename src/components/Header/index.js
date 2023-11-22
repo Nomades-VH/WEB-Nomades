@@ -15,29 +15,22 @@ export default function Header(props) {
                 </Link>
             </div>
             <div className={styles.itens}>
-                <Link className={styles.default} href={'/store'}>Loja</Link>
-                <Link className={styles.default} href={'poomsae/'}>Poomsae</Link>
-                <Link className={styles.default} href={'/'}>Kibon Donjak</Link>
-                <Link className={styles.default} href={'/'}>Tchagui Sool</Link>
-                <Link className={styles.default} href={'/'}>Kiorugui</Link>
-                <Link className={styles.default} href={'/'}>Matcho Kiorugui</Link>
-                <Link className={styles.default} href={'/'}>Taget</Link>
-                <Link className={styles.default} href={'/'}>Iron</Link>
-                <Link className={styles.default} href={'/'}>Yu yun sung</Link>
-            </div>
-            {
-                props.user ? (
-                    <div>
+                {/*<Link className={styles.default} href={'/store'}>Loja</Link>*/}
+                {
+                    props.user ? (
                         <div>
-                            {props.user.name}
+                            <div>
+                                {props.user.name}
+                            </div>
                         </div>
-                    </div>
-                ) : (
-                    <div className={styles.menu}>
-                        <Link className={styles.default} href='/login'>Entrar</Link>
-                    </div>
-                )
-            }
+                    ) : (
+                        <div className={styles.menu}>
+                            <Link className={styles.default} href='/login'>Entrar</Link>
+                        </div>
+                    )
+                }
+            </div>
+
 
         </header>
     );

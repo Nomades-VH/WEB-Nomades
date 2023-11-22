@@ -20,7 +20,7 @@ export default function InputPassword({ name, label, placeholder, value, onChang
                     />
                     {toggleMask && (
                         <button className={styles.button} type='button' onClick={() => setMask(!mask)}>
-                            {mask ? <TbEye className={styles.icon} /> : <TbEyeOff className={styles.icon} />}
+                            {mask ? <TbEyeOff className={styles.icon} /> : <TbEye className={styles.icon} />}
                         </button>
                     )}
                 </div>
