@@ -12,9 +12,12 @@ $background-color: #F2F1F1;
   display: flex;
   flex-direction: column;
   min-height: 85vh;
+  height: auto;
   background-color: #efefef;
+  margin: 30px;
 
-  width: 80vw;
+  min-width: 80vw;
+  width: auto;
   border-radius: 20px;
 
 }

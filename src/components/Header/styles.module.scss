@@ -10,7 +10,6 @@ $background-color: #F2F1F1;
   align-items: center;
   // space-between
   justify-content: space-between;
-  margin-bottom: 30px;
   border-radius: 0 0 10px 10px;
   box-shadow: 2px 2px 8px 2px grey;
 
@@ -39,10 +38,11 @@ $background-color: #F2F1F1;
   }
 
   .menu {
-    width: 200px;
+    width: 300px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
 
     font-weight: 500;
     font-size: 1.2em;

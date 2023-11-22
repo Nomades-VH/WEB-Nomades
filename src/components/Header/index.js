@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styles from './styles.module.scss';
 import logo from '../../public/images/LogoAtual-removebg-preview.png'
 import { useRouter } from 'next/router';
+import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 export default function Header(props) {
     const router = useRouter();
@@ -18,15 +19,30 @@ export default function Header(props) {
                 {/*<Link className={styles.default} href={'/store'}>Loja</Link>*/}
                 {
                     props.user ? (
-                        <div>
-                            <div>
-                                {props.user.name}
-                            </div>
-                        </div>
+                        <Navbar expand="lg" className="bg-body-tertiary">
+                            <Container>
+                                <div className={styles.menu}>
+                                    {props.user.name}
+                                </div>
+                            </Container>
+
+                        </Navbar>
+
                     ) : (
-                        <div className={styles.menu}>
-                            <Link className={styles.default} href='/login'>Entrar</Link>
-                        </div>
+                        <Navbar expand="lg">
+                            <Container>
+                                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                                    <Nav className="me-auto">
+                                        <div className={styles.menu}>
+                                            <Nav.Link className={styles.default} href='/login'>Entrar</Nav.Link>
+                                            <NavDropdown title="Opções" className="me-4">
+                                                    <NavDropdown.Item href="/band">Apostila</NavDropdown.Item>
+                                                    <NavDropdown.Item href="/polo">Seu Polo</NavDropdown.Item>
+                                            </NavDropdown>
+                                        </div>
+                                    </Nav>
+                            </Container>
+                        </Navbar>
                     )
                 }
             </div>
