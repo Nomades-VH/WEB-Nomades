@@ -1,7 +1,5 @@
 import styles from './styles.module.scss';
-import Link from "next/link";
 import Image from "next/image";
-import Polos from "./Polos";
 import defaultImage from "../../../public/images/Logo.jpeg"
 import d from "../../../public/images/img.png"
 import a from "../../../public/images/faixa-sem-logo-amarelo.png"
@@ -21,7 +19,7 @@ export default function Menu(props) {
                     <Image src={d} alt={'default image'} />
                 </Carousel.Item>
                 <Carousel.Item className={styles.item}>
-                    <Image src={a} alt={'default image'} />
+                    <Image src={a} alt={'default image'} priority="false" />
                 </Carousel.Item>
                 <Carousel.Item className={styles.item}>
                     <Image src={defaultImage} alt={'default image'} />
