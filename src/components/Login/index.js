@@ -7,56 +7,64 @@ import Image from "next/image";
 import logo from '../../public/images/Logo.jpeg'
 import headerImage from '../../public/images/faixa-sem-logo-amarelo.png'
 import Link from "next/link";
-import {login} from "../../services/login";
 import {useState} from "react";
+import { useAuth } from "../../context/AuthContext";
+import { router } from "next/router"
 
 function Login() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const { login, isAuthenticated } = useAuth();
 
-    const handleLogin = async () => {
+    const handleLogin = async (event) => {
+        event.preventDefault();
         try {
-            const result = await login(username, password);
-            console.log(username, password)
-            console.log(result);
-            console.log(result.data);
-            console.log(result.data.access_token);
-            localStorage.setItem("access_token", result.data.access_token)
+            const response = await login(username, password);
+            if (response) {
+                router.push('/')
+            }
         } catch (error) {
-            console.error('Erro durante o login', error)
+            alert("Usuário ou senha incorreto.")
         }
     }
-    return (
-        <div className={styles.main}>
-            <Image src={headerImage} alt={'faixa'} className={styles.band}/>
+    if (!isAuthenticated) {
+        return (
+            <div className={styles.main}>
 
-            <div className={styles.container}>
-                <div className={styles.div}>
-                    <Form className={styles.form} onSubmit={handleLogin}>
-                        <label>
-                            <h2>Entrar</h2>
-                        </label>
-                        <section>
-                            <label><h3>Usuário</h3></label>
-                            <InputText name="username" placeholder={'E-mail ou usuário'} required={true} onChange={(e) => setUsername(e.target.value)}/>
-                            <label><h3>Senha</h3></label>
-                            <InputPassword name="password" placeholder={'Insira sua senha'} required={true} onChange={(e) => setPassword(e.target.value)}/>
-                        </section>
-                        <Button label={'Entrar'}/>
-                    </Form>
-                </div>
-                <div className={styles.div}>
-                    <Link href={'/'}>
-                        <Image alt={'Logo'} src={logo} className={styles.logo}/>
-                    </Link>
+                <Image src={headerImage} alt={'faixa'} className={styles.band}/>
+                <button id="mensagem-sucesso">
+                    Exibir mensagem de sucesso
+                </button>
+
+                <div className={styles.container}>
+                    <div className={styles.div}>
+                        <Form className={styles.form} onSubmit={handleLogin}>
+                            <label>
+                                <h2>Entrar</h2>
+                            </label>
+                            <section>
+                                <label><h3>Usuário</h3></label>
+                                <InputText name="username" placeholder={'E-mail ou usuário'} required={true}
+                                           onChange={(e) => setUsername(e.target.value)}/>
+                                <label><h3>Senha</h3></label>
+                                <InputPassword name="password" placeholder={'Insira sua senha'} required={true}
+                                               onChange={(e) => setPassword(e.target.value)}/>
+                            </section>
+                            <Button label={'Entrar'}/>
+                        </Form>
+                    </div>
+                    <div className={styles.div}>
+                        <Link href={'/'}>
+                            <Image alt={'Logo'} src={logo} className={styles.logo}/>
+                        </Link>
+                    </div>
                 </div>
             </div>
-
-        </div>
-
-
-    )
+        )
+    } else {
+        router.push("/");
+    }
 }
 
 export default Login;
