@@ -8,6 +8,8 @@ export default function Poomsae(props) {
     return (
         <div>
             <h1>Pagina de Poomsae</h1>
+            <h1>Pagina de Poomsae</h1>
+            <h1>Pagina de Poomsae</h1>
         </div>
     )
 

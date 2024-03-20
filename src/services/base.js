@@ -3,7 +3,7 @@ import {router} from "next/router";
 import AuthService from "./auth";
 
 export const instance = axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://api-nomades.onrender.com/',
     paramsSerializer: {
         indexes: null,
     },

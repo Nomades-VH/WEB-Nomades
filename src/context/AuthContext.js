@@ -46,7 +46,7 @@ export const AuthProvider = ({children}) => {
 
     const login = async (username, password) => {
         try {
-            const response = await axios.post('http://localhost:8000/auth',
+            const response = await axios.post('https://api-nomades.onrender.com/auth',
                 {
                     "username": username,
                     "password": password
