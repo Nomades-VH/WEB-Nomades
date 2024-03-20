@@ -63,15 +63,17 @@ export const AuthProvider = ({children}) => {
     };
 
     const logout = async () => {
-        var token = localStorage.getItem('access_token');
-        console.log('token')
-            await axios.post('https://api-nomades.onrender.com/auth/logout',
-                {
-                    "Authorization": `Bearer ${token}`
-                }, {
-                    'Content-Type': 'application/json'
-                }
-            )
+        const token = localStorage.getItem('access_token');
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }
+
+        const response = await axios.post('https://api-nomades.onrender.com/auth/logout/', {}, config)
+        if (response.status === 200) {
+            console.log("FELIZ")
+        }
         localStorage.removeItem('access_token');
         setIsAuthenticated(false);
     };
