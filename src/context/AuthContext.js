@@ -65,7 +65,7 @@ export const AuthProvider = ({children}) => {
     const logout = async () => {
             await axios.post('https://api-nomades.onrender.com/auth/logout/',
                 {
-                    "token": localStorage.get('access_token')
+                    "token": localStorage.getItem('access_token')
                 }, {
                     'Content-Type': 'application/json'
                 }
