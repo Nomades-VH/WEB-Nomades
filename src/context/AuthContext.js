@@ -1,6 +1,7 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import axios from "axios";
 import UserService from '../services/user'
+import {instance} from "../services/base";
 
 const AuthContext = createContext();
 
@@ -46,7 +47,7 @@ export const AuthProvider = ({children}) => {
 
     const login = async (username, password) => {
         try {
-            const response = await axios.post('https://api-nomades.onrender.com/auth',
+            const response = await instance.post('auth',
                 {
                     "username": username,
                     "password": password
@@ -70,7 +71,7 @@ export const AuthProvider = ({children}) => {
             }
         }
 
-        const response = await axios.post('https://api-nomades.onrender.com/auth/logout/', {}, config)
+        const response = await instance.post('auth/logout/', {}, config)
         if (response.status === 200) {
             console.log("FELIZ")
         }

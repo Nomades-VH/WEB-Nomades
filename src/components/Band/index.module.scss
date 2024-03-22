@@ -1,0 +1,42 @@
+.main {
+    font-family: "Nimbus Roman", sans-serif;
+    // colocar no centro da pagina
+    display: flex;
+}
+
+.container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 85vh;
+    height: auto;
+    background-color: #efefef;
+    margin: 30px;
+    width: 50%;
+    border-radius: 20px;
+    padding: 30px;
+
+    h1 {
+        align-self: center;
+    }
+
+    .content {
+        margin: 30px;
+
+        .single {
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+            margin-bottom: 0;
+        }
+
+        .attribute {
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+            margin: 10px;
+        }
+    }
+
+
+}

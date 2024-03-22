@@ -1,10 +1,9 @@
 import '../styles/globals.css'
 import Header from "../components/Header";
-import Footer from "../components/footer";
+import Footer from "../components/Footer";
 import React from "react";
 import {AuthProvider} from "../context/AuthContext";
 import LoginPage from "./login";
-
 import { useEffect } from "react";
 
 export default function App({Component, pageProps}) {

@@ -9,10 +9,9 @@ import headerImage from '../../public/images/faixa-sem-logo-amarelo.png'
 import Link from "next/link";
 import {useState} from "react";
 import { useAuth } from "../../context/AuthContext";
-import { router } from "next/router"
+import router from "next/router"
 
 function Login() {
-
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { login, isAuthenticated } = useAuth();
@@ -22,7 +21,7 @@ function Login() {
         try {
             const response = await login(username, password);
             if (response) {
-                router.push('/')
+                await router.push('/')
             }
         } catch (error) {
             alert("Usuário ou senha incorreto.")
@@ -33,9 +32,6 @@ function Login() {
             <div className={styles.main}>
 
                 <Image src={headerImage} alt={'faixa'} className={styles.band}/>
-                <button id="mensagem-sucesso">
-                    Exibir mensagem de sucesso
-                </button>
 
                 <div className={styles.container}>
                     <div className={styles.div}>

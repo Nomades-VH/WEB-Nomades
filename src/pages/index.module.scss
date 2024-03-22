@@ -1,24 +1,26 @@
 $background-color: #F2F1F1;
 
-.main {
-  // colocar no centro da pagina
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+@media(min-width: 992px) {
+  .main {
+    // colocar no centro da pagina
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    min-height: 85vh;
+    height: auto;
+    background-color: #efefef;
+    margin: 30px;
+    min-width: 80vw;
+    width: 95%;
+    border-radius: 20px;
+
+  }
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  min-height: 85vh;
-  height: auto;
-  background-color: #efefef;
-  margin: 30px;
-
-  min-width: 80vw;
-  width: auto;
-  border-radius: 20px;
-
-}
 

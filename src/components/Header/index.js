@@ -13,7 +13,7 @@ export default function Header(props) {
         <header className={styles.container}>
             <div className={styles.logo}>
                 <Link href='/'>
-                    <Image src={logo} width={150} height={150} alt="Logo da equipe Nômades"/>
+                    <Image src={logo} width={80} height={80} alt="Logo da equipe Nômades"/>
                 </Link>
             </div>
             <div className={styles.itens}>
