@@ -58,7 +58,7 @@ export default function CoursePackets() {
             <div className={styles.contents}>
                 <h1>Apostilas</h1>
                 {user.permission >= 3 ?
-                    <Link to='/faixa/criar' style={{position: "absolute", alignSelf: "end"}}>
+                    <Link to='/faixa/criar' style={{position: "absolute", alignSelf: "flex-end"}}>
                         <h1>+</h1>
                     </Link> : null}
                 {bands && bands.map((band) => (
