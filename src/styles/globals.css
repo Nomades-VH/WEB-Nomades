@@ -1,30 +1,53 @@
+@font-face {
+    font-family: JapanWave;
+    src: url("../public/japan_wave/JapanWave.ttf");
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url("../public/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
+    font-family: JapanWave;
+    font-size: 25px;
 }
 
-html,
-body {
-    font-family: Roboto, sans-serif;
-    max-width: 100vw;
-    overflow-x: hidden;
+.app {
+    background: linear-gradient(to bottom right, #F5EE40, #EB1F26);
 }
 
 a {
     color: inherit !important;
     text-decoration: none !important;
+    transition: 0.2s;
 }
 
 .link {
-    border-bottom: 2px black double;
+    border-bottom: 2px double;
 }
 
-::-webkit-scrollbar {
-    width: 8px;
+p, a {
+    font-family: Montserrat;
+    font-size: 18px;
 }
 
-::-webkit-scrollbar-thumb {
-    background-color: #a9a9a9;
-    border-radius: 5px;
+@media (min-width: 1400px) {
+    html, body {
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #a9a9a9;
+        border-radius: 5px;
+    }
 }
+

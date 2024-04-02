@@ -1,5 +1,4 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
-import axios from "axios";
 import UserService from '../services/user'
 import {instance} from "../services/base";
 
@@ -16,45 +15,45 @@ export const AuthProvider = ({children}) => {
         if (token) {
             setIsAuthenticated(true);
         } else {
-            setIsAuthenticated(false)
+            setIsAuthenticated(false);
         }
 
         if (isAuthenticated) {
             async function loadUser() {
                 try {
-                    const result = await UserService.get_me(token)
+                    const result = await UserService.get_me(token);
                     if (result) {
-                        setUser(result)
-                        setIsAuthenticated(true)
+                        setUser(result);
+                        setIsAuthenticated(true);
                     } else {
-                        setIsAuthenticated(false)
+                        setIsAuthenticated(false);
                     }
                 } catch (error) {
                     localStorage.removeItem("access_token");
-                    setIsAuthenticated(false)
+                    setIsAuthenticated(false);
                 } finally {
                     setLoading(false);
                 }
 
             }
 
-            loadUser()
+            loadUser();
         } else {
             setLoading(false);
         }
 
     }, [isAuthenticated]);
 
-    const login = async (username, password) => {
+    const login = async (email, password) => {
         try {
             const response = await instance.post('auth',
                 {
-                    "username": username,
+                    "email": email,
                     "password": password
                 }, {
                     'Content-Type': 'application/json'
                 }
-            )
+            );
             localStorage.setItem('access_token', response.data.access_token);
             setIsAuthenticated(true);
             return response;
@@ -71,12 +70,12 @@ export const AuthProvider = ({children}) => {
             }
         }
 
-        const response = await instance.post('auth/logout/', {}, config)
+        const response = await instance.post('auth/logout', {}, config);
         if (response.status === 200) {
-            console.log("FELIZ")
+            setUser(null)
+            localStorage.removeItem('access_token');
+            setIsAuthenticated(false);
         }
-        localStorage.removeItem('access_token');
-        setIsAuthenticated(false);
     };
 
     return (

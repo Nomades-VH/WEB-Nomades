@@ -16,6 +16,7 @@ export default function InputPassword({ name, label, placeholder, value, onChang
                         placeholder={placeholder}
                         onChange={onChange}
                         onBlur={onBlur}
+                        value={value}
                         {...props}
                     />
                     {toggleMask && (
@@ -24,7 +25,6 @@ export default function InputPassword({ name, label, placeholder, value, onChang
                         </button>
                     )}
                 </div>
-                {<span className='error'>{error}</span>}
             </label>
         </>
     );

@@ -1,22 +1,16 @@
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import styles from "../../styles.module.scss";
 import {useAuth} from "../../../../context/AuthContext";
-import router from "next/router";
+import {Link} from 'react-router-dom';
 
-function Logged(user) {
+
+export default function Logged(props) {
     const {logout} = useAuth();
 
     const handleLogout = async () => {
         // Chama a função de logout
         logout();
-        await router.push("/")
     };
-
-    const toUpperCaseInitial = (text) => {
-        return text.toLowerCase().replace(/(?:^|\s)\S/g, function(a) {
-            return a.toUpperCase();
-        });
-    }
 
     return (
         <Navbar expand="lg">
@@ -24,10 +18,19 @@ function Logged(user) {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Nav>
                     <div className={styles.menu}>
-                        <Nav className={styles.default}>{toUpperCaseInitial(user?.user.username)} </Nav>
-                        <NavDropdown title="Opções" className={styles.dropdown}>
-                            <NavDropdown.Item href="/apostilas">Apostilas</NavDropdown.Item>
-                            <NavDropdown.Item href="/polo">Seu Polo</NavDropdown.Item>
+                        <NavDropdown title="Opções" className={styles.dropdown} drop="start">
+                            {parseInt(props.user?.permission) >= 3 ?
+                                <div><NavDropdown.Item>
+                                    <Link to="usuario/criar">Criar usuário</Link>
+                                </NavDropdown.Item></div>
+                                : null}
+
+                            <NavDropdown.Item>
+                                <Link to="/apostilas">Apostilas</Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item>
+                                <Link to="/polo">Seu Polo</Link>
+                            </NavDropdown.Item>
                             <NavDropdown.Item onClick={handleLogout}>Sair</NavDropdown.Item>
                         </NavDropdown>
                     </div>
@@ -35,14 +38,4 @@ function Logged(user) {
             </Container>
         </Navbar>
     )
-}
-
-export default function User() {
-    const { user } = useAuth();
-    if (user) {
-        return (
-            <Logged user={user}/>
-        );
-    }
-
 }

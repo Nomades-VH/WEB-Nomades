@@ -1,39 +1,70 @@
 import '../styles/globals.css'
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import React from "react";
+import React, {useState} from "react";
 import {AuthProvider} from "../context/AuthContext";
+import {useEffect} from "react";
+import {Route, Routes, BrowserRouter as Router, useLocation} from "react-router-dom";
+import Home from "./index";
+import PrivateRoute from "../components/PrivateRoute";
+import CreateUser from "./user/create";
+import CoursePackets from "./coursePackets";
+import CoursePack from "./coursePack/[id]";
+import NotFound from "../components/commons/NotFound";
 import LoginPage from "./login";
-import { useEffect } from "react";
+import ScrollToTopButton from "../components/ScrollToTopButton";
+import CreateBand from "./band/create";
 
-export default function App({Component, pageProps}) {
+
+const App = () => {
+
+    const [isClient, setIsClient] = useState(false)
+
     useEffect(() => {
         require("bootstrap/dist/css/bootstrap.min.css");
+        setIsClient(true)
     }, []);
 
-
-    if (Component === LoginPage) {
+    if (isClient) {
         return (
-            <div>
-                <AuthProvider>
-                    <Component {...pageProps} />
-                    <Footer/>
-                </AuthProvider>
+            <div className="app">
+                <Router>
+                    {/* O componente App está dentro do Router */}
+                    <AuthProvider>
+                        <AppContent/>
+                        <ScrollToTopButton />
+                    </AuthProvider>
+                </Router>
             </div>
-        )
+        );
     }
 
-    return (
-        <div>
-            <AuthProvider>
-                <Header/>
-                <Component {...pageProps} />
-                <Footer/>
-            </AuthProvider>
-
-            <script async >
-
-            </script>
-        </div>
-    )
 }
+const AppContent = () => {
+    const location = useLocation();
+    const isLoginPage = location.pathname === "/login";
+
+    return (
+        <>
+            {/* Renderiza o Header apenas se a página não for a página de login */}
+            {!isLoginPage && <Header/>}
+
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route element={<PrivateRoute/>}>
+                    <Route path="/usuario/criar" element={<CreateUser/>}/>
+                    <Route path="/apostilas" element={<CoursePackets/>}/>
+                    <Route path="/apostila/:id" element={<CoursePack/>}/>
+                    <Route path="/polo" element={<NotFound/>}/>
+                    <Route path="/faixa/criar" element={<CreateBand />} />
+                </Route>
+                <Route path="*" element={<NotFound/>}/>
+            </Routes>
+
+            <Footer/>
+        </>
+    );
+};
+
+export default App;

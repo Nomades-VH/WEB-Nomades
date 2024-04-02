@@ -1,18 +1,21 @@
 import {useEffect, useState} from "react";
-import router, {useRouter} from "next/router";
+import {useRouter} from "next/router";
 import BandService from "../../services/band";
 import {useAuth} from "../../context/AuthContext";
 import Band from "../../components/Band";
+import {useNavigate, useParams} from 'react-router-dom';
 
-export default function Apostila() {
+
+export default function CoursePack() {
     const router = useRouter();
-    const {id} = router.query;
     const [band, setBand] = useState();
     const {isAuthenticated} = useAuth();
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (!id) {
-            router.push('/');
+            navigate('/');
         } else {
             if (isAuthenticated) {
                 const token = localStorage.getItem("access_token")
@@ -21,13 +24,11 @@ export default function Apostila() {
                     try {
                         const result = await BandService.get_by_id(token, id)
                         if (result) {
-                            console.log(`Resultado: ${result.id} e ID: ${id}`)
                             setBand(result)
                         } else {
-                            await router.push("/")
+                            navigate("/")
                         }
                     } catch (error) {
-                        console.log(error)
                     }
 
                 }
@@ -35,7 +36,7 @@ export default function Apostila() {
                 loadBand()
             }
         }
-    }, [id, router, isAuthenticated]);
+    }, [id, router, isAuthenticated, navigate]);
 
     if (!id) {
         // Renderiza algo enquanto carrega
@@ -44,9 +45,7 @@ export default function Apostila() {
 
     if (band) {
         return (
-            <div>
-                <Band band={band} kicks={band.kicks} poomsaes={band.poomsaes} kibon_donjaks={band.kibon_donjaks}/>
-            </div>
+            <Band band={band} kicks={band.kicks} poomsaes={band.poomsaes} kibon_donjaks={band.kibon_donjaks}/>
         )
     }
 

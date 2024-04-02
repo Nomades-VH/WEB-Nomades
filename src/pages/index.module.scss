@@ -1,26 +1,57 @@
-$background-color: #F2F1F1;
 
-@media(min-width: 992px) {
-  .main {
-    // colocar no centro da pagina
+.main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+    margin: 10px 0;
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    min-height: 85vh;
-    height: auto;
-    background-color: #efefef;
-    margin: 30px;
-    min-width: 80vw;
-    width: 95%;
-    border-radius: 20px;
+    .container {
 
-  }
+        $background-color: #F2F1F1;
+
+        display: flex;
+        flex-direction: column;
+        background-color: #efefef;
+        min-height: 85vh;
+        height: auto;
+        margin: 30px;
+        min-width: 80vw;
+        width: 95%;
+        border-radius: 20px;
+    }
 }
 
 
+
+.kiossanins {
+    border-radius: 10px;
+    width: 100%;
+    padding: 30px;
+
+    h1 {
+        text-align: center;
+    }
+
+    img {
+        width: 500px;
+        height: 500px;
+    }
+
+    .person {
+        display: flex;
+        gap: 30px;
+        margin: 30px;
+        padding: 30px;
+        min-width: 1250px;
+        width: 80%;
+        border-radius: 10px;
+        background-color: #ffffff;
+    }
+
+    .personRight {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+    }
+}

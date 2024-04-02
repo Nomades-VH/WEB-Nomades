@@ -2,73 +2,58 @@ $primary-color: #F5EE40;
 $secondary-color: #F93030;
 $background-color: #F2F1F1;
 
-.main {
-  // colocar no centro da pagina
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-
-  .band {
-    margin-top: 20px;
-    position: absolute;
-    mix-blend-mode: multiply;
-    width: 100%;
-    height: 15%;
-  }
-
-  .container {
+.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    height: 100%;
 
     .div {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      a {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 50%;
-
-        .logo {
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      .form {
         width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        background-image: radial-gradient(#f37f14, #f55b5b);
 
-        h3 {
-          border-bottom: solid 2px;
-          width: auto;
+        a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        section {
-          width: 50%;
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
 
-          button:hover {
-            cursor: pointer;
-          }
+        .form {
+            width: 700px;
+            margin: 30px;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            background-color: rgba(0, 0, 0, 0.09);
+            color: white;
+            border-radius: 20px;
+
+            h3 {
+                border-bottom: solid 2px;
+                width: auto;
+            }
+
+            section {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+
+                button:hover {
+                    cursor: pointer;
+                }
+
+
+            }
+            button {
+                margin-bottom: 20px;
+            }
         }
-      }
     }
-  }
 }
+
 

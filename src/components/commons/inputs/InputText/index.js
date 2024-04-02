@@ -14,7 +14,6 @@ export default function InputText({ name, label, placeholder, value, onChange, o
                     onBlur={onBlur}
                     required={required}
                 />
-                <span className={styles.error}>{error}</span>
             </label>
         </>
     );

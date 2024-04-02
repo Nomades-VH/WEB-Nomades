@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px;
+    min-height: 85vh;
+    height: auto;
+    margin: 30px auto;
+    border-radius: 20px;
+    width: 1000px;
+
+    p {
+        text-align: center;
+        font-size: 30px;
+    }
+}

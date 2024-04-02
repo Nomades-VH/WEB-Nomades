@@ -1,19 +1,20 @@
 import styles from "./index.module.scss";
 
-export default function Band(props) {
+
+export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
     return (
         <div className={styles.main}>
 
             <div className={styles.container}>
-                <h1>{props.band.name}</h1>
+                <h1>{band.name}</h1>
 
                 <div className={styles.content}>
                     <div className={styles.single}>
-                        <h3>GUB:</h3> <p>{props.band.gub}</p>
+                        <h3>GUB:</h3> <p>{band.gub}</p>
                     </div>
 
                     <h3>Poomsae:</h3>
-                    {props.poomsaes.map((poomsae, index) => {
+                    {poomsaes.map((poomsae, index) => {
                         return (
                             <div key={index} className={styles.attributeBox}>
                                 <div className={styles.attribute}>
@@ -29,7 +30,7 @@ export default function Band(props) {
                         )
                     })}
                     <h3>Kibon Donjaks:</h3>
-                    {props.kibon_donjaks.map((kibon_donjak, index) => {
+                    {kibon_donjaks.map((kibon_donjak, index) => {
                         return (
                             <div key={index} className={styles.attributeBox}>
                                 <div className={styles.attribute}>
@@ -42,7 +43,7 @@ export default function Band(props) {
                         )
                     })}
                     <h3>Chutes:</h3>
-                    {props.kicks.map((kick, index) => {
+                    {kicks.map((kick, index) => {
                         return (
                             <div key={index} className={styles.attributeBox}>
                                 <div className={styles.attribute}>
@@ -56,16 +57,16 @@ export default function Band(props) {
                     })}
                     <div className={styles.single}>
                         <h3>Teoria:</h3>
-                        <a href="#" className="link">{props.band.theory}</a>
+                        <a href="#" className="link">{band.theory}</a>
                     </div>
                     <div className={styles.single}>
                         <h3>Alongamento:</h3>
-                        <a href="#" className="link">{props.band.stretching}</a>
+                        <a href="#" className="link">{band.stretching}</a>
                     </div>
                     <div className={styles.single}>
 
                         <h3>Quebramento:</h3>
-                        <a href="#" className="link">{props.band.breakdown}</a>
+                        <a href="#" className="link">{band.breakdown}</a>
                     </div>
                 </div>
             </div>

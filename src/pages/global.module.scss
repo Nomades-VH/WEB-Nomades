@@ -1,19 +1,21 @@
-* {
-  a.default {
-    padding: 10px;
-    width: 150px;
-    font-size: 20px;
-    border-radius: 10px;
-    border: 0.5px solid white;
-    margin: 10px;
-    text-decoration: none;
-    color: #ea8e21;
-    transition: 0.5s;
+@font-face {
+    font-family: JapanWave;
+    src: url("../public/japan_wave/JapanWave.ttf");
+}
 
-    &:hover {
-      background-color: #ea8e21;
-      color: white;
-      transform: translateY(-10px);
+@font-face {
+    font-family: Montserrat;
+    src: url("../public/Montserrat/Montserrat-VariableFont_wght.ttf");
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .about, .content {
+        display: flex;
+        width: 100%;
     }
-  }
 }

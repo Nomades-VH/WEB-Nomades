@@ -1,7 +1,7 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import Image from "next/image";
-import defaultImage from "../../../../public/images/Logo.jpeg"
+import defaultImage from "../../../public/images/Logo.jpeg"
 
 export default function Polos(props) {
     return (

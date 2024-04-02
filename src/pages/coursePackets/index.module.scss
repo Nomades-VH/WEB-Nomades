@@ -1,0 +1,35 @@
+$background-color: #F2F1F1;
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    min-height: 80vh;
+    height: auto;
+    background-color: #efefef;
+    margin: 30px auto;
+    border-radius: 20px;
+    width: 1000px;
+
+    .contents {
+        margin: 30px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        .content {
+            //style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        a {
+            margin: 10px;
+        }
+    }
+}
+
+
+
