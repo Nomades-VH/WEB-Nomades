@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import FormCreate from "../../components/FormCreate";
+import FormCreate from "../../components/commons/FormCreate";
 import InputText from "../../components/commons/inputs/InputText";
 import InputPassword from "../../components/commons/inputs/InputPassword";
 import Select from "../../components/commons/inputs/Select";

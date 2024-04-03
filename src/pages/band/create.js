@@ -1,4 +1,4 @@
-import FormCreate from "../../components/FormCreate";
+import FormCreate from "../../components/commons/FormCreate";
 import InputText from "../../components/commons/inputs/InputText";
 import React, {useEffect, useState} from "react";
 import {useAuth} from "../../context/AuthContext";
@@ -37,7 +37,8 @@ export default function CreateBand() {
     return (
         <FormCreate token={token} data={{gub, name, meaning, theory, breakdown, stretching}}
                     titlePage={"Criar usuário"} messageSuccess={"Continuar criando faixa?"}
-                    messageError={"Erro ao criar faixa."} serviceCreate={BandService.create} defaultInputs={defaultInputs}>
+                    messageError={"Erro ao criar faixa."} serviceCreate={BandService.create} defaultInputs={defaultInputs}
+        redirectTo={"/apostilas"}>
             <section>
                 <InputText
                     type="text"

@@ -1,9 +1,9 @@
 
 import styles from "./index.module.scss";
-import Form from "../commons/Form";
+import Form from "../Form";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import Alert from "../commons/Alert";
+import Alert from "../Alert";
 
 class Hubs {
     static Areias = "areias";
@@ -16,7 +16,7 @@ class Hubs {
     }
 }
 
-function FormCreate({children, token, data, titlePage, messageError, messageSuccess, serviceCreate, defaultInputs}) {
+function FormCreate({children, token, data, titlePage, messageError, messageSuccess, serviceCreate, defaultInputs, redirectTo}) {
     const navigate = useNavigate();
     const [openAlert, setOpenAlert] = useState(false);
     const [openAlertErrorCreate, setOpenAlertErrorCreate] = useState(false);
@@ -48,7 +48,7 @@ function FormCreate({children, token, data, titlePage, messageError, messageSucc
                 <button type="submit" className={styles.btn + " btn btn-secondary"}>Criar</button>
             </Form>
             <Alert isOpen={openAlert} setAlertOpen={() => setOpenAlert(!openAlert)} textClose="Não"
-                   hasButtons={true} textContinue={"Sim"} redirectTo={'/'}>
+                   hasButtons={true} textContinue={"Sim"} redirectTo={redirectTo}>
                 <h2>{messageSuccess}</h2>
             </Alert>
             <Alert isOpen={openAlertErrorCreate} setAlertOpen={() => setOpenAlertErrorCreate(!openAlertErrorCreate)}

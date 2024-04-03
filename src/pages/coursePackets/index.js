@@ -1,11 +1,11 @@
 import BandService from "../../services/band";
 import React, {useEffect, useState} from "react";
 import {useAuth} from "../../context/AuthContext";
-import styles from "./index.module.scss"
 import {Link, useNavigate} from "react-router-dom";
 import {MdEdit} from "react-icons/md";
 import {MdDelete} from "react-icons/md";
-import Alert from "../../components/commons/Alert";
+import DisplayPage from "../../components/DisplayPage";
+import styles from "./index.module.scss"
 
 
 export default function CoursePackets() {
@@ -54,35 +54,33 @@ export default function CoursePackets() {
     };
 
     return (
-        <div className={styles.container}>
-            <div className={styles.contents}>
-                <h1>Apostilas</h1>
-                {user.permission >= 3 ?
-                    <Link to='/faixa/criar' style={{position: "absolute", alignSelf: "flex-end"}}>
-                        <h1>+</h1>
-                    </Link> : null}
-                {bands && bands.map((band) => (
-                    // eslint-disable-next-line react/jsx-key
-                    <div className={styles.content}>
-                        <Link to={`/apostila/${band.id}`}>
-                            <h4 className="link">{band.gub}º Gub - {band.name}</h4>
-                        </Link>
-                        {user.permission >= 3 ?
-                            <div>
-                                <Link to={`/apostila/editar/${band.id}`}><MdEdit/></Link>
-                                <Link to={"#"} onClick={() => {
-                                    setAlertDeleteBand(true);
-                                    setIdToDelete(band.id)
-                                }}><MdDelete style={{color: "red"}}/></Link>
-                            </div> : null}
-                    </div>
-                ))}
-            </div>
+        <DisplayPage titlePage={<>
+            <h1>Apostilas</h1>
+            {user.permission >= 3 ?
+                <Link to='/faixa/criar' style={{position: "absolute", alignSelf: "flex-end"}}>
+                    <h1>+</h1>
+                </Link> : null}
+        </>} alertDelete={alertDeleteBand} setAlertDelete={setAlertDeleteBand}
+                     textDelete={"Deseja mesmo deletar essa faixa?"} handleDelete={handleDeleteBand}>
 
-            <Alert isOpen={alertDeleteBand} setAlertOpen={() => setAlertDeleteBand(!alertDeleteBand)} textClose="Não"
-                   hasButtons={true} textContinue={"Sim"} redirectTo={"#"} onContinue={handleDeleteBand}>
-                <h2>Deseja realmente excluir essa faixa?</h2>
-            </Alert>
-        </div>
+            {bands && bands.map((band) => (
+                // eslint-disable-next-line react/jsx-key
+                <div className={styles.content}>
+                    <Link to={`/apostila/${band.id}`}>
+                        <h4 className="link">{band.gub}º Gub - {band.name}</h4>
+                    </Link>
+                    {user.permission >= 3 ?
+                        <div>
+                            <Link to={`/apostila/editar/${band.id}`}><MdEdit/></Link>
+                            <Link to={"#"} onClick={() => {
+                                setAlertDeleteBand(true);
+                                setIdToDelete(band.id)
+                            }}><MdDelete style={{color: "red"}}/></Link>
+                        </div> : null}
+                </div>
+
+            ))}
+
+        </DisplayPage>
     )
 }
