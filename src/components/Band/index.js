@@ -18,8 +18,7 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         return (
                             <div key={index} className={styles.attributeBox}>
                                 <div className={styles.attribute}>
-                                    <h4>Nome: </h4>
-                                    <a href='#' className="link" key={index}>{poomsae.name}</a>
+                                    <h4>Nome: <a href='#' className="link" key={index}>{poomsae.name}</a></h4>
                                 </div>
                                 <div className={styles.attribute}>
                                     <h4>Descrição:</h4>
@@ -34,8 +33,8 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         return (
                             <div key={index} className={styles.attributeBox}>
                                 <div className={styles.attribute}>
-                                    <h4>{index + 1}º - </h4>
-                                    <a href="#" key={index} className="link">{kibon_donjak.name}</a>
+                                    <h4>{index + 1}º - <a href="#" key={index} className="link">{kibon_donjak.name}</a>
+                                    </h4>
                                     <p key={index}>({kibon_donjak.description})</p>
                                 </div>
                             </div>
@@ -47,8 +46,7 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         return (
                             <div key={index} className={styles.attributeBox}>
                                 <div className={styles.attribute}>
-                                    <h4>{index + 1}º - </h4>
-                                    <a href="#" className="link" key={index}>{kick.name}</a>
+                                    <h4>{index + 1}º - <a href="#" className="link" key={index}>{kick.name}</a></h4>
                                     <p key={index}>({kick.description})</p>
                                 </div>
                             </div>

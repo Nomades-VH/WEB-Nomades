@@ -27,14 +27,14 @@ export default function Unlogged() {
                                     }}>
                                         Apostilas <FaLock/>
                                     </a></NavDropdown.Item>
-                                <NavDropdown.Item>
-                                <a onClick={() => {
-                                        setOpenAlert(true);
-                                        setNavigateTo('/polo');
-                                    }}>
-                                        Seu Polo <FaLock/>
-                                    </a>
-                                </NavDropdown.Item>
+                                {/*<NavDropdown.Item>*/}
+                                {/*<a onClick={() => {*/}
+                                {/*        setOpenAlert(true);*/}
+                                {/*        setNavigateTo('/polo');*/}
+                                {/*    }}>*/}
+                                {/*        Seu Polo <FaLock/>*/}
+                                {/*    </a>*/}
+                                {/*</NavDropdown.Item>*/}
                                 <NavDropdown.Item>
                                     <Link to={'/login'}>
                                         Entrar
@@ -45,10 +45,12 @@ export default function Unlogged() {
                     </Nav>
                 </Container>
             </Navbar>
+
             <Alert isOpen={openAlert} setAlertOpen={() => setOpenAlert(!openAlert)} hasButtons={false}>
                 <Login redirectTo={navigateTo}/>
                 <Contact />
             </Alert>
+
         </div>
 
     )

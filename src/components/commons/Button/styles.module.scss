@@ -12,6 +12,7 @@ $tertiary-color: #F37F14;
   margin-top: 8px;
   background-color: $primary-color;
   transition: background-color 0.3s;
+  width: 100%;
 
     &:hover {
         background-color: $tertiary-color;

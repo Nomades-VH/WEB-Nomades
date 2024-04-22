@@ -18,9 +18,9 @@ export default function Header() {
         <header className={styles.container}>
             <div className={styles.logo}>
                 <Link to='/'>
-                    <Image src={logo} width={80} height={80} alt="Logo da equipe Nômades"/>
+                    <Image src={logo} width={500} height={500} alt="Logo da equipe Nômades"/>
                 </Link>
-                <h2>{user ? toUpperCaseInitial(user.username) : null}</h2>
+                <h2 className={user ? styles.logged : ''}>{user ? toUpperCaseInitial(user.username) : null}</h2>
             </div>
             <div className={styles.itens}>
                 {/*<Link className={styles.default} href={'/store'}>Loja</Link>*/}

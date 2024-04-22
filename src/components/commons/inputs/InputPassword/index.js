@@ -8,7 +8,7 @@ export default function InputPassword({ name, label, placeholder, value, onChang
     return (
         <>
             <label className={styles.container}>
-                {label}
+                <h5>{label}</h5>
                 <div className={styles.inputWrapper}>
                     <input
                         type={mask ? 'password' : 'text'}

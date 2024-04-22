@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 import {useAuth} from "../../context/AuthContext";
 import {useNavigate} from "react-router-dom";
 import BandService from "../../services/band";
+import styles from "./styles.module.scss";
 
 export default function CreateBand() {
 
@@ -39,7 +40,7 @@ export default function CreateBand() {
                     titlePage={"Criar usuário"} messageSuccess={"Continuar criando faixa?"}
                     messageError={"Erro ao criar faixa."} serviceCreate={BandService.create} defaultInputs={defaultInputs}
         redirectTo={"/apostilas"}>
-            <section>
+            <section className={styles.inputs}>
                 <InputText
                     type="text"
                     placeholder="Gub (Somente número)"
@@ -58,38 +59,46 @@ export default function CreateBand() {
                 />
                 <InputText
                     type="text"
-                    placeholder="Significado"
-                    required={true}
-                    label={"Significado da Faixa"}
-                    value={meaning}
-                    onChange={(e) => setMeaning(e.target.value)}
-                />
-            </section>
-            <section>
-                <InputText
-                    type="text"
-                    placeholder="Teoria"
-                    required={true}
-                    label={"Teoria da Faixa"}
-                    value={theory}
-                    onChange={(e) => setTheory(e.target.value)}
-                />
-                <InputText
-                    type="text"
                     placeholder="Quebramento"
                     required={true}
                     label={"Quebramento da Faixa"}
                     value={breakdown}
                     onChange={(e) => setBreakdown(e.target.value)}
                 />
-                <InputText
-                    type="text"
-                    placeholder="Flexibilidade"
-                    required={true}
-                    label={"Flexibilidade da Faixa"}
-                    value={stretching}
-                    onChange={(e) => setStretching(e.target.value)}
-                />
+            </section>
+            <section className={styles.containerTextArea}>
+                <label>
+                    <h5>Teoria</h5>
+                    <textarea
+                        rows={2}
+                        type="text"
+                        placeholder="Descreva a Teoria da Faixa"
+                        required={true}
+                        value={theory}
+                        onChange={(e) => setTheory(e.target.value)}
+                    />
+                </label>
+                <label>
+                    <h5>Significado</h5>
+                    <textarea
+                        rows={2}
+                        placeholder="Qual o Significado da Faixa"
+                        required={true}
+                        value={meaning}
+                        onChange={(e) => setMeaning(e.target.value)}
+                    />
+                </label>
+                <label>
+                    <h5>Flexibilidade</h5>
+                    <textarea
+                        rows={2}
+                        placeholder="Quais os Movimentos de Flexibilidade"
+                        required={true}
+                        value={stretching}
+                        onChange={(e) => setStretching(e.target.value)}
+                    />
+                </label>
+
             </section>
         </FormCreate>
     )

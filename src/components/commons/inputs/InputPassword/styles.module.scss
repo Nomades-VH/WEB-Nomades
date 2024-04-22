@@ -8,22 +8,21 @@
 
   .inputWrapper {
     display: flex;
-    flex-direction: column;
     position: relative;
 
     .button {
-      position: absolute;
-      right: 10px;
-      top: 10%;
-
       background: none;
       border: none;
-      height: 20px;
-      width: 20px;
+      height: auto;
+      width: auto;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
 
       .icon {
-        height: 22px;
-        width: 22px;
+        height: 25px;
+        width: 25px;
       }
     }
   }

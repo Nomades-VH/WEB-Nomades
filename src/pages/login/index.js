@@ -16,7 +16,7 @@ export default function LoginPage() {
                     <Login/>
                 </div>
                 <div className={styles.image}>
-                    <Link to={'/'}><Image src={logo} width={500} height={500} alt={"Logo da equipe"}/></Link>
+                    <Link to={'/'}><Image src={logo} alt={"Logo da equipe"}/></Link>
                 </div>
             </div>
         </div>

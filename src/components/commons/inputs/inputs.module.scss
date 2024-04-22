@@ -1,19 +1,46 @@
 
 %basic-container {
-  font-family: Montserrat!important;
+  font-family: Montserrat sans-serif !important;
   display: flex;
   flex-direction: column;
   font-size: 30px!important;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 0;
+
+  h5 {
+    margin: 0;
+  }
 }
 
 
 %basic-input {
-  font-family: Montserrat!important;
+  font-family: Montserrat sans-serif !important ;
   font-weight: 300;
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1.0rem;
   height: 42px;
   padding: 0.2rem;
-  margin-top: 3px;
+
+  width: 100%;
+}
+
+@media (max-width: 1199px) {
+  %basic-container {
+    width: 100%;
+
+    %basic-input {
+      width: 100%;
+
+    }
+  }
+}
+
+@media (max-width: 776px) {
+  %basic-input {
+    font-size: 0.7rem;
+    font-weight: 200;
+    padding: 5px;
+  }
 }

@@ -1,5 +1,11 @@
-.content {
+.contentPermission {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+}
+
+.contentOutPermission {
+    display: flex;
+    justify-content: center;
     align-items: center;
 }

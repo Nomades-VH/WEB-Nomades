@@ -2,6 +2,8 @@ import React from "react";
 import styles from "./index.module.scss"
 import {Link as LinkInter, useNavigate} from "react-router-dom";
 import NextLink from "next/link"
+import { IoClose } from "react-icons/io5";
+
 
 import Button from "../Button";
 import Image from "next/image";
@@ -25,7 +27,7 @@ export default function Alert({
             <div className={styles.background}>
 
                 <div className={styles.container}>
-                    <h2 onClick={setAlertOpen} className={styles.close}>X</h2>
+                    <h2 onClick={setAlertOpen} className={styles.close}><IoClose className={styles.icon} /></h2>
                     <LinkInter to='/'>
                         <Image src={logo} width={80} height={80} alt="Logo da equipe Nômades"/>
                     </LinkInter>

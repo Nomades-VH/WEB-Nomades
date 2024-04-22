@@ -15,7 +15,7 @@ export default function InputSearch({ label, placeholder, value, onChange, onSub
     return (
         <>
             <label className={styles.container}>
-                {label}
+                <h5>{label}</h5>
                 <form className={styles.inputWrapper} onSubmit={withPreventDefaultGetValue(onSubmit)}>
                     <input
                         type='search'

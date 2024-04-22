@@ -27,6 +27,8 @@ const UserService = {
             }
         }
 
+        console.log(data)
+
         const user = {
             credentials: {
                 username: data.credentials.username,
@@ -35,10 +37,9 @@ const UserService = {
             },
             permission: parseInt(data.permission),
             hub: data.hub,
-            fk_band: data.fk_band ? data.fk_band.toString() : null
+            fk_band: data.fkBand ? data.fkBand.toString() : null
         }
 
-        console.log("USER AQUI USER AQUI")
         console.log(user)
 
         try {

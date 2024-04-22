@@ -54,33 +54,34 @@ export default function CoursePackets() {
     };
 
     return (
-        <DisplayPage titlePage={<>
-            <h1>Apostilas</h1>
-            {user.permission >= 3 ?
-                <Link to='/faixa/criar' style={{position: "absolute", alignSelf: "flex-end"}}>
-                    <h1>+</h1>
-                </Link> : null}
-        </>} alertDelete={alertDeleteBand} setAlertDelete={setAlertDeleteBand}
-                     textDelete={"Deseja mesmo deletar essa faixa?"} handleDelete={handleDeleteBand}>
+        <div className={styles.container}>
+            <DisplayPage titlePage={<>
+                <h1>Apostilas</h1>
+                {user.permission >= 3 ?
+                    <Link to='/faixa/criar' style={{position: "absolute", alignSelf: "flex-end"}}>
+                        <h1>+</h1>
+                    </Link> : null}
+            </>} alertDelete={alertDeleteBand} setAlertDelete={setAlertDeleteBand}
+                         textDelete={"Deseja mesmo deletar essa faixa?"} handleDelete={handleDeleteBand}>
 
-            {bands && bands.map((band) => (
-                // eslint-disable-next-line react/jsx-key
-                <div className={styles.content}>
-                    <Link to={`/apostila/${band.id}`}>
-                        <h4 className="link">{band.gub}º Gub - {band.name}</h4>
-                    </Link>
-                    {user.permission >= 3 ?
-                        <div>
-                            <Link to={`/apostila/editar/${band.id}`}><MdEdit/></Link>
-                            <Link to={"#"} onClick={() => {
-                                setAlertDeleteBand(true);
-                                setIdToDelete(band.id)
-                            }}><MdDelete style={{color: "red"}}/></Link>
-                        </div> : null}
-                </div>
+                {bands && bands.map((band) => (
+                    // eslint-disable-next-line react/jsx-key
+                    <div className={user.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
+                        <Link to={`/apostila/${band.id}`}>
+                            <h4 className="link">{band.gub}º Gub - {band.name}</h4>
+                        </Link>
+                        {user.permission >= 3 ?
+                            <div className={styles.buttons}>
+                                <Link to={`/apostila/editar/${band.id}`}><MdEdit/></Link>
+                                <Link to={"#"} onClick={() => {
+                                    setAlertDeleteBand(true);
+                                    setIdToDelete(band.id)
+                                }}><MdDelete style={{color: "red"}}/></Link>
+                            </div> : null}
+                    </div>
 
-            ))}
-
-        </DisplayPage>
+                ))}
+            </DisplayPage>
+        </div>
     )
 }

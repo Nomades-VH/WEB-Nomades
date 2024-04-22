@@ -4,7 +4,7 @@ export default function InputText({ name, label, placeholder, value, onChange, o
     return (
         <>
             <label className={`${styles.container} ${className || ''}`}>
-                {label}
+                <h5>{label}</h5>
                 <input
                     type='text'
                     name={name}

@@ -2,7 +2,16 @@ $primary-color: #F5EE40;
 $secondary-color: #F93030;
 $background-color: #F2F1F1;
 
+
+//@media (max-width: 775px) {
+//    .container {
+//        min-width: 400px;
+//    }
+//}
+
 .container {
+    min-width: 400px;
+    width: 45vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,6 +21,7 @@ $background-color: #F2F1F1;
         align-items: center;
         justify-content: center;
         width: 100%;
+        height: 100%;
 
         a {
             display: flex;
@@ -20,7 +30,7 @@ $background-color: #F2F1F1;
         }
 
         .form {
-            width: 700px;
+            width: 100%;
             margin: 30px;
             padding: 30px;
             display: flex;

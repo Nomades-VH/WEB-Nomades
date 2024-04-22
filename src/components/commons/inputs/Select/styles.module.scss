@@ -3,26 +3,9 @@
 .container {
     @extend %basic-container;
 
-    .inputWrapper {
-        display: flex;
-        flex-direction: column;
-        position: relative;
-
-        input::-webkit-search-decoration,
-        input::-webkit-search-cancel-button,
-        input::-webkit-search-results-button,
-        input::-webkit-search-results-decoration {
-            -webkit-appearance: none;
-        }
-
-        select {
-            @extend %basic-input;
-            background-color: field;
-            color: gray;
-
-            option {
-                height: 200%;
-            }
-        }
+    select {
+        @extend %basic-input;
+        background-color: field;
+        color: gray;
     }
 }

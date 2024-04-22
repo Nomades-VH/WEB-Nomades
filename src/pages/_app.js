@@ -27,7 +27,7 @@ const App = () => {
 
     if (isClient) {
         return (
-            <div className="app">
+            <body className="app">
                 <Router>
                     {/* O componente App está dentro do Router */}
                     <AuthProvider>
@@ -35,7 +35,7 @@ const App = () => {
                         <ScrollToTopButton />
                     </AuthProvider>
                 </Router>
-            </div>
+            </body>
         );
     }
 

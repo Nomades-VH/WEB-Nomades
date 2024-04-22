@@ -1,9 +1,7 @@
 @import '../inputs.module';
 
 .container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  @extend %basic-container;
 
   .inputWrapper {
     display: flex;

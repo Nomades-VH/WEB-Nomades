@@ -28,9 +28,9 @@ export default function Logged(props) {
                             <NavDropdown.Item>
                                 <Link to="/apostilas">Apostilas</Link>
                             </NavDropdown.Item>
-                            <NavDropdown.Item>
-                                <Link to="/polo">Seu Polo</Link>
-                            </NavDropdown.Item>
+                            {/*<NavDropdown.Item>*/}
+                            {/*    <Link to="/polo">Seu Polo</Link>*/}
+                            {/*</NavDropdown.Item>*/}
                             <NavDropdown.Item onClick={handleLogout}>Sair</NavDropdown.Item>
                         </NavDropdown>
                     </div>

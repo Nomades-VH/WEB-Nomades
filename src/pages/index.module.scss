@@ -1,57 +1,175 @@
+@media (min-width: 776px) {
 
-.main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0;
+    .main {
+        p {
+            font-size: 0.7rem;
+        }
 
-    .container {
+        h1, h2, h3 {
+            font-size: 1.9rem;
+            text-align: center;
+        }
 
-        $background-color: #F2F1F1;
+        .about {
+            background-color: white;
+            margin: 0 30px;
+            padding: 30px 15px;
+            border-radius: 10px;
 
-        display: flex;
-        flex-direction: column;
-        background-color: #efefef;
-        min-height: 85vh;
-        height: auto;
-        margin: 30px;
-        min-width: 80vw;
-        width: 95%;
-        border-radius: 20px;
+            .divizona {
+                text-align: center;
+            }
+        }
+    }
+
+}
+
+@media (max-width: 1199px) {
+    .item {
+        overflow: hidden;
+    }
+
+    .carousel1 {
+        margin-bottom: 20px;
+    }
+
+    .kiossanins {
+
+        .person {
+            display: flex;
+            margin: 30px;
+            padding: 15px;
+            align-items: center;
+            gap: 10px;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .about {
+        .carouselContainer {
+            display: flex;
+            justify-content: space-around;
+
+            .carousel1 {
+                width: 48%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+
+                .divizona {
+                    background-color: rgba(128, 128, 128, 0.16);
+                    border-radius: 10px;
+                    padding: 15px;
+                    width: 100%;
+
+                    .carouselx {
+                        .item {
+                            overflow: hidden;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .kiossanins {
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            margin: 20px;
+        }
+
+        .personRight {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .person {
+            display: flex;
+            margin: 30px;
+            width: 80%;
+            padding: 30px;
+
+            button {
+                display: none;
+            }
+        }
+    }
+}
+
+@media (max-width: 775px) {
+    .main {
+        h1 {
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 0.85rem;
+        }
+
+        p {
+            font-size: 0.5rem;
+        }
+
+        .about {
+            margin: 0 10px;
+        }
+
+        .kiossanins {
+
+
+            .personRight {
+                .person {
+                    flex-direction: column-reverse;
+                }
+            }
+
+            .person {
+                flex-direction: column;
+
+                h2 {
+                    text-align: center;
+                }
+            }
+        }
     }
 }
 
 
 
-.kiossanins {
-    border-radius: 10px;
+.main {
     width: 100%;
-    padding: 30px;
 
-    h1 {
-        text-align: center;
+    .about {
+        button {
+            display: none;
+        }
+        .item {
+            height: 700px;
+            img {
+                height: 100%;
+                width: 100%;
+                object-fit: contain;
+            }
+        }
     }
 
-    img {
-        width: 500px;
-        height: 500px;
-    }
+    .kiossanins {
 
-    .person {
-        display: flex;
-        gap: 30px;
-        margin: 30px;
-        padding: 30px;
-        min-width: 1250px;
-        width: 80%;
-        border-radius: 10px;
-        background-color: #ffffff;
-    }
+        img {
+            width: 250px;
+            height: 250px;
+        }
 
-    .personRight {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
+        .person {
+            background-color: white;
+            border-radius: 10px;
+        }
     }
 }

@@ -16,7 +16,7 @@ function ScrollToTopButton() {
     // Adicione um event listener para verificar a posição de rolagem
     useEffect(() => {
         const handleScroll = () => {
-            if (window.pageYOffset > 2500) {
+            if (window.pageYOffset > 1500) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);
