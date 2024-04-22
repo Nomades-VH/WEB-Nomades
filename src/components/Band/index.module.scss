@@ -73,9 +73,9 @@
 
         .single {
             display: flex;
-            gap: 10px;
             align-items: baseline;
-            margin-bottom: 0;
+            flex-direction: column;
+            margin: 10px 0;
         }
 
         .attribute {
@@ -85,6 +85,5 @@
             margin: 10px;
         }
     }
-
 
 }

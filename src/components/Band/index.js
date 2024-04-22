@@ -6,29 +6,11 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
         <div className={styles.main}>
 
             <div className={styles.container}>
-                <h1>{band.name}</h1>
-
+                <h1>{band.gub}° - {band.name}</h1>
+                <p>{band.meaning}</p>
                 <div className={styles.content}>
-                    <div className={styles.single}>
-                        <h3>GUB:</h3> <p>{band.gub}</p>
-                    </div>
 
-                    <h3>Poomsae:</h3>
-                    {poomsaes.map((poomsae, index) => {
-                        return (
-                            <div key={index} className={styles.attributeBox}>
-                                <div className={styles.attribute}>
-                                    <h4>Nome: <a href='#' className="link" key={index}>{poomsae.name}</a></h4>
-                                </div>
-                                <div className={styles.attribute}>
-                                    <h4>Descrição:</h4>
-                                    <p key={index}>{poomsae.description}</p>
-                                </div>
-                            </div>
-
-                        )
-                    })}
-                    <h3>Kibon Donjaks:</h3>
+                    <h3>1° - Kibon Donjaks</h3>
                     {kibon_donjaks.map((kibon_donjak, index) => {
                         return (
                             <div key={index} className={styles.attributeBox}>
@@ -41,7 +23,18 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
 
                         )
                     })}
-                    <h3>Chutes:</h3>
+                    <h3>2° - Poomsaes</h3>
+                    {poomsaes.map((poomsae, index) => {
+                        return (
+                            <div key={index} className={styles.attributeBox}>
+                                <div className={styles.attribute}>
+                                    <h4>{index + 1}° - <a href='#' className="link" key={index}>{poomsae.name}</a></h4>
+                                </div>
+                            </div>
+
+                        )
+                    })}
+                    <h3>3° - Chutes</h3>
                     {kicks.map((kick, index) => {
                         return (
                             <div key={index} className={styles.attributeBox}>
@@ -54,17 +47,16 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         )
                     })}
                     <div className={styles.single}>
-                        <h3>Teoria:</h3>
+                        <h3>4° - Quebramento</h3>
+                        <a href="#" className="link">{band.breakdown}</a>
+                    </div>
+                    <div className={styles.single}>
+                        <h3>5° - Teoria</h3>
                         <a href="#" className="link">{band.theory}</a>
                     </div>
                     <div className={styles.single}>
-                        <h3>Alongamento:</h3>
+                        <h3>6° - Alongamento</h3>
                         <a href="#" className="link">{band.stretching}</a>
-                    </div>
-                    <div className={styles.single}>
-
-                        <h3>Quebramento:</h3>
-                        <a href="#" className="link">{band.breakdown}</a>
                     </div>
                 </div>
             </div>
