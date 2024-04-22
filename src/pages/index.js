@@ -90,7 +90,7 @@ export default function Home() {
                 <div className={styles.person}>
                     <Image src={logo} alt={"L"}/>
                     <div>
-                        <h2>Kiossanim Felipe Sampaio</h2>
+                        <h2>Kiossanim</h2>
                         <p id={'text-1'}>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                             has
@@ -113,7 +113,7 @@ export default function Home() {
                 <div className={styles.personRight}>
                     <div className={styles.person}>
                         <div>
-                            <h2>Kiossanim Felipe Sampaio</h2>
+                            <h2>Kiossanim</h2>
                             <p id={"text-2"}>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has
@@ -137,7 +137,7 @@ export default function Home() {
                 <div className={styles.person}>
                     <Image src={logo} alt={"L"}/>
                     <div>
-                        <h2>Kiossanim Felipe Sampaio</h2>
+                        <h2>Kiossanim</h2>
                         <p id={"text-3"}>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                             has
@@ -159,7 +159,7 @@ export default function Home() {
                 <div className={styles.personRight}>
                     <div className={styles.person}>
                         <div>
-                            <h2>Kiossanim Felipe Sampaio</h2>
+                            <h2>Kiossanim</h2>
                             <p id={"text-2"}>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has
@@ -183,7 +183,7 @@ export default function Home() {
                 <div className={styles.person}>
                     <Image src={logo} alt={"L"}/>
                     <div>
-                        <h2>Kiossanim Felipe Sampaio</h2>
+                        <h2>Kiossanim</h2>
                         <p id={'text-1'}>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                             has
@@ -205,7 +205,7 @@ export default function Home() {
                 <div className={styles.personRight}>
                     <div className={styles.person}>
                         <div>
-                            <h2>Kiossanim Felipe Sampaio</h2>
+                            <h2>Kiossanim</h2>
                             <p id={"text-2"}>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has
@@ -229,7 +229,7 @@ export default function Home() {
                 <div className={styles.person}>
                     <Image src={logo} alt={"L"}/>
                     <div>
-                        <h2>Kiossanim Felipe Sampaio</h2>
+                        <h2>Kiossanim</h2>
                         <p id={'text-1'}>
                             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                             has
@@ -251,7 +251,7 @@ export default function Home() {
                 <div className={styles.personRight}>
                     <div className={styles.person}>
                         <div>
-                            <h2>Kiossanim Felipe Sampaio</h2>
+                            <h2>Kiossanim</h2>
                             <p id={"text-2"}>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has
