@@ -4,6 +4,7 @@ import BandService from "../../services/band";
 import {useAuth} from "../../context/AuthContext";
 import Band from "../../components/Band";
 import {useNavigate, useParams} from 'react-router-dom';
+import Loading from "../../components/commons/Loading";
 
 
 export default function CoursePack() {
@@ -38,14 +39,13 @@ export default function CoursePack() {
         }
     }, [id, router, isAuthenticated, navigate]);
 
-    if (!id) {
-        // Renderiza algo enquanto carrega
-        return <div>Carregando...</div>;
-    }
-
     if (band) {
         return (
             <Band band={band} kicks={band.kicks} poomsaes={band.poomsaes} kibon_donjaks={band.kibon_donjaks}/>
+        )
+    } else {
+        return (
+            <Loading />
         )
     }
 

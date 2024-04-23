@@ -7,6 +7,7 @@ import {useNavigate} from "react-router-dom";
 import BandService from "../../services/band";
 import {useAuth} from "../../context/AuthContext";
 import UserService from "../../services/user";
+import Loading from "../../components/commons/Loading";
 
 class Hubs {
     static Areias = "areias";
@@ -61,53 +62,60 @@ export default function CreateUser() {
         password: password
     }
 
-    return (
-        <FormCreate token={token} data={{credentials, permission, hub, fkBand}}
-                    titlePage={"Criar usuário"} messageSuccess={"Continuar criando usuário?"}
-                    messageError={"Erro ao criar usuário"} serviceCreate={UserService.create_user}
-                    defaultInputs={defaultInputs} redirectTo={"/"}>
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                <section>
-                    <InputText
-                        type="text"
-                        placeholder="Usuário"
-                        value={username}
-                        required={true}
-                        label={"Nome de usuário"}
-                        onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <InputText
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        label={"Email"}
-                        required={true}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <InputPassword
-                        name="password"
-                        placeholder={'Insira sua senha'}
-                        label={"Senha"} required={true}
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}/>
-                </section>
-                <section>
-                    <Select label={"Permissão"} options={[{label: "Aluno", value: permission}]}
-                            onChange={(e) => setPermission(e.target.value)}>
-                    </Select>
-                    <Select label={"Cidade"} onChange={(e) => setHub(e.target.value)}
-                            options={Object.keys(Hubs).map((key) => ({
-                                label: key, // O valor representa diretamente a cidade
-                                value: Hubs[key] // O valor também é a cidade neste caso
-                            }))}></Select>
-                    {bands ? <Select label={"Faixa do aluno"} onChange={(e) => setFkBand(e.target.value)}
-                                     options={bands?.map((band) => ({
-                                         label: band.name, // O valor representa diretamente a cidade
-                                         value: band.id // O valor também é a cidade neste caso
-                                     }))}></Select> : null
-                    }
-                </section>
-            </div>
-        </FormCreate>
-    )
+    if (bands) {
+
+        return (
+            <FormCreate token={token} data={{credentials, permission, hub, fkBand}}
+                        titlePage={"Criar usuário"} messageSuccess={"Continuar criando usuário?"}
+                        messageError={"Erro ao criar usuário"} serviceCreate={UserService.create_user}
+                        defaultInputs={defaultInputs} redirectTo={"/"}>
+                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                    <section>
+                        <InputText
+                            type="text"
+                            placeholder="Usuário"
+                            value={username}
+                            required={true}
+                            label={"Nome de usuário"}
+                            onChange={(e) => setUsername(e.target.value)}
+                        />
+                        <InputText
+                            type="email"
+                            placeholder="Email"
+                            value={email}
+                            label={"Email"}
+                            required={true}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <InputPassword
+                            name="password"
+                            placeholder={'Insira sua senha'}
+                            label={"Senha"} required={true}
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}/>
+                    </section>
+                    <section>
+                        <Select label={"Permissão"} options={[{label: "Aluno", value: permission}]}
+                                onChange={(e) => setPermission(e.target.value)}>
+                        </Select>
+                        <Select label={"Cidade"} onChange={(e) => setHub(e.target.value)}
+                                options={Object.keys(Hubs).map((key) => ({
+                                    label: key, // O valor representa diretamente a cidade
+                                    value: Hubs[key] // O valor também é a cidade neste caso
+                                }))}></Select>
+                        {bands ?
+                            <Select label={"Faixa do aluno"} onChange={(e) => setFkBand(e.target.value)}
+                                    options={bands?.map((band) => ({
+                                        label: band.name, // O valor representa diretamente a cidade
+                                        value: band.id // O valor também é a cidade neste caso
+                                    }))}></Select>
+                            : null
+                        }
+                    </section>
+                </div>
+            </FormCreate>
+        )
+    } else {
+        return <Loading/>
+    }
 }

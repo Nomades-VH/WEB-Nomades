@@ -1,6 +1,7 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import UserService from '../services/user'
 import {instance} from "../services/base";
+import Loading from "../components/commons/Loading";
 
 const AuthContext = createContext();
 
@@ -78,11 +79,19 @@ export const AuthProvider = ({children}) => {
         }
     };
 
-    return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout, user, loading }}>
-            {children}
-        </AuthContext.Provider>
-    );
+    if (loading) {
+        return (
+            <Loading />
+        )
+    } else {
+        return (
+            <AuthContext.Provider value={{ isAuthenticated, login, logout, user, loading }}>
+                {children}
+            </AuthContext.Provider>
+        );
+    }
+
+
 };
 
 export const useAuth = () => {

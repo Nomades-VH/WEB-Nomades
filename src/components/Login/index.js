@@ -7,6 +7,7 @@ import React, {useState} from "react";
 import {useAuth} from "../../context/AuthContext";
 import {useNavigate} from "react-router-dom";
 import Alert from "../commons/Alert";
+import Loading from "../commons/Loading";
 
 function validarEmail(email) {
     // Expressão regular para validar e-mails
@@ -23,10 +24,12 @@ function Login({redirectTo = "/"}) {
     const [openAlert, setOpenAlert] = useState(false)
     const [errorMessage, setErrorMessage] = useState('Email ou senha incorreta.')
     let [count, setCount] = useState(0);
+    const [loading, setLoading] = useState(false)
 
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
+            setLoading(true)
             if (validarEmail(email)) {
                 const response = await login(email, password);
                 if (response) {
@@ -59,8 +62,15 @@ function Login({redirectTo = "/"}) {
             } else {
                 setOpenAlert(true)
             }
+        } finally {
+            setLoading(false)
         }
     }
+
+    if (loading) {
+        return <Loading />
+    }
+
     if (!isAuthenticated) {
         return (
             <div className={styles.main}>
