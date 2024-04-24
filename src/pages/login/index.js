@@ -1,7 +1,7 @@
 import Login from "../../components/Login";
 import Image from "next/image";
-import headerImage from '../../public/images/faixa-sem-logo-amarelo.png'
-import logo from "../../public/images/Logo.jpeg"
+import headerImage from '../../../public/images/faixa-sem-logo-amarelo.png'
+import logo from "../../../public/images/Logo.jpeg"
 import styles from "./login.module.scss"
 import {Link} from "react-router-dom";
 

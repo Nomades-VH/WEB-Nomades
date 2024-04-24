@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./index.module.scss";
 import Image from "next/image";
-import logo from "../../../public/images/LogoAtual-removebg-preview.png"
+import logo from "../../../../public/images/LogoAtual-removebg-preview.png"
 
 export default function Loading() {
     return (

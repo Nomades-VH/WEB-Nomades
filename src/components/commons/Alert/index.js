@@ -7,7 +7,7 @@ import { IoClose } from "react-icons/io5";
 
 import Button from "../Button";
 import Image from "next/image";
-import logo from "../../../public/images/LogoAtual-removebg-preview.png";
+import logo from "../../../../public/images/LogoAtual-removebg-preview.png";
 
 export default function Alert({
                                   isOpen,

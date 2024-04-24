@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
-import logo from '../../public/images/LogoAtual-removebg-preview.png'
+import logo from '../../../public/images/LogoAtual-removebg-preview.png'
 import {useAuth} from "../../context/AuthContext";
 import Logged from "./info/logged";
 import Unlogged from "./info/unlogged";

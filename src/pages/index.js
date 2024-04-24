@@ -1,10 +1,10 @@
 import styles from './index.module.scss'
 import Image from "next/image";
-import logo from "../public/images/Logo.jpeg";
+import logo from "../../public/images/Logo.jpeg";
 import React, {useState} from "react";
 import {Carousel} from "react-bootstrap";
 
-const images = importAll(require.context("../public/exames/", false, /\.(png|jpe?g|svg)$/));
+const images = importAll(require.context("../../public/exames/", false, /\.(png|jpe?g|svg)$/));
 
 function importAll(r) {
     return r.keys().map(r);
