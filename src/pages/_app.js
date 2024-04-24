@@ -14,6 +14,7 @@ import NotFound from "../components/commons/NotFound";
 import LoginPage from "./login";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import CreateBand from "./band/create";
+import Head from "next/head";
 
 
 const App = () => {
@@ -28,6 +29,9 @@ const App = () => {
     if (isClient) {
         return (
             <body className="app">
+            <Head>
+                <title>Nômades do Vale Histórico</title>
+            </Head>
                 <Router>
                     {/* O componente App está dentro do Router */}
                     <AuthProvider>
