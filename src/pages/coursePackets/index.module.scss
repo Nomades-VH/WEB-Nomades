@@ -2,10 +2,27 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    a{
+        width: 100%;
+        text-align: start;
+    }
 }
 
 .contentOutPermission {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+
+    a {
+        width: 100%;
+
+        h4 {
+            text-align: start;
+        }
+    }
 }
+
+.buttons {
+    display: flex;
+}
+

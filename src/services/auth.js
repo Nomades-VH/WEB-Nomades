@@ -5,15 +5,8 @@ const SERVICE = "/auth"
 
 const AuthService = {
     refresh: async (setIsAuthenticated) => {
-        const token = localStorage.getItem('access_token')
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
-
         try {
-            const response = await instance.put(`${SERVICE}/refresh-token`, {}, config)
+            const response = await instance.put(`${SERVICE}/refresh-token`, {})
 
             if (response.status === 200) {
                 return response.data;

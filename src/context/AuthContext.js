@@ -22,7 +22,7 @@ export const AuthProvider = ({children}) => {
         if (isAuthenticated) {
             async function loadUser() {
                 try {
-                    const result = await UserService.get_me(token);
+                    const result = await UserService.get_me();
                     if (result) {
                         setUser(result);
                         setIsAuthenticated(true);
@@ -55,23 +55,19 @@ export const AuthProvider = ({children}) => {
                     'Content-Type': 'application/json'
                 }
             );
+            console.log("OPA", response)
             localStorage.setItem('access_token', response.data.access_token);
             setIsAuthenticated(true);
             return response;
         } catch (error) {
-            throw error; // Propaga o erro para quem chama a função de login
+            console.log("VISH")
+            throw error;
         }
     };
 
     const logout = async () => {
-        const token = localStorage.getItem('access_token');
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
 
-        const response = await instance.post('auth/logout', {}, config);
+        const response = await instance.post('auth/logout', {});
         if (response.status === 200) {
             setUser(null)
             localStorage.removeItem('access_token');

@@ -3,14 +3,9 @@ import {instance} from "./base";
 const SERVICE = "/band";
 
 const BandService = {
-    get_me: async (token) => {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
+    get_me: async () => {
         try {
-            const response = await instance.get(`${SERVICE}/me`, config)
+            const response = await instance.get(`${SERVICE}/me`)
 
             if (response.status === 200) {
                 return response.data;
@@ -20,14 +15,9 @@ const BandService = {
         }
     },
 
-    get: async (token) => {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
+    get: async () => {
         try {
-            const response = await instance.get(`${SERVICE}/`, config)
+            const response = await instance.get(`${SERVICE}/`)
             if (response.status === 200) {
                 return response.data;
             }
@@ -36,14 +26,9 @@ const BandService = {
         }
     },
 
-    get_by_id: async (token, id) => {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
+    get_by_id: async (id) => {
         try {
-            const response = await instance.get(`${SERVICE}/${id}`, config)
+            const response = await instance.get(`${SERVICE}/${id}`)
             if (response.status === 200) {
                 return response.data;
             }
@@ -52,13 +37,7 @@ const BandService = {
         }
     },
 
-    create: async (token, data) => {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
-
+    create: async (data) => {
         const band = {
             gub: data.gub,
             name: data.name,
@@ -72,7 +51,7 @@ const BandService = {
         }
 
         try {
-            const response = await instance.post(`${SERVICE}/`, band, config)
+            const response = await instance.post(`${SERVICE}/`, band)
 
             if (response.status === 200) {
                 return response.data;
@@ -81,21 +60,18 @@ const BandService = {
             throw error; // Propaga o erro para quem chama a função de login
         }
     },
-    delete: async (token, id) => {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
-
+    delete: async (id) => {
         try {
-            const response = await instance.delete(`${SERVICE}/${id}`, config)
+            const response = await instance.delete(`${SERVICE}/${id}`)
             if (response.status === 200) {
                 return response
             }
         } catch (error) {
             throw error;
         }
+    },
+    put: async (band) => {
+
     }
 }
 

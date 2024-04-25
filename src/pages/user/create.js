@@ -23,7 +23,6 @@ class Hubs {
 export default function CreateUser() {
     const navigate = useNavigate();
     const {user} = useAuth();
-    const [token, setToken] = useState('')
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -36,8 +35,7 @@ export default function CreateUser() {
         const loadBand = async () => {
             try {
                 if (parseInt(user.permission) >= 3) {
-                    setToken(localStorage.getItem('access_token'));
-                    const result = await BandService.get(token);
+                    const result = await BandService.get();
                     if (result) {
                         setBands(result);
                     }
@@ -48,7 +46,7 @@ export default function CreateUser() {
             }
         };
         loadBand();
-    }, [user, token, navigate]);
+    }, [user, navigate]);
 
     const defaultInputs = async () => {
         setUsername('');
@@ -65,7 +63,7 @@ export default function CreateUser() {
     if (bands) {
 
         return (
-            <FormCreate token={token} data={{credentials, permission, hub, fkBand}}
+            <FormCreate data={{credentials, permission, hub, fkBand}}
                         titlePage={"Criar usuário"} messageSuccess={"Continuar criando usuário?"}
                         messageError={"Erro ao criar usuário"} serviceCreate={UserService.create_user}
                         defaultInputs={defaultInputs} redirectTo={"/"}>

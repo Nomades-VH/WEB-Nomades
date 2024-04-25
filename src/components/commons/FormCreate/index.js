@@ -4,18 +4,20 @@ import Form from "../Form";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Alert from "../Alert";
+import {error} from "next/dist/build/output/log";
 
 
-function FormCreate({children, token, data, titlePage, messageError, messageSuccess, serviceCreate, defaultInputs, redirectTo}) {
+function FormCreate({children, data, titlePage, messageError, messageSuccess, serviceCreate, defaultInputs, redirectTo}) {
     const navigate = useNavigate();
     const [openAlert, setOpenAlert] = useState(false);
     const [openAlertErrorCreate, setOpenAlertErrorCreate] = useState(false);
+    const [errorMsg, setErrorMsg] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await serviceCreate(token, data);
+            const response = await serviceCreate(data);
             if (response) {
                 setOpenAlert(true);
                 defaultInputs();
@@ -23,7 +25,7 @@ function FormCreate({children, token, data, titlePage, messageError, messageSucc
                 setOpenAlertErrorCreate(true)
             }
         } catch (error) {
-            alert(` ${messageError} : ${error}`);
+            setErrorMsg(error.message)
         }
     };
 
@@ -41,7 +43,7 @@ function FormCreate({children, token, data, titlePage, messageError, messageSucc
             </Alert>
             <Alert isOpen={openAlertErrorCreate} setAlertOpen={() => setOpenAlertErrorCreate(!openAlertErrorCreate)}
                    hasButtons={false}>
-                <h2>{messageError}</h2>
+                <h2>{messageError ? messageError : errorMsg }</h2>
             </Alert>
         </div>
     )

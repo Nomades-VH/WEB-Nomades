@@ -4,14 +4,9 @@ import { instance } from "./base"
 const SERVICE = "/user"
 
 const UserService = {
-    get_me: async (token) => {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
+    get_me: async () => {
         try {
-            const response = await instance.get(`${SERVICE}/me/`, config)
+            const response = await instance.get(`${SERVICE}/me/`)
 
             if (response.status === 200) {
                 return response.data;
@@ -20,15 +15,7 @@ const UserService = {
             throw error; // Propaga o erro para quem chama a função de login
         }
     },
-    create_user: async (token, data) => {
-        const config = {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        }
-
-        console.log(data)
-
+    create_user: async (data) => {
         const user = {
             credentials: {
                 username: data.credentials.username,
@@ -40,10 +27,8 @@ const UserService = {
             fk_band: data.fkBand ? data.fkBand.toString() : null
         }
 
-        console.log(user)
-
         try {
-            const response = await instance.post(`${SERVICE}/`, user, config)
+            const response = await instance.post(`${SERVICE}/`, user)
 
             if (response.status === 200) {
                 return response.data;

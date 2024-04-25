@@ -19,11 +19,10 @@ export default function CoursePack() {
             navigate('/');
         } else {
             if (isAuthenticated) {
-                const token = localStorage.getItem("access_token")
 
                 async function loadBand() {
                     try {
-                        const result = await BandService.get_by_id(token, id)
+                        const result = await BandService.get_by_id(id)
                         if (result) {
                             setBand(result)
                         } else {

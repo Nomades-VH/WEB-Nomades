@@ -1,6 +1,5 @@
 import axios from "axios";
-import {router} from "next/router";
-import AuthService from "./auth";
+import Alert from "../components/commons/Alert";
 
 export const instance = axios.create({
     baseURL: 'https://api-nomades.onrender.com',
@@ -10,14 +9,16 @@ export const instance = axios.create({
     validateStatus: (status) => status !== 401,
 })
 
-instance.interceptors.response.use(
-    (response) => {
-        return response;
-    }, async function (error) {
-        const token = localStorage.getItem('access_token');
-        // if ((error.response.status === 401) && token) {
-        //     localStorage.removeItem('access_token');
-        //     router.push("/login")
-        // }
+instance.interceptors.request.use((config) => {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
+    return config
+})
+
+instance.interceptors.response.use((response) => {
+    console.log(response.status)
+    if (response.status === 403) {
+        return Promise.reject({message: response.data.message});
     }
-)
+
+    return response;
+})

@@ -46,9 +46,10 @@ export default function Alert({
                                         navigate(redirectTo);
                                         setAlertOpen();
                                     }}>{textClose}</Button> :
-                                    <Button>
+                                    redirectOtherPage != null ? <Button>
                                         <NextLink href={redirectOtherPage}>{textClose}</NextLink>
                                     </Button>
+                                : null
                             }
                         </div> : null}
 

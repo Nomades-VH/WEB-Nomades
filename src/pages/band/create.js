@@ -14,14 +14,11 @@ export default function CreateBand() {
     const [theory, setTheory] = useState('');
     const [breakdown, setBreakdown] = useState('');
     const [stretching, setStretching] = useState('');
-    const [token, setToken] = useState('')
     const {user} = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (parseInt(user.permission) >= 3) {
-            setToken(localStorage.getItem('access_token'));
-        } else {
+        if (parseInt(user.permission) <= 3) {
             navigate("/")
         }
     }, [navigate, user]);
@@ -36,7 +33,7 @@ export default function CreateBand() {
     }
 
     return (
-        <FormCreate token={token} data={{gub, name, meaning, theory, breakdown, stretching}}
+        <FormCreate data={{gub, name, meaning, theory, breakdown, stretching}}
                     titlePage={"Criar usuário"} messageSuccess={"Continuar criando faixa?"}
                     messageError={"Erro ao criar faixa."} serviceCreate={BandService.create} defaultInputs={defaultInputs}
         redirectTo={"/apostilas"}>
@@ -71,7 +68,6 @@ export default function CreateBand() {
                     <h5>Teoria</h5>
                     <textarea
                         rows={2}
-                        type="text"
                         placeholder="Descreva a Teoria da Faixa"
                         required={true}
                         value={theory}
@@ -98,7 +94,6 @@ export default function CreateBand() {
                         onChange={(e) => setStretching(e.target.value)}
                     />
                 </label>
-
             </section>
         </FormCreate>
     )

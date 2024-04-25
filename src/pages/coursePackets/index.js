@@ -7,51 +7,52 @@ import {MdDelete} from "react-icons/md";
 import DisplayPage from "../../components/DisplayPage";
 import styles from "./index.module.scss"
 import Loading from "../../components/commons/Loading";
+import Alert from "../../components/commons/Alert";
 
 
 export default function CoursePackets() {
     const [alertDeleteBand, setAlertDeleteBand] = useState(false);
     const {isAuthenticated, user} = useAuth();
-    const [bands, setBands] = useState();
+    const [bands, setBands] = useState(null);
     const navigate = useNavigate();
     const [logged, setLogged] = useState();
     const [idToDelete, setIdToDelete] = useState();
-    const [token, setToken] = useState('');
+    const [alertNotBand, setAlertNotBand] = useState(false);
+    const [messageError, setMessageError] = useState('');
 
     useEffect(() => {
-        setToken(localStorage.getItem("access_token"));
-
         async function loadBand() {
             if (user) {
                 setLogged(true)
             }
             try {
-                const result = await BandService.get(token)
+                const result = await BandService.get()
                 if (result) {
                     setBands(result)
                 }
             } catch (error) {
+                setBands([])
+                setAlertNotBand(true)
+                setMessageError(error.message)
             }
         }
 
         loadBand()
-    }, [isAuthenticated, user, navigate, token]);
-
+    }, [isAuthenticated, user, navigate]);
 
 
     const handleDeleteBand = async () => {
         try {
-            await BandService.delete(token, idToDelete);
+            await BandService.delete(idToDelete);
             const updatedBands = bands.filter((band) => band.id !== idToDelete);
             setBands(updatedBands);
         } catch (error) {
             console.error("Erro ao excluir faixa:", error);
         }
     };
-
-    if (logged && bands) {
+    if (logged && bands != null) {
         return (
-            <div className={styles.container}>
+            <div>
                 <DisplayPage titlePage={<>
                     <h1>Apostilas</h1>
                     {user.permission >= 3 ?
@@ -67,6 +68,7 @@ export default function CoursePackets() {
                             <Link to={`/apostila/${band.id}`}>
                                 <h4 className="link">{band.gub}º Gub - {band.name}</h4>
                             </Link>
+
                             {user.permission >= 3 ?
                                 <div className={styles.buttons}>
                                     <Link to={`/apostila/editar/${band.id}`}><MdEdit/></Link>
@@ -79,11 +81,14 @@ export default function CoursePackets() {
 
                     ))}
                 </DisplayPage>
+
+                <Alert isOpen={alertNotBand} setAlertOpen={() => navigate('/')} redirectTo={null} hasButtons={true}
+                       textContinue={"Voltar"}>{messageError}</Alert>
             </div>
         )
     } else {
         return (
-            <Loading />
+            <Loading/>
         )
     }
 }
