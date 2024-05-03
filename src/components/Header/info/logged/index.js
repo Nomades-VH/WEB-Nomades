@@ -21,18 +21,19 @@ export default function Logged(props) {
                         <div className={styles.menu}>
                             <NavDropdown title="Opções" className={styles.dropdown} drop="start">
                                 {parseInt(props.user?.permission) >= 3 ?
-                                    <div><NavDropdown.Item>
+                                    <NavDropdown.Item className={styles.item}>
                                         <Link to="usuario/criar">Criar usuário</Link>
-                                    </NavDropdown.Item></div>
+                                    </NavDropdown.Item>
                                     : null}
 
-                                <NavDropdown.Item>
-                                    <Link to="/apostilas">Apostilas</Link>
+                                <NavDropdown.Item className={styles.item}>
+                                    <Link to="/apostilas">
+                                        Apostilas
+                                    </Link>
                                 </NavDropdown.Item>
-                                {/*<NavDropdown.Item>*/}
-                                {/*    <Link to="/polo">Seu Polo</Link>*/}
-                                {/*</NavDropdown.Item>*/}
-                                <NavDropdown.Item onClick={handleLogout}>Sair</NavDropdown.Item>
+                                <NavDropdown.Item onClick={handleLogout} className={styles.item}>
+                                    Sair
+                                </NavDropdown.Item>
                             </NavDropdown>
                         </div>
                     </Nav>

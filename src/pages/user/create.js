@@ -38,6 +38,8 @@ export default function CreateUser() {
                     const result = await BandService.get();
                     if (result) {
                         setBands(result);
+                    } else {
+                        setBands([])
                     }
                 } else {
                     navigate("/")
@@ -60,7 +62,7 @@ export default function CreateUser() {
         password: password
     }
 
-    if (bands) {
+    if (user) {
 
         return (
             <FormCreate data={{credentials, permission, hub, fkBand}}

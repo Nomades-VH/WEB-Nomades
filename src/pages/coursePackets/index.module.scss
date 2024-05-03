@@ -22,6 +22,35 @@
     }
 }
 
+.navbar {
+    display: flex;
+
+    a {
+        &::before {
+            display: none!important;
+        }
+    }
+
+    .item {
+        width: auto;
+        padding: 5px;
+        transition: 0.5s;
+        border-radius: 5px;
+        margin: 5px!important;
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.12);
+        }
+    }
+
+    .dropdownMenu {
+        div {
+            min-width: auto;
+            padding: 5px;
+        }
+    }
+}
+
 .buttons {
     display: flex;
 }

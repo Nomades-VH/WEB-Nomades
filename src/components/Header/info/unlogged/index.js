@@ -20,22 +20,14 @@ export default function Unlogged() {
                     <Nav>
                         <div className={styles.menu}>
                             <NavDropdown title="Entrar" className={styles.dropdown} drop="start">
-                                <NavDropdown.Item>
+                                <NavDropdown.Item className={styles.item}>
                                     <a onClick={() => {
                                         setOpenAlert(true);
                                         setNavigateTo('/apostilas');
                                     }}>
                                         Apostilas <FaLock/>
                                     </a></NavDropdown.Item>
-                                {/*<NavDropdown.Item>*/}
-                                {/*<a onClick={() => {*/}
-                                {/*        setOpenAlert(true);*/}
-                                {/*        setNavigateTo('/polo');*/}
-                                {/*    }}>*/}
-                                {/*        Seu Polo <FaLock/>*/}
-                                {/*    </a>*/}
-                                {/*</NavDropdown.Item>*/}
-                                <NavDropdown.Item>
+                                <NavDropdown.Item className={styles.item}>
                                     <Link to={'/login'}>
                                         Entrar
                                     </Link>

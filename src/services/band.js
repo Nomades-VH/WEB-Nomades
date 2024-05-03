@@ -44,14 +44,12 @@ const BandService = {
             meaning: data.meaning,
             theory: data.theory,
             breakdown: data.breakdown,
-            stretching: data.stretching,
-            kicks: [],
-            poomsaes: [],
-            kibon_donjaks: []
+            stretching: data.stretching
         }
 
         try {
             const response = await instance.post(`${SERVICE}/`, band)
+            console.log("Resposta: ", band, response.status)
 
             if (response.status === 200) {
                 return response.data;

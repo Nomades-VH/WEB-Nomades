@@ -15,6 +15,7 @@ import LoginPage from "./login";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import CreateBand from "./band/create";
 import Head from "next/head";
+import CreateKick from "./Kick/create";
 
 
 const App = () => {
@@ -62,6 +63,7 @@ const AppContent = () => {
                     <Route path="/apostila/:id" element={<CoursePack/>}/>
                     <Route path="/polo" element={<NotFound/>}/>
                     <Route path="/faixa/criar" element={<CreateBand />} />
+                    <Route path="/chute/criar" element={<CreateKick />} />
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
