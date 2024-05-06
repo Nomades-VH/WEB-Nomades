@@ -73,12 +73,12 @@ export default function CoursePackets() {
                                             </Link>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item className={styles.item}>
-                                            <Link to='#'>
+                                            <Link to='/kibon_donjak/criar'>
                                                 Kibon-Donjak
                                             </Link>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item className={styles.item}>
-                                            <Link to='#'>
+                                            <Link to='/poomsae/criar'>
                                                 Poomsae
                                             </Link>
                                         </NavDropdown.Item>
