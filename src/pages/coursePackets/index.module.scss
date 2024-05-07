@@ -33,10 +33,16 @@
 
     .item {
         width: auto;
-        padding: 5px;
+        padding: 0;
         transition: 0.5s;
         border-radius: 5px;
-        margin: 5px!important;
+
+        a {
+            width: 100%;
+            margin: 0;
+            padding: 5px;
+            display: flex;
+        }
 
         &:hover {
             background-color: rgba(0, 0, 0, 0.12);

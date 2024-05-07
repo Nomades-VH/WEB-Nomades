@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import Alert from "../Alert";
 import {error} from "next/dist/build/output/log";
+import Button from "../Button";
 
 
 function FormCreate({children, data, titlePage, messageError, messageSuccess, serviceCreate, defaultInputs, redirectTo}) {
@@ -35,7 +36,7 @@ function FormCreate({children, data, titlePage, messageError, messageSuccess, se
             <h2>{titlePage}</h2>
             <Form onSubmit={handleSubmit}>
                     {children}
-                <button type="submit" className={styles.btn + " btn btn-secondary"}>Criar</button>
+                <Button className={styles.submit} type="submit">Criar</Button>
             </Form>
             <Alert isOpen={openAlert} setAlertOpen={() => setOpenAlert(!openAlert)} textClose="Não"
                    hasButtons={true} textContinue={"Sim"} redirectTo={redirectTo}>

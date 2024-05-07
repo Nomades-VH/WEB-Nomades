@@ -8,10 +8,10 @@ const PrivateRoute = () => {
         setIsClient(true)
     }, []);
 
-    const auth = useAuth();
+    const {isAuthenticated} = useAuth();
 
     if (isClient) {
-        if (!auth.isAuthenticated) return <Navigate to="/login" />;
+        if (!isAuthenticated) return <Navigate to="/login" />;
         return <Outlet />;
     }
 };

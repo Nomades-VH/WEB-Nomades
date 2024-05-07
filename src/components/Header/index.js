@@ -22,7 +22,7 @@ export default function Header() {
                 </Link>
                 <h2 className={user ? styles.logged : ''}>{user ? toUpperCaseInitial(user.username) : null}</h2>
             </div>
-            <div className={styles.itens}>
+            <div className={styles.items}>
                 {/*<Link className={styles.default} href={'/store'}>Loja</Link>*/}
                 {
                     isAuthenticated ? (

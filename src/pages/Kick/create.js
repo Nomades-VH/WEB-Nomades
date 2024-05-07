@@ -2,13 +2,21 @@ import DisplayPage from "../../components/DisplayPage";
 import FormCreate from "../../components/commons/FormCreate";
 import React, {useState} from "react";
 import InputText from "../../components/commons/inputs/InputText";
+import KickService from "../../services/kick";
 
 export default function CreateKick() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
+    const defaultInputs = async () => {
+        setName('')
+        setDescription('')
+    }
+
     return (
-        <FormCreate >
+        <FormCreate data={{name, description}} defaultInputs={defaultInputs} serviceCreate={KickService.create}
+                    titlePage={"Criar Chute"} messageSuccess={"Continuar criando?"}
+                    messageError={"Erro ao criar o chute"} redirectTo={'/apostilas'}>
             <section>
                 <InputText
                     type="text"

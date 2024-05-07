@@ -1,13 +1,21 @@
 import InputText from "../../components/commons/inputs/InputText";
 import FormCreate from "../../components/commons/FormCreate";
 import React, {useState} from "react";
+import KibonDonjakService from "../../services/kibon_donjak";
 
 export default function CreateKibonDonjak() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
+    const defaultInputs = async () => {
+        setName('')
+        setDescription('')
+    }
+
     return (
-        <FormCreate >
+        <FormCreate data={{name, description}} serviceCreate={KibonDonjakService.create}
+                    titlePage={"Criar Kibon Donjak"} messageSuccess={"Continuar criando?"}
+                    messageError={"Erro ao criar kibon Donjak"} redirectTo={'/apostilas'} defaultInputs={defaultInputs}>
             <section>
                 <InputText
                     type="text"

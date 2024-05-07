@@ -32,7 +32,9 @@ export default function Logged(props) {
                                     </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item onClick={handleLogout} className={styles.item}>
-                                    Sair
+                                    <Link to="#">
+                                        Sair
+                                    </Link>
                                 </NavDropdown.Item>
                             </NavDropdown>
                         </div>

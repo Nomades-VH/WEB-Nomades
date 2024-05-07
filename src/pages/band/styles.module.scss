@@ -11,6 +11,17 @@
             margin: 0;
         }
     }
+
+    .label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0!important;
+
+        h3 {
+            margin: 25px 10px 0;
+        }
+    }
 }
 
 @media (max-width: 1199px) {
@@ -28,4 +39,32 @@
             margin: 0;
         }
     }
+
+    .label {
+        flex-direction: row;
+
+        h3 {
+            margin: 25px 10px 0;
+        }
+    }
 }
+
+.selects {
+    display: flex;
+    flex-direction: column;
+    gap: 0!important;
+}
+
+.remove {
+    background-color: rgba(255, 0, 0, 0.5);
+    color: black;
+}
+
+@media (min-width: 776px) {
+    .buttons {
+        display: flex;
+        flex-direction: unset;
+        gap: 30px!important;
+    }
+}
+

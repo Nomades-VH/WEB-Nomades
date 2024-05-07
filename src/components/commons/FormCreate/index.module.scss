@@ -6,7 +6,13 @@
             }
         }
     }
+}
 
+@media (min-width: 776px) {
+    .submit {
+        width: 33%;
+        align-self: center;
+    }
 }
 
 @media (max-width: 1199px) {

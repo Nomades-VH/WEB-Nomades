@@ -19,6 +19,7 @@ const BandService = {
         try {
             const response = await instance.get(`${SERVICE}/`)
             if (response.status === 200) {
+                console.log(response.data)
                 return response.data;
             }
         } catch (error) {
@@ -44,8 +45,13 @@ const BandService = {
             meaning: data.meaning,
             theory: data.theory,
             breakdown: data.breakdown,
-            stretching: data.stretching
+            stretching: data.stretching,
+            kicks: data.kicks || null,
+            poomsaes: data.poomsaes || null,
+            kibon_donjaks: data.kibonDonjaks || null
         }
+
+        console.log(band)
 
         try {
             const response = await instance.post(`${SERVICE}/`, band)

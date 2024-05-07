@@ -5,10 +5,15 @@ import {useAuth} from "../../context/AuthContext";
 import {useNavigate} from "react-router-dom";
 import BandService from "../../services/band";
 import styles from "./styles.module.scss";
+import Select from "../../components/commons/inputs/Select";
+import Button from "../../components/commons/Button";
+import KibonDonjakService from "../../services/kibon_donjak";
+import KickService from "../../services/kick";
+import PomsaeService from "../../services/poomsae";
 
 export default function CreateBand() {
 
-    const [gub, setGub] = useState();
+    const [gub, setGub] = useState('');
     const [name, setName] = useState('');
     const [meaning, setMeaning] = useState('');
     const [theory, setTheory] = useState('');
@@ -16,12 +21,81 @@ export default function CreateBand() {
     const [stretching, setStretching] = useState('');
     const {user} = useAuth();
     const navigate = useNavigate();
+    const [getKicks, setGetKicks] = useState([]);
+    const [getKibonDonjaks, setGetKibonDonjaks] = useState([]);
+    const [kibonDonjaks, setKibonDonjaks] = useState([]);
+    const [poomsaes, setPoomsaes] = useState([]);
+    const [kicks, setKicks] = useState([]);
+    const [getPoomsaes, setGetPoomsaes] = useState([]);
+    const [selectsKibons, setSelectsKibons] = useState([]);
+    const [selectsKicks, setSelectsKicks] = useState([]);
+    const [selectsPoomsaes, setSelectsPoomsaes] = useState([]);
+
+    const loadKibonDonjaks = async () => {
+        try {
+            const result = await KibonDonjakService.get();
+            if (result) {
+                setGetKibonDonjaks(result);
+            } else {
+                setGetKibonDonjaks([])
+            }
+        } catch (error) {
+            setGetKibonDonjaks([])
+        }
+    }
+
+    const loadKicks = async () => {
+        try {
+            const result = await KickService.get();
+            if (result) {
+                setGetKicks(result)
+            } else {
+                setGetKibonDonjaks([])
+            }
+        } catch (error) {
+            setGetKicks([])
+        }
+    }
+
+    const loadPomsaes = async () => {
+        try {
+            const result = await PomsaeService.get();
+            if (result) {
+                setGetPoomsaes(result)
+            } else {
+                setGetPoomsaes([])
+            }
+        } catch (error) {
+            setGetPoomsaes([])
+        }
+    }
 
     useEffect(() => {
-        if (parseInt(user.permission) <= 3) {
-            navigate("/")
-        }
-    }, [navigate, user]);
+        loadKibonDonjaks();
+        loadKicks();
+        loadPomsaes()
+    }, []);
+
+    const addSelect = (list, optionsItems, setList, onChangeSetItem) => {
+        setList(list.concat(
+            <div className={styles.label} key={list.length}>
+                <Select
+                    onChange={(e) => onChangeSetItem(prevState => [...prevState, e.target.value])}
+                    options={optionsItems?.map(items => ({
+                        label: items.name,
+                        value: items.id
+                    }))}
+                />
+            </div>
+        ))
+    }
+
+    const removeSelect = (selectsList, setSelectsList, itemsList, setItemsList) => {
+        const newItemsList = itemsList.slice(0, -1)
+        const newSelectsList = selectsList.slice(0, -1)
+        setSelectsList(newSelectsList);
+        setItemsList(newItemsList)
+    };
 
     const defaultInputs = async () => {
         setGub('')
@@ -33,10 +107,11 @@ export default function CreateBand() {
     }
 
     return (
-        <FormCreate data={{gub, name, meaning, theory, breakdown, stretching}}
-                    titlePage={"Criar usuário"} messageSuccess={"Continuar criando faixa?"}
-                    messageError={"Erro ao criar faixa."} serviceCreate={BandService.create} defaultInputs={defaultInputs}
-        redirectTo={"/apostilas"}>
+        <FormCreate data={{gub, name, meaning, theory, breakdown, stretching, poomsaes, kibonDonjaks, kicks}}
+                    titlePage={"Criar Faixa"} messageSuccess={"Continuar criando faixa?"}
+                    messageError={"Erro ao criar faixa."} serviceCreate={BandService.create}
+                    defaultInputs={defaultInputs}
+                    redirectTo={"/apostilas"}>
             <section className={styles.inputs}>
                 <InputText
                     type="text"
@@ -62,6 +137,72 @@ export default function CreateBand() {
                     value={breakdown}
                     onChange={(e) => setBreakdown(e.target.value)}
                 />
+            </section>
+            <section className={styles.inputs}>
+                <div className={styles.selects}>
+                    <div className={styles.label}>
+                        <Select label={"Poomsaes"} onChange={(e) => setPoomsaes([e.target.value])}
+                                options={getPoomsaes?.map((poomsae) => ({
+                                    label: poomsae.name,
+                                    value: poomsae.id
+                                }))}>
+                        </Select>
+                    </div>
+                    {selectsPoomsaes.map((select, index) => (
+                        <div key={index} className={styles.selects}>
+                            {select}
+                        </div>
+                    ))}
+                    <div className={styles.buttons}>
+                        <Button type={'button'} onClick={() => addSelect(selectsPoomsaes, getPoomsaes, setSelectsPoomsaes, setPoomsaes)}>Adicionar</Button>
+                        <Button type={'button'} className={styles.remove} onClick={() => removeSelect(selectsPoomsaes, setSelectsPoomsaes, poomsaes, setPoomsaes)}>Remover</Button>
+                    </div>
+                </div>
+
+                <div className={styles.selects}>
+                    <div className={styles.label}>
+                        <Select label={"Kibon Donjaks"} onChange={(e) => setKibonDonjaks([e.target.value])}
+                                options={getKibonDonjaks?.map((kibonDonjak) => ({
+                                    label: kibonDonjak.name,
+                                    value: kibonDonjak.id
+                                }))}></Select>
+                    </div>
+                    {
+                        selectsKibons.map((select, index) => (
+                            <div key={index} className={styles.selects}>
+                                {select}
+                            </div>
+                        ))
+                    }
+                    <div className={styles.buttons}>
+                        <Button type={'button'} onClick={() => {
+                            addSelect(selectsKibons, getKibonDonjaks, setSelectsKibons, setKibonDonjaks)
+                            console.log(kibonDonjaks)
+                        }}>Adicionar</Button>
+                        <Button type={'button'} className={styles.remove} onClick={() => removeSelect(selectsKibons, setSelectsKibons, kibonDonjaks, setKibonDonjaks)}>Remover</Button>
+                    </div>
+
+                </div>
+                <div className={styles.selects}>
+                    <div className={styles.label}>
+                        <Select label={"Chutes"} onChange={(e) => setKicks([e.target.value])}
+                                options={getKicks?.map((kick) => ({
+                                    label: kick.name,
+                                    value: kick.id
+                                }))}></Select>
+                    </div>
+                    {
+                        selectsKicks.map((select, index) => (
+                            <div key={index} className={styles.selects}>
+                                {select}
+                            </div>
+                        ))
+                    }
+                    <div className={styles.buttons}>
+                        <Button type={'button'} onClick={() => addSelect(selectsKicks, getKicks, setSelectsKicks, setKicks)}>Adicionar</Button>
+                        <Button type={'button'} className={styles.remove} onClick={() => removeSelect(selectsKicks, setSelectsKicks, kicks, setKicks)}>Remover</Button>
+                    </div>
+                </div>
             </section>
             <section className={styles.containerTextArea}>
                 <label>

@@ -90,7 +90,7 @@ export default function CoursePackets() {
 
                     {bands && bands.map((band) => (
                         // eslint-disable-next-line react/jsx-key
-                        <div className={user.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
+                        <div key={band.id} className={user.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
                             <Link to={`/apostila/${band.id}`}>
                                 <h4 className="link">{band.gub}º Gub - {band.name}</h4>
                             </Link>

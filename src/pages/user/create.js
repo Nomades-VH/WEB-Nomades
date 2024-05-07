@@ -29,7 +29,7 @@ export default function CreateUser() {
     const [permission, setPermission] = useState(2);
     const [hub, setHub] = useState('');
     const [fkBand, setFkBand] = useState(null)
-    const [bands, setBands] = useState();
+    const [bands, setBands] = useState([]);
 
     useEffect(() => {
         const loadBand = async () => {
@@ -45,6 +45,7 @@ export default function CreateUser() {
                     navigate("/")
                 }
             } catch (error) {
+                setBands([])
             }
         };
         loadBand();
@@ -100,14 +101,14 @@ export default function CreateUser() {
                         </Select>
                         <Select label={"Cidade"} onChange={(e) => setHub(e.target.value)}
                                 options={Object.keys(Hubs).map((key) => ({
-                                    label: key, // O valor representa diretamente a cidade
-                                    value: Hubs[key] // O valor também é a cidade neste caso
+                                    label: key,
+                                    value: Hubs[key]
                                 }))}></Select>
                         {bands ?
                             <Select label={"Faixa do aluno"} onChange={(e) => setFkBand(e.target.value)}
                                     options={bands?.map((band) => ({
-                                        label: band.name, // O valor representa diretamente a cidade
-                                        value: band.id // O valor também é a cidade neste caso
+                                        label: band.name,
+                                        value: band.id
                                     }))}></Select>
                             : null
                         }
