@@ -8,11 +8,17 @@ import {error} from "next/dist/build/output/log";
 import Button from "../Button";
 
 
-function FormCreate({children, data, titlePage, messageError, messageSuccess, serviceCreate, defaultInputs, redirectTo}) {
+function FormCreate({children, data, titlePage: title, messageError, messageSuccess, serviceCreate, defaultInputs, redirectTo}) {
     const navigate = useNavigate();
     const [openAlert, setOpenAlert] = useState(false);
     const [openAlertErrorCreate, setOpenAlertErrorCreate] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
+    const [titlePage, setTitlePage] = useState("");
+
+    const handleChange = () => {
+        const newTitle = title.replace(" ", '-')
+        setTitlePage(newTitle);
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,6 +28,7 @@ function FormCreate({children, data, titlePage, messageError, messageSuccess, se
             if (response) {
                 setOpenAlert(true);
                 defaultInputs();
+                localStorage.removeItem(titlePage)
             } else {
                 setOpenAlertErrorCreate(true)
             }
@@ -30,11 +37,15 @@ function FormCreate({children, data, titlePage, messageError, messageSuccess, se
         }
     };
 
+    useEffect(() => {
+        localStorage.setItem(titlePage, JSON.stringify(data));
+    }, [titlePage, data]);
+
 
     return (
         <div className={styles.container}>
             <h2>{titlePage}</h2>
-            <Form onSubmit={handleSubmit}>
+            <Form onChange={handleChange} onSubmit={handleSubmit}>
                     {children}
                 <Button className={styles.submit} type="submit">Criar</Button>
             </Form>

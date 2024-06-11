@@ -9,8 +9,6 @@ const PoomsaeService = {
             description: data.description,
         }
 
-        console.log(poomsae);
-
         try {
             const response = await instance.post(`${SERVICE}/`, poomsae)
 
@@ -27,7 +25,6 @@ const PoomsaeService = {
             const response = await instance.get(`${SERVICE}/`)
 
             if (response.status === 200) {
-                console.log(response.data)
                 return response.data;
             }
         } catch (error) {

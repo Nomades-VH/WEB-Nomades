@@ -8,7 +8,9 @@ export default function Select({ label, options, value, onChange }) {
                     <select value={value} onChange={onChange}>
                         <option selected>Selecione a opção</option>
                         {options.map((option) => (
-                            <option key={option.value} value={option.value}>{option.label}</option>
+                            option.selected ?
+                                <option selected key={option.value} value={option.value}>{option.label}</option> :
+                                <option key={option.value} value={option.value}>{option.label}</option>
                         ))}
                     </select>
             </label>
