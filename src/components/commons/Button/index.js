@@ -1,8 +1,8 @@
 import styles from './styles.module.scss';
 
-export default function Button({ children, onClick, disabled, className }) {
+export default function Button({ children, onClick, disabled, className, type }) {
     return (
-        <button className={`${styles.button} ${className || ''}`} onClick={onClick} disabled={disabled}>
+        <button type={type} className={`${styles.button} ${className || ''}`} onClick={onClick} disabled={disabled}>
             {children}
         </button>
     );

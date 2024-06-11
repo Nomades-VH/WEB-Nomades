@@ -4,10 +4,10 @@ import { instance } from "./base"
 const SERVICE = "/auth"
 
 const AuthService = {
-    refresh: async (setIsAuthenticated) => {
+    refresh: async () => {
         try {
             const response = await instance.put(`${SERVICE}/refresh-token`, {})
-
+            console.log(response.status)
             if (response.status === 200) {
                 return response.data;
             }

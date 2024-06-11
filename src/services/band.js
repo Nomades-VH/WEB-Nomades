@@ -45,9 +45,9 @@ const BandService = {
             theory: data.theory,
             breakdown: data.breakdown,
             stretching: data.stretching,
-            kicks: [],
-            poomsaes: [],
-            kibon_donjaks: []
+            kicks: data.kicks || null,
+            poomsaes: data.poomsaes || null,
+            kibon_donjaks: data.kibonDonjaks || null
         }
 
         try {

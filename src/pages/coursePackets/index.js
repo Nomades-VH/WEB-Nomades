@@ -8,6 +8,7 @@ import DisplayPage from "../../components/DisplayPage";
 import styles from "./index.module.scss"
 import Loading from "../../components/commons/Loading";
 import Alert from "../../components/commons/Alert";
+import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 
 export default function CoursePackets() {
@@ -31,9 +32,11 @@ export default function CoursePackets() {
                     setBands(result)
                 }
             } catch (error) {
-                setBands([])
-                setAlertNotBand(true)
-                setMessageError(error.message)
+                if (user && user.permission <= 3) {
+                    setBands([])
+                    setAlertNotBand(true)
+                    setMessageError(error.message)
+                }
             }
         }
 
@@ -50,21 +53,44 @@ export default function CoursePackets() {
             console.error("Erro ao excluir faixa:", error);
         }
     };
-    if (logged && bands != null) {
+    if (logged && (bands != null || user.permission >= 3)) {
         return (
             <div>
                 <DisplayPage titlePage={<>
                     <h1>Apostilas</h1>
                     {user.permission >= 3 ?
-                        <Link to='/faixa/criar' style={{position: "absolute", alignSelf: "flex-end"}}>
-                            <h1>+</h1>
-                        </Link> : null}
+                        <Navbar className={styles.navbar} expand="lg"
+                                style={{position: "absolute", alignSelf: "flex-end"}}>
+                                    <NavDropdown title={<h2>+</h2>} drop="start" className={styles.dropdownMenu}>
+                                        <NavDropdown.Item className={styles.item}>
+                                            <Link to='/faixa/criar'>
+                                                Faixa
+                                            </Link>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item className={styles.item}>
+                                            <Link to='/chute/criar'>
+                                                Chute
+                                            </Link>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item className={styles.item}>
+                                            <Link to='/kibon_donjak/criar'>
+                                                Kibon-Donjak
+                                            </Link>
+                                        </NavDropdown.Item>
+                                        <NavDropdown.Item className={styles.item}>
+                                            <Link to='/poomsae/criar'>
+                                                Poomsae
+                                            </Link>
+                                        </NavDropdown.Item>
+                                    </NavDropdown>
+                        </Navbar>
+                        : null}
                 </>} alertDelete={alertDeleteBand} setAlertDelete={setAlertDeleteBand}
                              textDelete={"Deseja mesmo deletar essa faixa?"} handleDelete={handleDeleteBand}>
 
                     {bands && bands.map((band) => (
                         // eslint-disable-next-line react/jsx-key
-                        <div className={user.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
+                        <div key={band.id} className={user.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
                             <Link to={`/apostila/${band.id}`}>
                                 <h4 className="link">{band.gub}º Gub - {band.name}</h4>
                             </Link>
