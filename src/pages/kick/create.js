@@ -16,7 +16,7 @@ export default function CreateKick() {
     return (
         <FormCreate data={{name, description}} defaultInputs={defaultInputs} serviceCreate={KickService.create}
                     titlePage={"Criar Chute"} messageSuccess={"Continuar criando?"}
-                    messageError={"Erro ao criar o chute"} redirectTo={'/apostilas'}>
+                    messageError={"Erro ao criar o chute"} redirectTo={'/chute'}>
             <section>
                 <InputText
                     type="text"

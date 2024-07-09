@@ -45,14 +45,23 @@ export const AuthProvider = ({children}) => {
 
     }, [isAuthenticated]);
 
-    const login = async (email, password) => {
+    const login = async (login, password, isEmail) => {
         try {
+            console.log(isEmail ? {
+                "email": login,
+                "password": password
+            } : {
+                "username": login,
+                "password": password
+            })
+
             const response = await instance.post('auth',
-                {
-                    "email": email,
+                isEmail ? {
+                    "email": login,
                     "password": password
-                }, {
-                    'Content-Type': 'application/json'
+                } : {
+                    "username": login,
+                    "password": password
                 }
             );
             console.log("OPA", response)
@@ -60,7 +69,7 @@ export const AuthProvider = ({children}) => {
             setIsAuthenticated(true);
             return response;
         } catch (error) {
-            console.log("VISH")
+            console.log("VISH", error)
             throw error;
         }
     };

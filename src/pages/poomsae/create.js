@@ -25,7 +25,7 @@ export default function CreatePoomsae() {
     return (
         <FormCreate data={{name, description}}
                     titlePage={"Criar Poomsae"} messageSuccess={"Continuar criando?"}
-                    messageError={"Erro ao criar Poomsae"} redirectTo={'/apostilas'} serviceCreate={PoomsaeService.create} defaultInputs={defaultInputs}>
+                    messageError={"Erro ao criar Poomsae"} redirectTo={'/poomsae'} serviceCreate={PoomsaeService.create} defaultInputs={defaultInputs}>
             <section>
                 <InputText
                     type="text"

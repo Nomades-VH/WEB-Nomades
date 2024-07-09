@@ -6,7 +6,7 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
         <div className={styles.main}>
 
             <div className={styles.container}>
-                <h1>{band.gub}° - {band.name}</h1>
+                <h1>Prospecto de {band.name} - {band.gub}° GUB</h1>
                 <p style={{alignSelf: "center"}}>{band.meaning}</p>
                 <div className={styles.content}>
 

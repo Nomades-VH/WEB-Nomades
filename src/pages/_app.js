@@ -15,9 +15,12 @@ import LoginPage from "./login";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import CreateBand from "./band/create";
 import Head from "next/head";
-import CreateKick from "./Kick/create";
+import CreateKick from "./kick/create";
 import CreateKibonDonjak from "./kibon_donjak/create";
 import CreatePoomsae from "./poomsae/create";
+import Kicks from "./kick";
+import KibonDonjaks from './kibon_donjak';
+import Poomsaes from './poomsae';
 
 
 const App = () => {
@@ -66,8 +69,12 @@ const AppContent = () => {
                     <Route path="/polo" element={<NotFound/>}/>
                     <Route path="/faixa/criar" element={<CreateBand />} />
                     <Route path="/chute/criar" element={<CreateKick />} />
+                    <Route path="/chute" element={<Kicks />} />
                     <Route path="/kibon_donjak/criar" element={<CreateKibonDonjak />} />
+                    <Route path="/kibon_donjak" element={<KibonDonjaks />} />
                     <Route path="/poomsae/criar" element={<CreatePoomsae />} />
+                    <Route path="/poomsae" element={<Poomsaes />} />
+
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
