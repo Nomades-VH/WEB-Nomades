@@ -51,11 +51,19 @@ $background-color: #F2F1F1;
             }
         }
 
-        h4 {
-            font-size: 0.65rem;
+        a {
+
+
+            h4 {
+                font-size: 1rem;
+            }
         }
     }
 }
 
+@keyframes moving {
+    from {transform: translateX(30%);}
+    to {transform: translateX(-50%);}
+}
 
 

@@ -30,6 +30,18 @@ const KibonDonjakService = {
         } catch (error) {
             throw error;
         }
+    },
+
+    delete: async (id) => {
+        try {
+            const response = await instance.delete(`${SERVICE}/${id}`)
+
+            if (response.status === 200) {
+                return response
+            }
+        } catch (error) {
+            throw error;
+        }
     }
 }
 

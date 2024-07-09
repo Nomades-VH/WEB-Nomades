@@ -16,8 +16,9 @@ function validarEmail(email) {
 }
 
 function Login({redirectTo = "/"}) {
-    const [email, setEmail] = useState('');
+    const [textLogin, setTextLogin] = useState('');
     const [password, setPassword] = useState('');
+    const [response, setResponse] = useState(null)
     const {login, isAuthenticated} = useAuth();
     const navigate = useNavigate();
     const [openAlertNotStudent, setOpenAlertNotStudent] = useState(false);
@@ -30,22 +31,16 @@ function Login({redirectTo = "/"}) {
         event.preventDefault();
         try {
             setLoading(true)
-            if (validarEmail(email)) {
-                const response = await login(email, password);
-                if (response) {
-                    navigate(redirectTo)
-                } else {
-                    setErrorMessage('Email ou senha incorreta.')
-                    setCount(count+1)
-                    if (count >= 2) {
-                        setCount(0)
-                        setOpenAlertNotStudent(true)
-                    } else {
-                        setOpenAlert(true)
-                    }
-                }
+            if (validarEmail(textLogin)) {
+                console.log('email')
+                setResponse(await login(textLogin, password, true));
             } else {
-                setErrorMessage("Email inválido.")
+                setResponse(await login(textLogin, password, false));
+            }
+            if (response) {
+                navigate(redirectTo)
+            } else {
+                setErrorMessage('Login ou senha incorreta.')
                 setCount(count+1)
                 if (count >= 2) {
                     setCount(0)
@@ -82,7 +77,7 @@ function Login({redirectTo = "/"}) {
                             </label>
                             <section>
                                 <InputText name="email" placeholder={'Digite seu E-mail'} required={true}
-                                           onChange={(e) => setEmail(e.target.value)} label={"Email"} value={email}/>
+                                           onChange={(e) => setTextLogin(e.target.value)} label={"Email"} value={textLogin}/>
                                 <InputPassword name="password" placeholder={'Insira sua senha'} label={"Senha"} required={true}
                                                onChange={(e) => setPassword(e.target.value)} value={password}/>
                             </section>

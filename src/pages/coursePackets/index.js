@@ -1,14 +1,14 @@
 import BandService from "../../services/band";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useAuth} from "../../context/AuthContext";
 import {Link, useNavigate} from "react-router-dom";
 import {MdEdit} from "react-icons/md";
 import {MdDelete} from "react-icons/md";
 import DisplayPage from "../../components/DisplayPage";
-import styles from "./index.module.scss"
+import styles from "../content.module.scss"
 import Loading from "../../components/commons/Loading";
 import Alert from "../../components/commons/Alert";
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Navbar, NavDropdown} from "react-bootstrap";
 
 
 export default function CoursePackets() {
@@ -21,6 +21,8 @@ export default function CoursePackets() {
     const [alertNotBand, setAlertNotBand] = useState(false);
     const [messageError, setMessageError] = useState('');
 
+    const textRefs = useRef([]);
+
     useEffect(() => {
         async function loadBand() {
             if (user) {
@@ -32,7 +34,7 @@ export default function CoursePackets() {
                     setBands(result)
                 }
             } catch (error) {
-                if (user && user.permission <= 3) {
+                if (user && user.permission < 3) {
                     setBands([])
                     setAlertNotBand(true)
                     setMessageError(error.message)
@@ -42,6 +44,15 @@ export default function CoursePackets() {
 
         loadBand()
     }, [isAuthenticated, user, navigate]);
+
+    useEffect(() => {
+        textRefs.current.forEach((text) => {
+            if (text.scrollWidth > text.clientWidth) {
+                console.log(`Texto ${text} ultrapassa uma linha.`);
+                text.classList.add('animated-text');
+            }
+        });
+    }, [bands]);
 
 
     const handleDeleteBand = async () => {
@@ -55,62 +66,59 @@ export default function CoursePackets() {
     };
     if (logged && (bands != null || user.permission >= 3)) {
         return (
-            <div>
-                <DisplayPage titlePage={<>
-                    <h1>Apostilas</h1>
-                    {user.permission >= 3 ?
-                        <Navbar className={styles.navbar} expand="lg"
-                                style={{position: "absolute", alignSelf: "flex-end"}}>
-                                    <NavDropdown title={<h2>+</h2>} drop="start" className={styles.dropdownMenu}>
-                                        <NavDropdown.Item className={styles.item}>
-                                            <Link to='/faixa/criar'>
-                                                Faixa
-                                            </Link>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item className={styles.item}>
-                                            <Link to='/chute/criar'>
-                                                Chute
-                                            </Link>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item className={styles.item}>
-                                            <Link to='/kibon_donjak/criar'>
-                                                Kibon-Donjak
-                                            </Link>
-                                        </NavDropdown.Item>
-                                        <NavDropdown.Item className={styles.item}>
-                                            <Link to='/poomsae/criar'>
-                                                Poomsae
-                                            </Link>
-                                        </NavDropdown.Item>
-                                    </NavDropdown>
-                        </Navbar>
-                        : null}
-                </>} alertDelete={alertDeleteBand} setAlertDelete={setAlertDeleteBand}
-                             textDelete={"Deseja mesmo deletar essa faixa?"} handleDelete={handleDeleteBand}>
+            <DisplayPage titlePage={<>
+                <h1>Apostilas</h1>
+                {user.permission >= 3 ?
+                    <Navbar className={styles.navbar} expand="lg"
+                            style={{position: "absolute", alignSelf: "flex-end"}}>
+                        <NavDropdown title={<h2>+</h2>} drop="start" className={styles.dropdownMenu}>
+                            <NavDropdown.Item className={styles.item}>
+                                <Link to='/faixa/criar'>
+                                    Faixa
+                                </Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item className={styles.item}>
+                                <Link to='/chute'>
+                                    Chute
+                                </Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item className={styles.item}>
+                                <Link to='/kibon_donjak'>
+                                    Kibon-Donjak
+                                </Link>
+                            </NavDropdown.Item>
+                            <NavDropdown.Item className={styles.item}>
+                                <Link to='/poomsae'>
+                                    Poomsae
+                                </Link>
+                            </NavDropdown.Item>
+                        </NavDropdown>
+                    </Navbar>
+                    : null}
+            </>} alertDelete={alertDeleteBand} setAlertDelete={setAlertDeleteBand}
+                         textDelete={"Deseja mesmo deletar essa faixa?"} handleDelete={handleDeleteBand}>
+                {bands && bands.map((band, index) => (
+                    // eslint-disable-next-line react/jsx-key
+                    <div key={band.id}
+                         className={user.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
+                        <Link to={`/apostila/${band.id}`}>
+                            <h4 className="link" ref={(el) => (textRefs.current[index] = el)}>{band.gub}º Gub - {band.name}</h4>
+                        </Link>
 
-                    {bands && bands.map((band) => (
-                        // eslint-disable-next-line react/jsx-key
-                        <div key={band.id} className={user.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
-                            <Link to={`/apostila/${band.id}`}>
-                                <h4 className="link">{band.gub}º Gub - {band.name}</h4>
-                            </Link>
+                        {user.permission >= 3 ?
+                            <div className={styles.buttons}>
+                                <Link to={`/apostila/editar/${band.id}`}><MdEdit/></Link>
+                                <Link to={"#"} onClick={() => {
+                                    setAlertDeleteBand(true);
+                                    setIdToDelete(band.id)
+                                }}><MdDelete style={{color: "red"}}/></Link>
+                            </div> : null}
+                    </div>
 
-                            {user.permission >= 3 ?
-                                <div className={styles.buttons}>
-                                    <Link to={`/apostila/editar/${band.id}`}><MdEdit/></Link>
-                                    <Link to={"#"} onClick={() => {
-                                        setAlertDeleteBand(true);
-                                        setIdToDelete(band.id)
-                                    }}><MdDelete style={{color: "red"}}/></Link>
-                                </div> : null}
-                        </div>
-
-                    ))}
-                </DisplayPage>
-
+                ))}
                 <Alert isOpen={alertNotBand} setAlertOpen={() => navigate('/')} redirectTo={null} hasButtons={true}
                        textContinue={"Voltar"}>{messageError}</Alert>
-            </div>
+            </DisplayPage>
         )
     } else {
         return (
