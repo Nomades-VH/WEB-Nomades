@@ -23,6 +23,7 @@ import Kicks from "./kick";
 import KibonDonjaks from './kibon_donjak';
 import Poomsaes from './poomsae';
 import Kick from './kick/[id]';
+import KibonDonjak from './kibon_donjak/[id]';
 
 
 const App = () => {
@@ -75,6 +76,8 @@ const AppContent = () => {
                     
 
                     <Route path="/kibon_donjak" element={<KibonDonjaks />} />
+                    <Route path="/kibon_donjak/:id" element={<KibonDonjak />} />
+
                     <Route path="/poomsae" element={<Poomsaes />} />
 
                     {/* Somente logados com permissão acima da mesa podem acessar */}
