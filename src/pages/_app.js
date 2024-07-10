@@ -7,6 +7,7 @@ import {useEffect} from "react";
 import {Route, Routes, BrowserRouter as Router, useLocation} from "react-router-dom";
 import Home from "./index";
 import PrivateRoute from "../components/PrivateRoute";
+import PermissionPrivateRoute from '../components/PermissionPrivateRoute'
 import CreateUser from "./user/create";
 import CoursePackets from "./coursePackets";
 import CoursePack from "./coursePack/[id]";
@@ -62,19 +63,24 @@ const AppContent = () => {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/login" element={<LoginPage/>}/>
+
+                {/* Somente logados podem acessar */}
                 <Route element={<PrivateRoute/>}>
-                    <Route path="/usuario/criar" element={<CreateUser/>}/>
                     <Route path="/apostilas" element={<CoursePackets/>}/>
                     <Route path="/apostila/:id" element={<CoursePack/>}/>
-                    <Route path="/polo" element={<NotFound/>}/>
-                    <Route path="/faixa/criar" element={<CreateBand />} />
-                    <Route path="/chute/criar" element={<CreateKick />} />
+
                     <Route path="/chute" element={<Kicks />} />
-                    <Route path="/kibon_donjak/criar" element={<CreateKibonDonjak />} />
                     <Route path="/kibon_donjak" element={<KibonDonjaks />} />
-                    <Route path="/poomsae/criar" element={<CreatePoomsae />} />
                     <Route path="/poomsae" element={<Poomsaes />} />
 
+                    {/* Somente logados com permissão acima da mesa podem acessar */}
+                    <Route element={<PermissionPrivateRoute />} >
+                        <Route path="/chute/criar" element={<CreateKick />} />
+                        <Route path="/usuario/criar" element={<CreateUser/>}/>
+                        <Route path="/faixa/criar" element={<CreateBand />} />
+                        <Route path="/kibon_donjak/criar" element={<CreateKibonDonjak />} />
+                        <Route path="/poomsae/criar" element={<CreatePoomsae />} />
+                    </Route>
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
