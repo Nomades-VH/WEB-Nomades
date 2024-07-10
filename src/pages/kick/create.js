@@ -1,6 +1,5 @@
 import FormCreate from "../../components/commons/Forms/FormCreate";
 import React, {useState} from "react";
-import InputText from "../../components/commons/inputs/InputText";
 import KickService from "../../services/kick";
 import KickForm from "../../components/Kick/Form";
 

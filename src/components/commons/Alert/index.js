@@ -27,7 +27,9 @@ export default function Alert({
             <div className={styles.background}>
 
                 <div className={styles.container}>
-                    <h2 onClick={setAlertOpen} className={styles.close}><IoClose className={styles.icon} /></h2>
+                    <h2 onClick={setAlertOpen} className={styles.close}><IoClose className={styles.icon} onClick={() => {
+                        navigate(redirectTo)
+                    }}/></h2>
                     <LinkInter to='/'>
                         <Image src={logo} width={80} height={80} alt="Logo da equipe Nômades"/>
                     </LinkInter>
