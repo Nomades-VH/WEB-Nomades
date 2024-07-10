@@ -32,6 +32,18 @@ const PoomsaeService = {
         }
     },
 
+    get_by_id: async (id) => {
+        try {
+            const response = await instance.get(`${SERVICE}/${id}`)
+
+            if (response.status === 200) {
+                return response.data;
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
+
     delete: async (id) => {
         try {
             const response = await instance.delete(`${SERVICE}/${id}`)
