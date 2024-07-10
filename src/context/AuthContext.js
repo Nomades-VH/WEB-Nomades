@@ -13,13 +13,8 @@ export const AuthProvider = ({children}) => {
 
     useEffect( () => {
         const token = localStorage.getItem('access_token');
-        if (token) {
-            setIsAuthenticated(true);
-        } else {
-            setIsAuthenticated(false);
-        }
 
-        if (isAuthenticated) {
+        if (token) {
             async function loadUser() {
                 try {
                     const result = await UserService.get_me();
@@ -35,7 +30,6 @@ export const AuthProvider = ({children}) => {
                 } finally {
                     setLoading(false);
                 }
-
             }
 
             loadUser();
@@ -64,12 +58,10 @@ export const AuthProvider = ({children}) => {
                     "password": password
                 }
             );
-            console.log("OPA", response)
             localStorage.setItem('access_token', response.data.access_token);
             setIsAuthenticated(true);
             return response;
         } catch (error) {
-            console.log("VISH", error)
             throw error;
         }
     };
