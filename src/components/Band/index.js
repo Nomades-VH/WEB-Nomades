@@ -15,7 +15,7 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         return (
                             <div key={index}>
                                 <div className={styles.attribute}>
-                                    <h4>{index + 1}º - <a href="#" key={index} className="link">{kibon_donjak.name}</a>
+                                    <h4>{index + 1}º - <a href={`/kibon_donjak/${kibon_donjak.id}`} key={index} className="link">{kibon_donjak.name}</a>
                                     </h4>
                                     <p key={index}>({kibon_donjak.description})</p>
                                 </div>
