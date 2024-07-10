@@ -13,7 +13,8 @@ function FormEdit({children, data, titlePage, messageError, messageSuccess, serv
             messageSuccess={messageSuccess} 
             crudService={serviceEdit} 
             defaultInputs={defaultInputs} 
-            redirectTo={redirectTo} 
+            redirectTo={redirectTo}
+            isUpdate={true}
         />
     )
 }

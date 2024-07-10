@@ -20,6 +20,23 @@ const PoomsaeService = {
         }
     },
 
+    update: async (data) => {
+        const poomsae = {
+            name: data.name,
+            description: data.description,
+        }
+
+        try {
+            const response = await instance.put(`${SERVICE}/${data.id}`, poomsae)
+
+            if (response.status === 200) {
+                return response.data
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
+
     get: async () => {
         try {
             const response = await instance.get(`${SERVICE}/`)

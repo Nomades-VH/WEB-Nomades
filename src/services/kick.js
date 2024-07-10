@@ -20,6 +20,23 @@ const KickService = {
         }
     },
 
+    update: async (data) => {
+        const kick = {
+            name: data.name,
+            description: data.description,
+        }
+
+        try {
+            const response = await instance.put(`${SERVICE}/${data.id}`, kick)
+
+            if (response.status === 200) {
+                return response.data
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
+
     get: async () => {
         try {
             const response = await instance.get(`${SERVICE}/`)

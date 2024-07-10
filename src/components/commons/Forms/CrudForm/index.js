@@ -6,7 +6,7 @@ import Button from "../../Button";
 import Form from "..";
 
 
-function CrudForm({children, data, titlePage: title, messageError, messageSuccess, crudService, defaultInputs, redirectTo}) {
+function CrudForm({children, data, titlePage: title, messageError, messageSuccess, crudService, defaultInputs, redirectTo, isUpdate=false}) {
     const [openAlert, setOpenAlert] = useState(false);
     const [openAlertErrorCreate, setOpenAlertErrorCreate] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
@@ -21,8 +21,6 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
         e.preventDefault();
 
         try {
-            console.log("EITA")
-
             const response = await crudService(data);
             if (response) {
                 setOpenAlert(true);
@@ -48,10 +46,19 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
                     {children}
                 <Button className={styles.submit} type="submit">Enviar</Button>
             </Form>
-            <Alert isOpen={openAlert} setAlertOpen={() => setOpenAlert(!openAlert)} textClose="Não"
-                   hasButtons={true} textContinue={"Sim"} redirectTo={redirectTo}>
-                <h2>{messageSuccess}</h2>
-            </Alert>
+            {
+            isUpdate ? 
+            
+                <Alert isOpen={openAlert} setAlertOpen={() => setOpenAlert(!openAlert)} textClose="Não"
+                    hasButtons={false} redirectTo={redirectTo}>
+                    <h2>{messageSuccess}</h2>
+                </Alert> : 
+                
+                <Alert isOpen={openAlert} setAlertOpen={() => setOpenAlert(!openAlert)} textClose="Não"
+                    hasButtons={true} textContinue={"Sim"} redirectTo={redirectTo}>
+                    <h2>{messageSuccess}</h2>
+                </Alert>
+            }
             <Alert isOpen={openAlertErrorCreate} setAlertOpen={() => setOpenAlertErrorCreate(!openAlertErrorCreate)}
                    hasButtons={false}>
                 <h2>{messageError ? messageError : errorMsg }</h2>

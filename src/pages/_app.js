@@ -25,6 +25,9 @@ import Poomsaes from './poomsae';
 import Kick from './kick/[id]';
 import KibonDonjak from './kibon_donjak/[id]';
 import Poomsae from './poomsae/[id]';
+import EditKick from './kick/edit/[id]';
+import EditPoomsae from './poomsae/edit/[id]';
+import EditKibonDonjak from './kibon_donjak/edit/[id]';
 
 
 const App = () => {
@@ -87,9 +90,15 @@ const AppContent = () => {
                     <Route element={<PermissionPrivateRoute />} >
                         <Route path="/usuario/criar" element={<CreateUser/>}/>
                         <Route path="/faixa/criar" element={<CreateBand />} />
+
                         <Route path="/kibon_donjak/criar" element={<CreateKibonDonjak />} />
+                        <Route path="/kibon_donjak/editar/:id" element={<EditKibonDonjak />} />
+
                         <Route path="/poomsae/criar" element={<CreatePoomsae />} />
+                        <Route path="/poomsae/editar/:id" element={<EditPoomsae />} />
+
                         <Route path="/chute/criar" element={<CreateKick />} />
+                        <Route path="/chute/editar/:id" element={<EditKick />} />
                     </Route>
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
