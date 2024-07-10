@@ -1,4 +1,4 @@
-import FormCreate from "../../components/commons/FormCreate";
+import FormCreate from "../../components/commons/Forms/FormCreate";
 import InputText from "../../components/commons/inputs/InputText";
 import React, {useEffect, useState} from "react";
 import BandService from "../../services/band";
@@ -8,8 +8,6 @@ import Button from "../../components/commons/Button";
 import KibonDonjakService from "../../services/kibon_donjak";
 import KickService from "../../services/kick";
 import PomsaeService from "../../services/poomsae";
-import {forEach} from "react-bootstrap/ElementChildren";
-import {get} from "axios";
 
 export default function CreateBand() {
 

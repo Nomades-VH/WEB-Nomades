@@ -1,4 +1,4 @@
-import Form from "../commons/Form";
+import Form from "../commons/Forms";
 import InputPassword from "../commons/inputs/InputPassword";
 import InputText from "../commons/inputs/InputText";
 import Button from "../commons/Button";

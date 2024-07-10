@@ -1,5 +1,4 @@
-import DisplayPage from "../../components/DisplayPage";
-import FormCreate from "../../components/commons/FormCreate";
+import FormCreate from "../../components/commons/Forms/FormCreate";
 import React, {useState} from "react";
 import InputText from "../../components/commons/inputs/InputText";
 import KickService from "../../services/kick";

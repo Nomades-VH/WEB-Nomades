@@ -85,11 +85,11 @@ const AppContent = () => {
 
                     {/* Somente logados com permissão acima da mesa podem acessar */}
                     <Route element={<PermissionPrivateRoute />} >
-                        <Route path="/chute/criar" element={<CreateKick />} />
                         <Route path="/usuario/criar" element={<CreateUser/>}/>
                         <Route path="/faixa/criar" element={<CreateBand />} />
                         <Route path="/kibon_donjak/criar" element={<CreateKibonDonjak />} />
                         <Route path="/poomsae/criar" element={<CreatePoomsae />} />
+                        <Route path="/chute/criar" element={<CreateKick />} />
                     </Route>
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
