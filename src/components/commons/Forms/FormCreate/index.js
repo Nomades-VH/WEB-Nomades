@@ -1,11 +1,10 @@
 
-import styles from "./index.module.scss";
-import Form from "../Form";
+import styles from "../index.module.scss";
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import Alert from "../Alert";
-import {error} from "next/dist/build/output/log";
-import Button from "../Button";
+import Alert from "../../Alert";
+import Button from "../../Button";
+import Form from "..";
 
 
 function FormCreate({children, data, titlePage: title, messageError, messageSuccess, serviceCreate, defaultInputs, redirectTo}) {

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import InputText from "../../components/commons/inputs/InputText";
-import FormCreate from "../../components/commons/FormCreate";
+import FormCreate from "../../components/commons/Forms/FormCreate";
 import PoomsaeService from "../../services/poomsae";
 
 export default function CreatePoomsae() {
