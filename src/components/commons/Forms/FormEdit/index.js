@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import CrudForm from "../CrudForm";
 
 
-function FormCreate({children, data, titlePage, messageError, messageSuccess, serviceCreate, defaultInputs, redirectTo}) {
+function FormEdit({children, data, titlePage, messageError, messageSuccess, serviceEdit, defaultInputs, redirectTo}) {
     return (
         <CrudForm 
             children={children} 
@@ -11,11 +11,11 @@ function FormCreate({children, data, titlePage, messageError, messageSuccess, se
             titlePage={titlePage} 
             messageError={messageError} 
             messageSuccess={messageSuccess} 
-            crudService={serviceCreate} 
+            crudService={serviceEdit} 
             defaultInputs={defaultInputs} 
             redirectTo={redirectTo} 
         />
     )
 }
 
-export default FormCreate;
+export default FormEdit;
