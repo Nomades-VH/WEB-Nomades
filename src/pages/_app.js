@@ -22,6 +22,7 @@ import CreatePoomsae from "./poomsae/create";
 import Kicks from "./kick";
 import KibonDonjaks from './kibon_donjak';
 import Poomsaes from './poomsae';
+import Kick from './kick/[id]';
 
 
 const App = () => {
@@ -70,6 +71,9 @@ const AppContent = () => {
                     <Route path="/apostila/:id" element={<CoursePack/>}/>
 
                     <Route path="/chute" element={<Kicks />} />
+                    <Route path="/chute/:id" element={<Kick />} />
+                    
+
                     <Route path="/kibon_donjak" element={<KibonDonjaks />} />
                     <Route path="/poomsae" element={<Poomsaes />} />
 
