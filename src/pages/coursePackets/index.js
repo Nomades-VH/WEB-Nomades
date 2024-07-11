@@ -47,8 +47,7 @@ export default function CoursePackets() {
 
     useEffect(() => {
         textRefs.current.forEach((text) => {
-            if (text.scrollWidth > text.clientWidth) {
-                console.log(`Texto ${text} ultrapassa uma linha.`);
+            if (text && text.scrollWidth > text.clientWidth) {
                 text.classList.add('animated-text');
             }
         });

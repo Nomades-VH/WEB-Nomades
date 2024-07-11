@@ -20,9 +20,7 @@ export default function Home() {
                 <div className={styles.carouselContainer}>
                     <div className={styles.carousel1}>
                         <div className={styles.text}>
-                            <p onClick={(e) => {
-                                modifyText(e.target);
-                            }}>
+                            <p>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has
                                 been
@@ -48,9 +46,7 @@ export default function Home() {
                     </div>
                     <div className={styles.carousel1}>
                         <div className={styles.text}>
-                            <p onClick={(e) => {
-                                modifyText(e.target);
-                            }}>
+                            <p>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has
                                 been
