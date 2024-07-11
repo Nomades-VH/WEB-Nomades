@@ -9,12 +9,12 @@ import Home from "./index";
 import PrivateRoute from "../components/PrivateRoute";
 import PermissionPrivateRoute from '../components/PermissionPrivateRoute'
 import CreateUser from "./user/create";
-import CoursePackets from "./coursePackets";
+import CoursePackets from "./coursePack";
 import CoursePack from "./coursePack/[id]";
 import NotFound from "../components/commons/NotFound";
 import LoginPage from "./login";
 import ScrollToTopButton from "../components/ScrollToTopButton";
-import CreateBand from "./band/create";
+import CreateBand from "./coursePack/create";
 import Head from "next/head";
 import CreateKick from "./kick/create";
 import CreateKibonDonjak from "./kibon_donjak/create";
