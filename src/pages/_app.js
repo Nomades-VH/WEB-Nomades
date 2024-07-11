@@ -2,9 +2,9 @@ import '../styles/globals.css'
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import React, {useState} from "react";
-import {AuthProvider} from "../context/AuthContext";
+import {AuthProvider, useAuth} from "../context/AuthContext";
 import {useEffect} from "react";
-import {Route, Routes, BrowserRouter as Router, useLocation} from "react-router-dom";
+import {Route, Routes, BrowserRouter as Router, useLocation, useNavigate} from "react-router-dom";
 import Home from "./index";
 import PrivateRoute from "../components/PrivateRoute";
 import PermissionPrivateRoute from '../components/PermissionPrivateRoute'
@@ -60,6 +60,17 @@ const App = () => {
 const AppContent = () => {
     const location = useLocation();
     const isLoginPage = location.pathname === "/login";
+    const [token, setToken] = useState();
+
+    useEffect(() => {
+        setToken(localStorage.getItem('access_token'))
+    }, [])
+
+    const navigate = useNavigate();
+
+    if (isLoginPage && token) {
+        navigate('/')
+    }
 
     return (
         <>

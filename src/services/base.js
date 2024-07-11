@@ -23,15 +23,22 @@ instance.interceptors.request.use(async (config) => {
     return config
 })
 
-instance.interceptors.response.use((response) => {
+instance.interceptors.response.use(response => response, error => {
 
-    if (response.status === 403) {
-        return Promise.reject({message: response.data.message});
+    if (error.response.status === 401) {
+        alert('Reconecte-se')
+        localStorage.removeItem('access_token')
+        window.location.href = '/login'
     }
 
-    if (response.status === 404) {
-        return Promise.reject({message: response.data.message});
+    if (error.response.status === 403) {
+        window.location.href = '/'
     }
 
-    return response;
+    if (error.response.status === 404) {
+        window.location.href = '/not_found'
+    }
+
+    return Promise.reject(error);
+
 })
