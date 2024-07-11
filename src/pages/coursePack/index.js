@@ -68,8 +68,7 @@ export default function CoursePackets() {
             <DisplayPage titlePage={<>
                 <h1>Apostilas</h1>
                 {user.permission >= 3 ?
-                    <Navbar className={styles.navbar} expand="lg"
-                            style={{position: "absolute", alignSelf: "flex-end"}}>
+                    <Navbar className={styles.navbar} expand="lg">
                         <NavDropdown title={<h2>+</h2>} drop="start" className={styles.dropdownMenu}>
                             <NavDropdown.Item className={styles.item}>
                                 <Link to='/faixa/criar'>

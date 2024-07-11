@@ -33,6 +33,9 @@
 
 .navbar {
     display: flex;
+    padding: 0!important;
+    position: absolute!important;
+    align-self: flex-end;
 
     a {
         &::before {
