@@ -4,13 +4,10 @@ import Select from "../../commons/inputs/Select"
 import styles from "./styles.module.scss"
 import Button from "../../commons/Button";
 
-export default function BandForm({gub, name, theory, meaning, breakdown, stretching, poomsaes, kibonDonjaks, kicks, setGub, setTheory, setMeaning, setName, setBreakdown, setStretching, setPoomsaes, setKibonDonjaks, setKicks, PoomsaeService, KibonDonjakService, KickService}) {
+export default function BandForm({gub, name, theory, meaning, breakdown, stretching, poomsaes, kibonDonjaks, kicks, setGub, setTheory, setMeaning, setName, setBreakdown, setStretching, setPoomsaes, setKibonDonjaks, setKicks, PoomsaeService, KibonDonjakService, KickService, selectsKibons, selectsKicks, selectsPoomsaes, setSelectsKibons, setSelectsKicks, setSelectsPoomsaes}) {
     const [getKicks, setGetKicks] = useState([]);
     const [getKibonDonjaks, setGetKibonDonjaks] = useState([]);
     const [getPoomsaes, setGetPoomsaes] = useState([]);
-    const [selectsKibons, setSelectsKibons] = useState([]);
-    const [selectsKicks, setSelectsKicks] = useState([]);
-    const [selectsPoomsaes, setSelectsPoomsaes] = useState([]);
     const [preloadData, setPreloadData] = useState({});
     
     

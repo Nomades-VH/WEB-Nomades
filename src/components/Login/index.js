@@ -15,7 +15,7 @@ function validarEmail(email) {
     return regex.test(email);
 }
 
-function Login({redirectTo = "/"}) {
+function Login({redirectTo = "/apostila"}) {
     const [textLogin, setTextLogin] = useState('');
     const [password, setPassword] = useState('');
     const [response, setResponse] = useState(null)
@@ -29,10 +29,9 @@ function Login({redirectTo = "/"}) {
 
     const handleLogin = async (event) => {
         event.preventDefault();
+        setLoading(true)
         try {
-            setLoading(true)
             if (validarEmail(textLogin)) {
-                console.log('email')
                 setResponse(await login(textLogin, password, true));
             } else {
                 setResponse(await login(textLogin, password, false));
@@ -65,44 +64,40 @@ function Login({redirectTo = "/"}) {
     if (loading) {
         return <Loading />
     }
-
-    if (!isAuthenticated) {
-        return (
-            <div className={styles.main}>
-                <div className={styles.container}>
-                    <div className={styles.div}>
-                        <Form className={styles.form} onSubmit={handleLogin}>
-                            <label>
-                                <h2>Entrar</h2>
-                            </label>
-                            <section>
-                                <InputText name="email" placeholder={'Digite seu E-mail'} required={true}
-                                           onChange={(e) => setTextLogin(e.target.value)} label={"Email"} value={textLogin}/>
-                                <InputPassword name="password" placeholder={'Insira sua senha'} label={"Senha"} required={true}
-                                               onChange={(e) => setPassword(e.target.value)} value={password}/>
-                            </section>
-                            <Button>Entrar</Button>
-                        </Form>
-                    </div>
+    
+    return (
+        <div className={styles.main}>
+            <div className={styles.container}>
+                <div className={styles.div}>
+                    <Form className={styles.form} onSubmit={handleLogin}>
+                        <label>
+                            <h2>Entrar</h2>
+                        </label>
+                        <section>
+                            <InputText name="email" placeholder={'Digite seu E-mail'} required={true}
+                                        onChange={(e) => setTextLogin(e.target.value)} label={"Email"} value={textLogin}/>
+                            <InputPassword name="password" placeholder={'Insira sua senha'} label={"Senha"} required={true}
+                                            onChange={(e) => setPassword(e.target.value)} value={password}/>
+                        </section>
+                        <Button>Entrar</Button>
+                    </Form>
                 </div>
-                <Alert isOpen={openAlertNotStudent} setAlertOpen={() => setOpenAlertNotStudent(!openAlertNotStudent)} textClose="Não"
-                       hasButtons={true} textContinue={"Sim"} redirectOtherPage='https://api.whatsapp.com/send?phone=5512996140543&text=Ol%C3%A1!%20Gostaria%20de%20me%20tornar%20aluno%20da%20equipe%20n%C3%B4mades%20do%20vale%20hist%C3%B3rico.'>
-                    <div>
-                        <p>É aluno dos nômades?</p>
-                    </div>
-                </Alert>
-                <Alert isOpen={openAlert} setAlertOpen={() => setOpenAlert(!openAlert)} textClose="Tirar dúvida"
-                       hasButtons={true} textContinue={"Fechar"} redirectOtherPage='https://api.whatsapp.com/send/?phone=5512996140543'>
-                    <div>
-                        <p>{errorMessage}</p>
-                    </div>
-                </Alert>
-
             </div>
-        )
-    } else {
-        navigate(redirectTo)
-    }
+            <Alert isOpen={openAlertNotStudent} setAlertOpen={() => setOpenAlertNotStudent(!openAlertNotStudent)} textClose="Não"
+                    hasButtons={true} textContinue={"Sim"} redirectOtherPage='https://api.whatsapp.com/send?phone=5512996140543&text=Ol%C3%A1!%20Gostaria%20de%20me%20tornar%20aluno%20da%20equipe%20n%C3%B4mades%20do%20vale%20hist%C3%B3rico.'>
+                <div>
+                    <p>É aluno dos nômades?</p>
+                </div>
+            </Alert>
+            <Alert isOpen={openAlert} setAlertOpen={() => setOpenAlert(!openAlert)} textClose="Tirar dúvida"
+                    hasButtons={true} textContinue={"Fechar"} redirectOtherPage='https://api.whatsapp.com/send/?phone=5512996140543'>
+                <div>
+                    <p>{errorMessage}</p>
+                </div>
+            </Alert>
+
+        </div>
+    )
 }
 
 export default Login;

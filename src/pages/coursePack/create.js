@@ -17,6 +17,9 @@ export default function CreateBand() {
     const [kibonDonjaks, setKibonDonjaks] = useState([]);
     const [poomsaes, setPoomsaes] = useState([]);
     const [kicks, setKicks] = useState([]);
+    const [selectsKibons, setSelectsKibons] = useState([]);
+    const [selectsKicks, setSelectsKicks] = useState([]);
+    const [selectsPoomsaes, setSelectsPoomsaes] = useState([]);
     
 
     const defaultInputs = async () => {
@@ -48,7 +51,7 @@ export default function CreateBand() {
                     defaultInputs={defaultInputs}
                     redirectTo={"/apostilas"}
         >
-            <BandForm gub={gub} name={name} meaning={meaning} theory={theory} breakdown={breakdown} stretching={stretching} kibonDonjaks={kibonDonjaks} poomsaes={poomsaes} kicks={kicks} setGub={setGub} setName={setName} setMeaning={setMeaning} setTheory={setTheory} setBreakdown={setBreakdown} setStretching={setStretching} setKibonDonjaks={setKibonDonjaks} setPoomsaes={setPoomsaes} setKicks={setKicks} KibonDonjakService={KibonDonjakService} PoomsaeService={PoomsaeService} KickService={KickService}/>
+            <BandForm selectsKibons={selectsKibons} setSelectsKibons={setSelectsKibons} setSelectsKicks={setSelectsKicks} setSelectsPoomsaes={setSelectsPoomsaes} selectsKicks={selectsKicks} selectsPoomsaes={selectsPoomsaes} gub={gub} name={name} meaning={meaning} theory={theory} breakdown={breakdown} stretching={stretching} kibonDonjaks={kibonDonjaks} poomsaes={poomsaes} kicks={kicks} setGub={setGub} setName={setName} setMeaning={setMeaning} setTheory={setTheory} setBreakdown={setBreakdown} setStretching={setStretching} setKibonDonjaks={setKibonDonjaks} setPoomsaes={setPoomsaes} setKicks={setKicks} KibonDonjakService={KibonDonjakService} PoomsaeService={PoomsaeService} KickService={KickService}/>
         </FormCreate>
     )
 }
