@@ -71,7 +71,7 @@ export default function CoursePackets() {
                     <Navbar className={styles.navbar} expand="lg">
                         <NavDropdown title={<h2>+</h2>} drop="start" className={styles.dropdownMenu}>
                             <NavDropdown.Item className={styles.item}>
-                                <Link to='/faixa/criar'>
+                                <Link to='/apostila/criar'>
                                     Faixa
                                 </Link>
                             </NavDropdown.Item>

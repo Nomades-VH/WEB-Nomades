@@ -12,10 +12,10 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
     const [errorMsg, setErrorMsg] = useState("");
     const [titlePage, setTitlePage] = useState("");
 
-    const handleChange = () => {
+    useEffect(() => {
         const newTitle = title.replace(" ", '-')
         setTitlePage(newTitle);
-    }
+    },[])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,6 +25,7 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
             if (response) {
                 setOpenAlert(true);
                 defaultInputs();
+                console.log(titlePage)
                 localStorage.removeItem(titlePage)
             } else {
                 setOpenAlertErrorCreate(true)
@@ -35,14 +36,14 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
     };
 
     useEffect(() => {
-        localStorage.setItem(titlePage, JSON.stringify(data));
-    }, [titlePage, data]);
+        if (titlePage.includes('-')) localStorage.setItem(titlePage, JSON.stringify(data));
+    }, [data]);
 
 
     return (
         <div className={styles.container}>
             <h2>{title}</h2>
-            <Form onChange={handleChange} onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit}>
                     {children}
                 <Button className={styles.submit} type="submit">Enviar</Button>
             </Form>
@@ -52,8 +53,8 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
                 <Alert isOpen={openAlert} setAlertOpen={() => setOpenAlert(!openAlert)} textClose="Não"
                     hasButtons={false} redirectTo={redirectTo}>
                     <h2>{messageSuccess}</h2>
-                </Alert> : 
-                
+                </Alert> 
+                : 
                 <Alert isOpen={openAlert} setAlertOpen={() => setOpenAlert(!openAlert)} textClose="Não"
                     hasButtons={true} textContinue={"Sim"} redirectTo={redirectTo}>
                     <h2>{messageSuccess}</h2>

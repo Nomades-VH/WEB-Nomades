@@ -8,6 +8,11 @@ export default function CreatePoomsae() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
 
+    const defaultInputs = async () => {
+        setName('');
+        setDescription('');
+    }
+
     return (
         <FormCreate data={{name, description}}
                     titlePage={"Criar Poomsae"} messageSuccess={"Continuar criando?"}
