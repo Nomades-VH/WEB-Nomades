@@ -2,25 +2,52 @@ import { useEffect, useState } from "react";
 import InputText from "../../commons/inputs/InputText"
 import Select from "../../commons/inputs/Select"
 import styles from "./styles.module.scss"
-import Button from "../../commons/Button";
 
-export default function BandForm({gub, name, theory, meaning, breakdown, stretching, poomsaes, kibonDonjaks, kicks, setGub, setTheory, setMeaning, setName, setBreakdown, setStretching, setPoomsaes, setKibonDonjaks, setKicks, PoomsaeService, KibonDonjakService, KickService, selectsKibons, selectsKicks, selectsPoomsaes, setSelectsKibons, setSelectsKicks, setSelectsPoomsaes}) {
-    const [getKicks, setGetKicks] = useState([]);
-    const [getKibonDonjaks, setGetKibonDonjaks] = useState([]);
-    const [getPoomsaes, setGetPoomsaes] = useState([]);
-    const [preloadData, setPreloadData] = useState({});
-    
+export default function BandForm({setGub, preloadPoomsaes, preloadGub, preloadName, preloadKicks, preloadKibonDonjaks, preloadMeaning, preloadTheory, preloadBreakdown, preloadStretching, setTheory, setMeaning, setName, setBreakdown, setStretching, setPoomsaes, setKibonDonjaks, setKicks, PoomsaeService, KibonDonjakService, KickService}) {
+    const [gettedKicks, setGettedKicks] = useState([]);
+    const [gettedKibonDonjaks, setGettedKibonDonjaks] = useState([]);
+    const [gettedPoomsaes, setGettedPoomsaes] = useState([]);
+    const [defaultValuePoomsaes, setDefaultValuePoomsaes] = useState([]);
+    const [defaultValueKicks, setDefaultValueKicks] = useState([]);
+    const [defaultValueKibonDonjaks, setDefaultValueKibonDonjaks] = useState([]);
+
+    useEffect(() => {
+        if ((preloadPoomsaes || preloadBreakdown || preloadKicks) && (gettedPoomsaes || gettedKibonDonjaks || gettedKicks)) {
+            const defaultPoomsaes = [];
+            preloadPoomsaes.map((id) => {
+                const poomsae = gettedPoomsaes?.find((poomsae) => poomsae.id === id);
+                defaultPoomsaes.push(poomsae ? { label: poomsae.name, value: poomsae.id } : null);
+            }).filter(Boolean);
+
+            const defaultKicks = [];
+            preloadKicks.map((id) => {
+                const kick = gettedKicks?.find((kick) => kick.id === id);
+                defaultKicks.push(kick ? { label: kick.name, value: kick.id } : null);
+            }).filter(Boolean);
+
+            const defaultKibonDonjaks = [];
+            preloadKibonDonjaks.map((id) => {
+                const kibonDonjak = gettedKibonDonjaks?.find((kibonDonjak) => kibonDonjak.id === id);
+                defaultKibonDonjaks.push(kibonDonjak ? {label: kibonDonjak.name, value: kibonDonjak.id} : null);
+            }).filter(Boolean)
+
+            setDefaultValuePoomsaes(defaultPoomsaes);
+            setDefaultValueKicks(defaultKicks);
+            setDefaultValueKibonDonjaks(defaultKibonDonjaks)
+        }
+
+    }, [preloadPoomsaes, preloadKicks, preloadKibonDonjaks, gettedPoomsaes, gettedKicks, gettedKibonDonjaks]);
     
     const loadKibonDonjaks = async () => {
         try {
             const result = await KibonDonjakService.get();
             if (result) {
-                setGetKibonDonjaks(result);
+                setGettedKibonDonjaks(result);
             } else {
-                setGetKibonDonjaks([])
+                setGettedKibonDonjaks([])
             }
         } catch (error) {
-            setGetKibonDonjaks([])
+            setGettedKibonDonjaks([])
         }
     }
 
@@ -28,12 +55,12 @@ export default function BandForm({gub, name, theory, meaning, breakdown, stretch
         try {
             const result = await KickService.get();
             if (result) {
-                setGetKicks(result)
+                setGettedKicks(result)
             } else {
-                setGetKibonDonjaks([])
+                setGettedKibonDonjaks([])
             }
         } catch (error) {
-            setGetKicks([])
+            setGettedKicks([])
         }
     }
 
@@ -41,12 +68,12 @@ export default function BandForm({gub, name, theory, meaning, breakdown, stretch
         try {
             const result = await PoomsaeService.get();
             if (result) {
-                setGetPoomsaes(result)
+                setGettedPoomsaes(result)
             } else {
-                setGetPoomsaes([])
+                setGettedPoomsaes([])
             }
         } catch (error) {
-            setGetPoomsaes([])
+            setGettedPoomsaes([])
         }
     }
 
@@ -54,56 +81,8 @@ export default function BandForm({gub, name, theory, meaning, breakdown, stretch
         loadKibonDonjaks();
         loadKicks();
         loadPomsaes()
-        setPreloadData(JSON.parse(localStorage.getItem('Criar-Faixa')))
     }, []);
 
-    useEffect(() => {
-        if (preloadData) {
-            const { gub, name, meaning, theory, breakdown, stretching, poomsaes, kicks, kibonDonjaks } = preloadData;
-            setGub(gub);
-            setName(name);
-            setMeaning(meaning);
-            setTheory(theory);
-            setBreakdown(breakdown);
-            setStretching(stretching);
-            setPoomsaes(poomsaes);
-            setKicks(kicks);
-            setKibonDonjaks(kibonDonjaks);
-        }
-    }, [preloadData]);
-
-    useEffect(() => {
-        if (poomsaes && poomsaes.length > 0 && getPoomsaes && getPoomsaes.length > 0) {
-            poomsaes.slice(1).forEach(poomsaeId => {
-                console.log("ADICIONEI")
-                addSelect(selectsPoomsaes, getPoomsaes, setSelectsPoomsaes, setPoomsaes, poomsaeId);
-            });
-        }
-    }, []);
-
-
-    const addSelect = (listSelects, items, setListSelects, onChangeItem, itemId = null) => {
-        setListSelects(listSelects.concat(
-            <div className={styles.label} key={listSelects.length}>
-                <Select
-                    onChange={(e) => onChangeItem(prevState => [...prevState, e.target.value])}
-                    options={items?.map(item => ({
-                        label: item.name,
-                        value: item.id,
-                        selected: itemId === item.id
-                    }))}
-                />
-            </div>
-        ))
-    }
-
-    const removeSelect = (selectsList, setSelectsList, itemsList, setItemsList) => {
-        const newItemsList = itemsList.slice(0, -1)
-        const newSelectsList = selectsList.slice(0, -1)
-        setSelectsList(newSelectsList);
-        setItemsList(newItemsList)
-    };
-    
     return (
         <label>
             <section className={styles.inputs}>
@@ -112,7 +91,7 @@ export default function BandForm({gub, name, theory, meaning, breakdown, stretch
                     placeholder="Gub (Somente número)"
                     required={true}
                     label={"Gub da Faixa"}
-                    value={gub}
+                    value={preloadGub}
                     onChange={(e) => setGub(e.target.value)}
                 />
                 <InputText
@@ -120,7 +99,7 @@ export default function BandForm({gub, name, theory, meaning, breakdown, stretch
                     placeholder="Nome"
                     required={true}
                     label={"Nome da Faixa"}
-                    value={name}
+                    value={preloadName}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <InputText
@@ -128,79 +107,58 @@ export default function BandForm({gub, name, theory, meaning, breakdown, stretch
                     placeholder="Quebramento"
                     required={true}
                     label={"Quebramento da Faixa"}
-                    value={breakdown}
+                    value={preloadBreakdown}
                     onChange={(e) => setBreakdown(e.target.value)}
                 />
             </section>
+
             <section className={styles.inputs}>
-                <div className={styles.selects}>
-                    <div className={styles.label}>
-                        <Select label={"Poomsaes"} onChange={(e) => setPoomsaes([e.target.value])}
-                                options={getPoomsaes?.map((poomsae) => ({
+                    <div className={styles.divSelects}>
+                        <Select label={"Poomsaes"} 
+                        defaultValue={defaultValuePoomsaes}
+                        onChange={(e) => {
+                            const listPoomsaes = [];
+                            e?.map((poomsae) => {
+                                listPoomsaes.push(poomsae.value)
+                            })
+                            setPoomsaes(listPoomsaes)
+                        }}
+                                options={gettedPoomsaes?.map((poomsae) => ({
                                     label: poomsae.name,
-                                    value: poomsae.id,
-                                    selected: preloadData?.poomsaes ? poomsae.id === preloadData.poomsaes[0] : false
+                                    value: poomsae.id
                                 }))}>
                         </Select>
                     </div>
-                    {selectsPoomsaes?.map((select) => (
-                        select
-                    ))}
-                    <div className={styles.buttons}>
-                        <Button type={'button'}
-                                onClick={() => addSelect(selectsPoomsaes, getPoomsaes, setSelectsPoomsaes, setPoomsaes)}>Adicionar</Button>
-                        <Button type={'button'} className={styles.remove}
-                                onClick={() => removeSelect(selectsPoomsaes, setSelectsPoomsaes, poomsaes, setPoomsaes)}>Remover</Button>
-                    </div>
-                </div>
 
-                <div className={styles.selects}>
-                    <div className={styles.label}>
-                        <Select label={"Kibon Donjaks"} onChange={(e) => setKibonDonjaks([e.target.value])}
-                                options={getKibonDonjaks?.map((kibonDonjak) => ({
+                <div className={styles.divSelects}>
+                        <Select label={"Kibon Donjaks"}
+                        defaultValue={defaultValueKibonDonjaks}
+                        onChange={(e) => {
+                            const listKibonDonjaks = [];
+                            e?.map((kibonDonjak) => {
+                                listKibonDonjaks.push(kibonDonjak.value)
+                            })
+                            setKibonDonjaks(listKibonDonjaks)
+                        }}
+                                options={gettedKibonDonjaks?.map((kibonDonjak) => ({
                                     label: kibonDonjak.name,
-                                    value: kibonDonjak.id,
-                                    selected: false
-                                }))}></Select>
-                    </div>
-                    {
-                        selectsKibons.map((select, index) => (
-                            <div key={index} className={styles.selects}>
-                                {select}
-                            </div>
-                        ))
-                    }
-                    <div className={styles.buttons}>
-                        <Button type={'button'} onClick={() => {
-                            addSelect(selectsKibons, getKibonDonjaks, setSelectsKibons, setKibonDonjaks)
-                            console.log(kibonDonjaks)
-                        }}>Adicionar</Button>
-                        <Button type={'button'} className={styles.remove}
-                                onClick={() => removeSelect(selectsKibons, setSelectsKibons, kibonDonjaks, setKibonDonjaks)}>Remover</Button>
-                    </div>
-
+                                    value: kibonDonjak.id
+                                }))} />
                 </div>
-                <div className={styles.selects}>
-                    <div className={styles.label}>
-                        <Select label={"Chutes"} onChange={(e) => setKicks([e.target.value])}
-                                options={getKicks?.map((kick) => ({
+                <div className={styles.divSelects}>
+                        <Select label={"Chutes"} 
+                        defaultValue={defaultValueKicks}
+                        onChange={(e) => {
+                            const listKicks = [];
+                            e?.map((kick) => {
+                                listKicks.push(kick.value)
+                            })
+                            setKicks(listKicks)
+                        }}
+                                options={gettedKicks?.map((kick) => ({
                                     label: kick.name,
                                     value: kick.id
-                                }))}></Select>
-                    </div>
-                    {
-                        selectsKicks.map((select, index) => (
-                            <div key={index} className={styles.selects}>
-                                {select}
-                            </div>
-                        ))
-                    }
-                    <div className={styles.buttons}>
-                        <Button type={'button'}
-                                onClick={() => addSelect(selectsKicks, getKicks, setSelectsKicks, setKicks)}>Adicionar</Button>
-                        <Button type={'button'} className={styles.remove}
-                                onClick={() => removeSelect(selectsKicks, setSelectsKicks, kicks, setKicks)}>Remover</Button>
-                    </div>
+                                }))} />
                 </div>
             </section>
             <section className={styles.containerTextArea}>
@@ -210,7 +168,7 @@ export default function BandForm({gub, name, theory, meaning, breakdown, stretch
                         rows={2}
                         placeholder="Descreva a Teoria da Faixa"
                         required={true}
-                        value={theory}
+                        value={preloadTheory}
                         onChange={(e) => setTheory(e.target.value)}
                     />
                 </label>
@@ -220,7 +178,7 @@ export default function BandForm({gub, name, theory, meaning, breakdown, stretch
                         rows={2}
                         placeholder="Qual o Significado da Faixa"
                         required={true}
-                        value={meaning}
+                        value={preloadMeaning}
                         onChange={(e) => setMeaning(e.target.value)}
                     />
                 </label>
@@ -230,7 +188,7 @@ export default function BandForm({gub, name, theory, meaning, breakdown, stretch
                         rows={2}
                         placeholder="Quais os Movimentos de Flexibilidade"
                         required={true}
-                        value={stretching}
+                        value={preloadStretching}
                         onChange={(e) => setStretching(e.target.value)}
                     />
                 </label>

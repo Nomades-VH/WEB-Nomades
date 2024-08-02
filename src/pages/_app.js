@@ -28,6 +28,8 @@ import Poomsae from './poomsae/[id]';
 import EditKick from './kick/edit/[id]';
 import EditPoomsae from './poomsae/edit/[id]';
 import EditKibonDonjak from './kibon_donjak/edit/[id]';
+import EditBand from './coursePack/edit/[id]';
+import Tests from './tests';
 
 
 const App = () => {
@@ -96,11 +98,15 @@ const AppContent = () => {
                     <Route path="/poomsae" element={<Poomsaes />} />
                     <Route path="/poomsae/:id" element={<Poomsae />} />
 
+                    <Route path='/tests' element={<Tests />} />
+
 
                     {/* Somente logados com permissão acima da mesa podem acessar */}
                     <Route element={<PermissionPrivateRoute />} >
                         <Route path="/usuario/criar" element={<CreateUser/>}/>
-                        <Route path="/faixa/criar" element={<CreateBand />} />
+
+                        <Route path="/apostila/criar" element={<CreateBand />} />
+                        <Route path="/apostila/editar/:id" element={<EditBand />} />
 
                         <Route path="/kibon_donjak/criar" element={<CreateKibonDonjak />} />
                         <Route path="/kibon_donjak/editar/:id" element={<EditKibonDonjak />} />
