@@ -62,51 +62,51 @@ export default function BandForm({
         }
 
     }, [preloadPoomsaes, preloadKicks, preloadKibonDonjaks, gettedPoomsaes, gettedKicks, gettedKibonDonjaks]);
-    
-    const loadKibonDonjaks = async () => {
-        try {
-            const result = await KibonDonjakService.get();
-            if (result) {
-                setGettedKibonDonjaks(result);
-            } else {
-                setGettedKibonDonjaks([])
-            }
-        } catch (error) {
-            setGettedKibonDonjaks([])
-        }
-    }
-
-    const loadKicks = async () => {
-        try {
-            const result = await KickService.get();
-            if (result) {
-                setGettedKicks(result)
-            } else {
-                setGettedKibonDonjaks([])
-            }
-        } catch (error) {
-            setGettedKicks([])
-        }
-    }
-
-    const loadPomsaes = async () => {
-        try {
-            const result = await PoomsaeService.get();
-            if (result) {
-                setGettedPoomsaes(result)
-            } else {
-                setGettedPoomsaes([])
-            }
-        } catch (error) {
-            setGettedPoomsaes([])
-        }
-    }
 
     useEffect(() => {
+        const loadKibonDonjaks = async () => {
+            try {
+                const result = await KibonDonjakService.get();
+                if (result) {
+                    setGettedKibonDonjaks(result);
+                } else {
+                    setGettedKibonDonjaks([])
+                }
+            } catch (error) {
+                setGettedKibonDonjaks([])
+            }
+        }
+    
+        const loadKicks = async () => {
+            try {
+                const result = await KickService.get();
+                if (result) {
+                    setGettedKicks(result)
+                } else {
+                    setGettedKibonDonjaks([])
+                }
+            } catch (error) {
+                setGettedKicks([])
+            }
+        }
+    
+        const loadPomsaes = async () => {
+            try {
+                const result = await PoomsaeService.get();
+                if (result) {
+                    setGettedPoomsaes(result)
+                } else {
+                    setGettedPoomsaes([])
+                }
+            } catch (error) {
+                setGettedPoomsaes([])
+            }
+        }
+
         loadKibonDonjaks();
         loadKicks();
         loadPomsaes()
-    }, []);
+    }, [KibonDonjakService, KickService, PoomsaeService]);
 
     return (
         <label>

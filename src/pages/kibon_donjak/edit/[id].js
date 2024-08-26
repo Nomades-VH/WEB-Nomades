@@ -20,7 +20,7 @@ export default function EditKibonDonjak() {
         }
 
         loadKibonDonjak(id)
-    }, [])
+    }, [id])
 
     const defaultInputs = async () => {
         setName('')

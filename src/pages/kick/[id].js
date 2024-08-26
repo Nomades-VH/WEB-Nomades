@@ -24,7 +24,7 @@ export default function Kick() {
             
             loadKick(id)
         }
-    }, [id])
+    }, [id, navigate])
 
 
     if (kick) {

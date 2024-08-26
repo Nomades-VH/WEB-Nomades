@@ -15,7 +15,7 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
     useEffect(() => {
         const newTitle = title.replace(/ /g, '-')
         setTitlePage(newTitle);
-    },[])
+    },[title])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,7 +40,7 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
 
     useEffect(() => {
         if (titlePage.includes('-')) localStorage.setItem(titlePage, JSON.stringify(data));
-    }, [data]);
+    }, [data, titlePage]);
 
 
     return (

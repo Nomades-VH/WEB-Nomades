@@ -24,7 +24,7 @@ export default function Poomsae() {
             
             loadPoomsae(id)
         }
-    }, [id])
+    }, [id, navigate])
 
 
     if (poomsae) {

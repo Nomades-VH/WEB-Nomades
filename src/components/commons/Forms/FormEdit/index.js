@@ -6,7 +6,6 @@ import CrudForm from "../CrudForm";
 function FormEdit({children, data, titlePage, messageError, messageSuccess, serviceEdit, defaultInputs, redirectTo}) {
     return (
         <CrudForm 
-            children={children} 
             data={data} 
             titlePage={titlePage} 
             messageError={messageError} 
@@ -15,7 +14,7 @@ function FormEdit({children, data, titlePage, messageError, messageSuccess, serv
             defaultInputs={defaultInputs} 
             redirectTo={redirectTo}
             isUpdate={true}
-        />
+        >{children}</CrudForm>
     )
 }
 

@@ -40,7 +40,7 @@ export const AuthProvider = ({children}) => {
             setLoading(false)
         }
 
-    }, [isAuthenticated, localStorage]);
+    }, [isAuthenticated]);
 
     const login = async (login, password, isEmail) => {
         try {

@@ -31,7 +31,7 @@ export default function CreateUser() {
     const [fkBand, setFkBand] = useState(null)
     const [bands, setBands] = useState([]);
     const [preloadData, setPreloadData] = useState();
-    const [actualHub, setActualHub] = useState()/
+    const [actualHub, setActualHub] = useState();
 
     useEffect(() => {
         const loadBand = async () => {
@@ -68,7 +68,7 @@ export default function CreateUser() {
         }
 
         setActualHub(Hubs[hub])
-    }, [preloadData])
+    }, [preloadData, hub])
 
     const defaultInputs = async () => {
         setUsername('');
