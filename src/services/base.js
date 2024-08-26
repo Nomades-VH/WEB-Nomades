@@ -2,11 +2,11 @@ import axios from "axios";
 import AuthService from "./auth";
 
 export const instance = axios.create({
-	baseURL: 'http://localhost:8000',
+	baseURL: 'https://api-nomades.onrender.com/',
     paramsSerializer: {
         indexes: null,
     },
-    validateStatus: (status) => status !== 401,
+    validateStatus: (status) => status !== 400,
 })
 
 instance.interceptors.request.use(async (config) => {
@@ -26,14 +26,13 @@ instance.interceptors.request.use(async (config) => {
 instance.interceptors.response.use(response => response, error => {
 
     if (error.response.status === 401) {
-        alert('Reconecte-se')
         localStorage.removeItem('access_token')
         window.location.href = '/login'
     }
 
     if (error.response.status === 403) {
         window.location.href = '/'
-    }
+    }   
 
     if (error.response.status === 404) {
         window.location.href = '/not_found'

@@ -65,7 +65,6 @@ const BandService = {
     },
 
     update: async (data) => {
-        alert("ioasodkas")
         const band = {
             gub: data.gub,
             name: data.name,
@@ -73,9 +72,9 @@ const BandService = {
             theory: data.theory,
             breakdown: data.breakdown,
             stretching: data.stretching,
-            kicks: data.kicks || null,
-            poomsaes: data.poomsaes || null,
-            kibon_donjaks: data.kibonDonjaks || null
+            kicks: data.kicks || [],
+            poomsaes: data.poomsaes || [],
+            kibon_donjaks: data.kibonDonjaks || []
         }
 
         try {
@@ -97,9 +96,6 @@ const BandService = {
         } catch (error) {
             throw error;
         }
-    },
-    put: async (band) => {
-
     }
 }
 

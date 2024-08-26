@@ -18,7 +18,7 @@ export default function CreateBand() {
     const [poomsaes, setPoomsaes] = useState([]);
     const [kicks, setKicks] = useState([]);
     
-    const [preloadData, setPreloadData] = useState({});
+    const [preloadData, setPreloadData] = useState();
 
     useEffect(() => {
         setPreloadData(JSON.parse(localStorage.getItem('Criar-Faixa')))
@@ -68,7 +68,28 @@ export default function CreateBand() {
                     defaultInputs={defaultInputs}
                     redirectTo={"/apostilas"}
         >
-            <BandForm preloadPoomsaes={poomsaes} preloadGub={gub} preloadBreakdown={breakdown} preloadKibonDonjaks={kibonDonjaks} preloadKicks={kicks} preloadMeaning={meaning} preloadName={name} preloadStretching={stretching} preloadTheory={theory} setGub={setGub} setName={setName} setMeaning={setMeaning} setTheory={setTheory} setBreakdown={setBreakdown} setStretching={setStretching} setKibonDonjaks={setKibonDonjaks} setPoomsaes={setPoomsaes} setKicks={setKicks} KibonDonjakService={KibonDonjakService} PoomsaeService={PoomsaeService} KickService={KickService} preloadData={preloadData}/>
+            <BandForm 
+            preloadPoomsaes={poomsaes} 
+            preloadGub={gub} 
+            preloadBreakdown={breakdown} 
+            preloadKibonDonjaks={kibonDonjaks} 
+            preloadKicks={kicks} 
+            preloadMeaning={meaning} 
+            preloadName={name} 
+            preloadStretching={stretching} 
+            preloadTheory={theory} 
+            setGub={setGub} 
+            setName={setName} 
+            setMeaning={setMeaning} 
+            setTheory={setTheory} 
+            setBreakdown={setBreakdown} 
+            setStretching={setStretching} 
+            setKibonDonjaks={setKibonDonjaks} 
+            setPoomsaes={setPoomsaes} 
+            setKicks={setKicks} 
+            KibonDonjakService={KibonDonjakService} 
+            PoomsaeService={PoomsaeService} 
+            KickService={KickService} />
         </FormCreate>
     )
 }

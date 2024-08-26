@@ -3,7 +3,29 @@ import InputText from "../../commons/inputs/InputText"
 import Select from "../../commons/inputs/Select"
 import styles from "./styles.module.scss"
 
-export default function BandForm({setGub, preloadPoomsaes, preloadGub, preloadName, preloadKicks, preloadKibonDonjaks, preloadMeaning, preloadTheory, preloadBreakdown, preloadStretching, setTheory, setMeaning, setName, setBreakdown, setStretching, setPoomsaes, setKibonDonjaks, setKicks, PoomsaeService, KibonDonjakService, KickService}) {
+export default function BandForm({
+    setGub, 
+    preloadPoomsaes, 
+    preloadGub, 
+    preloadName, 
+    preloadKicks, 
+    preloadKibonDonjaks, 
+    preloadMeaning, 
+    preloadTheory, 
+    preloadBreakdown, 
+    preloadStretching, 
+    setTheory, 
+    setMeaning, 
+    setName, 
+    setBreakdown, 
+    setStretching, 
+    setPoomsaes, 
+    setKibonDonjaks, 
+    setKicks, 
+    PoomsaeService, 
+    KibonDonjakService, 
+    KickService
+}) {
     const [gettedKicks, setGettedKicks] = useState([]);
     const [gettedKibonDonjaks, setGettedKibonDonjaks] = useState([]);
     const [gettedPoomsaes, setGettedPoomsaes] = useState([]);
@@ -12,11 +34,14 @@ export default function BandForm({setGub, preloadPoomsaes, preloadGub, preloadNa
     const [defaultValueKibonDonjaks, setDefaultValueKibonDonjaks] = useState([]);
 
     useEffect(() => {
-        if ((preloadPoomsaes || preloadBreakdown || preloadKicks) && (gettedPoomsaes || gettedKibonDonjaks || gettedKicks)) {
+        if (
+            (preloadPoomsaes && preloadKibonDonjaks && preloadKicks) && 
+            (gettedPoomsaes && gettedKibonDonjaks && gettedKicks)
+        ) {
             const defaultPoomsaes = [];
             preloadPoomsaes.map((id) => {
                 const poomsae = gettedPoomsaes?.find((poomsae) => poomsae.id === id);
-                defaultPoomsaes.push(poomsae ? { label: poomsae.name, value: poomsae.id } : null);
+                defaultPoomsaes.push(poomsae)
             }).filter(Boolean);
 
             const defaultKicks = [];

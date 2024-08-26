@@ -1,12 +1,25 @@
 import InputText from "../../components/commons/inputs/InputText";
 import FormCreate from "../../components/commons/Forms/FormCreate";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import KibonDonjakService from "../../services/kibon_donjak";
 import KibonDonjakForm from "../../components/KibonDonjak/Form";
 
 export default function CreateKibonDonjak() {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
+    const [preloadData, setPreloadData] = useState();
+
+    useEffect(() => {
+        setPreloadData(JSON.parse(localStorage.getItem('Criar-Kibon-Donjak')))
+    }, [])
+
+    useEffect(() => {
+        if (preloadData) {
+            const { name, description } = preloadData;
+            setName(name)
+            setDescription(description)
+        }
+    }, [preloadData])
 
     const defaultInputs = async () => {
         setName('')

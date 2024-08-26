@@ -18,28 +18,25 @@ export default function EditBand() {
     const [kibonDonjaks, setKibonDonjaks] = useState([]);
     const [poomsaes, setPoomsaes] = useState([]);
     const [kicks, setKicks] = useState([]);
-    const [selectsKibons, setSelectsKibons] = useState([]);
-    const [selectsKicks, setSelectsKicks] = useState([]);
-    const [selectsPoomsaes, setSelectsPoomsaes] = useState([]);
 
     useEffect(() => {
         const loadBand = async (id) => {
-            const response = await BandService.get_by_id(id)
+            BandService.get_by_id(id).then((response) => {
 
-            if (response) {
                 setGub(response.gub);
                 setName(response.name);
                 setMeaning(response.meaning);
                 setTheory(response.theory);
                 setBreakdown(response.breakdown);
                 setStretching(response.stretching);
-                setPoomsaes(response.poomsaes);
-                setKicks(response.kicks);
-                setKibonDonjaks(response.kibonDonjaks);
-            }
-        }
+                setPoomsaes(response.poomsaes.map((poomsae) => poomsae.id));
+                setKicks(response.kicks.map((kick) => kick.id))
+                setKibonDonjaks(response.kibon_donjaks.map((kibonDonjak) => kibonDonjak.id))
 
-        loadBand(id)
+            })
+        }
+        
+        if (id) loadBand(id)
     }, [])
 
     const defaultInputs = async () => {
@@ -49,9 +46,9 @@ export default function EditBand() {
         setTheory('');
         setBreakdown('');
         setStretching('');
-        setSelectsPoomsaes([]);
-        setSelectsKibons([]);
-        setSelectsKicks([]);
+        setKibonDonjaks([]);
+        setPoomsaes([]);
+        setKicks([]);
     }
 
     return (
@@ -72,7 +69,28 @@ export default function EditBand() {
                     defaultInputs={defaultInputs}
                     redirectTo={"/apostilas"}
         >
-            <BandForm selectsKibons={selectsKibons} setSelectsKibons={setSelectsKibons} setSelectsKicks={setSelectsKicks} setSelectsPoomsaes={setSelectsPoomsaes} selectsKicks={selectsKicks} selectsPoomsaes={selectsPoomsaes} gub={gub} name={name} meaning={meaning} theory={theory} breakdown={breakdown} stretching={stretching} kibonDonjaks={kibonDonjaks} poomsaes={poomsaes} kicks={kicks} setGub={setGub} setName={setName} setMeaning={setMeaning} setTheory={setTheory} setBreakdown={setBreakdown} setStretching={setStretching} setKibonDonjaks={setKibonDonjaks} setPoomsaes={setPoomsaes} setKicks={setKicks} KibonDonjakService={KibonDonjakService} PoomsaeService={PoomsaeService} KickService={KickService} />
+            <BandForm 
+            preloadGub={gub} 
+            preloadName={name} 
+            preloadMeaning={meaning} 
+            preloadTheory={theory} 
+            preloadBreakdown={breakdown} 
+            preloadStretching={stretching} 
+            preloadKibonDonjaks={kibonDonjaks} 
+            preloadPoomsaes={poomsaes} 
+            preloadKicks={kicks} 
+            setGub={setGub} 
+            setName={setName} 
+            setMeaning={setMeaning} 
+            setTheory={setTheory} 
+            setBreakdown={setBreakdown} 
+            setStretching={setStretching} 
+            setKibonDonjaks={setKibonDonjaks} 
+            setPoomsaes={setPoomsaes} 
+            setKicks={setKicks} 
+            KibonDonjakService={KibonDonjakService} 
+            PoomsaeService={PoomsaeService} 
+            KickService={KickService} />
         </FormEdit>
     )
 }

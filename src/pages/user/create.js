@@ -30,6 +30,8 @@ export default function CreateUser() {
     const [hub, setHub] = useState('');
     const [fkBand, setFkBand] = useState(null)
     const [bands, setBands] = useState([]);
+    const [preloadData, setPreloadData] = useState();
+    const [actualHub, setActualHub] = useState()/
 
     useEffect(() => {
         const loadBand = async () => {
@@ -51,6 +53,23 @@ export default function CreateUser() {
         loadBand();
     }, [user, navigate]);
 
+    useEffect(() => {
+        setPreloadData(JSON.parse(localStorage.getItem('Criar-Usuário')))
+    }, [])
+
+    useEffect(() => {
+        if (preloadData) {
+            const { credentials, permission, hub, fkBand } = preloadData;
+            setUsername(credentials.username)
+            setEmail(credentials.email)
+            setPermission(permission)
+            setHub(hub)
+            setFkBand(fkBand)
+        }
+
+        setActualHub(Hubs[hub])
+    }, [preloadData])
+
     const defaultInputs = async () => {
         setUsername('');
         setEmail('');
@@ -67,10 +86,10 @@ export default function CreateUser() {
 
         return (
             <FormCreate data={{credentials, permission, hub, fkBand}}
-                        titlePage={"Criar usuário"} messageSuccess={"Continuar criando usuário?"}
+                        titlePage={"Criar Usuário"} messageSuccess={"Continuar criando usuário?"}
                         messageError={"Erro ao criar usuário"} serviceCreate={UserService.create_user}
                         defaultInputs={defaultInputs} redirectTo={"/"}>
-                <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <div>
                     <section>
                         <InputText
                             type="text"
@@ -95,17 +114,18 @@ export default function CreateUser() {
                             onChange={(e) => setPassword(e.target.value)}
                             value={password}/>
                     </section>
-                    <section>
+                    <section style={{display: 'flex', gap: '10px'}}>
                         <Select label={"Permissão"} options={[{label: "Aluno", value: permission}]}
-                                onChange={(e) => setPermission(e.target.value)}>
+                                onChange={(e) => setPermission(e.value)} isUnique={true}>
                         </Select>
-                        <Select label={"Cidade"} onChange={(e) => setHub(e.target.value)}
+                        <Select label={"Cidade"} onChange={(e) => setHub(e.value)} isUnique={true}
+                                defaultValue={actualHub}
                                 options={Object.keys(Hubs).map((key) => ({
                                     label: key,
                                     value: Hubs[key]
                                 }))}></Select>
                         {bands ?
-                            <Select label={"Faixa do aluno"} onChange={(e) => setFkBand(e.target.value)}
+                            <Select label={"Faixa do aluno"} onChange={(e) => setFkBand(e.value)} isUnique={true}
                                     options={bands?.map((band) => ({
                                         label: band.name,
                                         value: band.id

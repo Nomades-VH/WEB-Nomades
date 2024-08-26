@@ -11,6 +11,8 @@ const UserService = {
             if (response.status === 200) {
                 return response.data;
             }
+
+            localStorage.removeItem('access_token')
         } catch (error) {
             throw error; // Propaga o erro para quem chama a função de login
         }
