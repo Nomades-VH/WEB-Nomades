@@ -25,7 +25,7 @@ export default function Header() {
             <div className={styles.items}>
                 {/*<Link className={styles.default} href={'/store'}>Loja</Link>*/}
                 {
-                    isAuthenticated ? (
+                    isAuthenticated && user ? (
                         <Logged user={user}/>
                     ) : (
                         <Unlogged />

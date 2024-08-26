@@ -62,15 +62,11 @@ const App = () => {
 const AppContent = () => {
     const location = useLocation();
     const isLoginPage = location.pathname === "/login";
-    const [token, setToken] = useState();
-
-    useEffect(() => {
-        setToken(localStorage.getItem('access_token'))
-    }, [])
+    const {isAuthenticated} = useAuth();
 
     const navigate = useNavigate();
 
-    if (isLoginPage && token) {
+    if (isLoginPage && isAuthenticated) {
         navigate('/')
     }
 

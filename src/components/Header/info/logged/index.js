@@ -6,10 +6,10 @@ import Loading from "../../../commons/Loading";
 
 
 export default function Logged(props) {
-    const {logout, isAuthenticated} = useAuth();
+    const {logout} = useAuth();
 
     const handleLogout = async () => {
-        logout();
+        await logout();
     };
 
     if (props.user) {
@@ -32,7 +32,7 @@ export default function Logged(props) {
                                     </Link>
                                 </NavDropdown.Item>
                                 <NavDropdown.Item onClick={handleLogout} className={styles.item}>
-                                    <Link to="#">
+                                    <Link to="/">
                                         Sair
                                     </Link>
                                 </NavDropdown.Item>

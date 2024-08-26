@@ -13,7 +13,7 @@ export default function LoginPage() {
 
             <div className={styles.container}>
                 <div className={styles.login}>
-                    <Login redirectTo={"/apostilas"}/>
+                    <Login redirectTo={"/"}/>
                 </div>
                 <div className={styles.image}>
                     <Link to={'/'}><Image src={logo} alt={"Logo da equipe"}/></Link>

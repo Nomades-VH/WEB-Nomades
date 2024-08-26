@@ -2,6 +2,7 @@ import React, {createContext, useContext, useEffect, useState} from 'react';
 import UserService from '../services/user'
 import {instance} from "../services/base";
 import Loading from "../components/commons/Loading";
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
@@ -10,45 +11,39 @@ export const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    async function loadUser() {
+        try {
+            const result = await UserService.get_me();
+            if (result) {
+                setUser(result);
+                setIsAuthenticated(true);
+            } else {
+                setUser(null)
+                setIsAuthenticated(false);
+            }
+        } catch (error) {
+            localStorage.removeItem("access_token");
+            setUser(result);
+            setIsAuthenticated(false);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     useEffect( () => {
         const token = localStorage.getItem('access_token');
+        console.log('EAI')
 
         if (token) {
-            async function loadUser() {
-                try {
-                    const result = await UserService.get_me();
-                    if (result) {
-                        setUser(result);
-                        setIsAuthenticated(true);
-                    } else {
-                        setIsAuthenticated(false);
-                    }
-                } catch (error) {
-                    localStorage.removeItem("access_token");
-                    setIsAuthenticated(false);
-                } finally {
-                    setLoading(false);
-                }
-            }
-
             loadUser();
         } else {
-            setLoading(false);
+            setLoading(false)
         }
 
-    }, [isAuthenticated]);
+    }, [isAuthenticated, localStorage]);
 
     const login = async (login, password, isEmail) => {
         try {
-            console.log(isEmail ? {
-                "email": login,
-                "password": password
-            } : {
-                "username": login,
-                "password": password
-            })
-
             const response = await instance.post('auth',
                 isEmail ? {
                     "email": login,
@@ -58,8 +53,11 @@ export const AuthProvider = ({children}) => {
                     "password": password
                 }
             );
-            localStorage.setItem('access_token', response.data.access_token);
-            setIsAuthenticated(true);
+            if (response.status === 200) {
+                localStorage.setItem('access_token', response.data.access_token);
+                await loadUser()
+                setIsAuthenticated(true);
+            }
             return response;
         } catch (error) {
             throw error;
@@ -67,7 +65,6 @@ export const AuthProvider = ({children}) => {
     };
 
     const logout = async () => {
-
         const response = await instance.post('auth/logout', {});
         if (response.status === 200) {
             setUser(null)

@@ -13,7 +13,7 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
     const [titlePage, setTitlePage] = useState("");
 
     useEffect(() => {
-        const newTitle = title.replace(" ", '-')
+        const newTitle = title.replace(/ /g, '-')
         setTitlePage(newTitle);
     },[])
 
@@ -32,6 +32,9 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
             }
         } catch (error) {
             setErrorMsg(error.message)
+        } finally {
+            localStorage.removeItem(titlePage)
+            setTitlePage('')
         }
     };
 

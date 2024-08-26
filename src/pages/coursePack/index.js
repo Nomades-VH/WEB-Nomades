@@ -13,7 +13,7 @@ import {Navbar, NavDropdown} from "react-bootstrap";
 
 export default function CoursePackets() {
     const [alertDeleteBand, setAlertDeleteBand] = useState(false);
-    const {isAuthenticated, user} = useAuth();
+    const {isAuthenticated, user, loading} = useAuth();
     const [bands, setBands] = useState(null);
     const navigate = useNavigate();
     const [logged, setLogged] = useState();
@@ -25,9 +25,6 @@ export default function CoursePackets() {
 
     useEffect(() => {
         async function loadBand() {
-            if (user) {
-                setLogged(true)
-            }
             try {
                 const result = await BandService.get()
                 if (result) {
@@ -41,8 +38,10 @@ export default function CoursePackets() {
                 }
             }
         }
-
-        loadBand()
+        if (user) {
+            setLogged(true)
+            loadBand()
+        }
     }, [isAuthenticated, user, navigate]);
 
     useEffect(() => {
@@ -63,7 +62,14 @@ export default function CoursePackets() {
             console.error("Erro ao excluir faixa:", error);
         }
     };
-    if (logged && (bands != null || user.permission >= 3)) {
+
+    if (loading || !isAuthenticated) {
+        return (
+            <Loading />
+        )
+    }
+    
+    if ((bands != null || user.permission >= 3)) {
         return (
             <DisplayPage titlePage={<>
                 <h1>Apostilas</h1>
@@ -117,10 +123,6 @@ export default function CoursePackets() {
                 <Alert isOpen={alertNotBand} setAlertOpen={() => navigate('/')} redirectTo={null} hasButtons={true}
                        textContinue={"Voltar"}>{messageError}</Alert>
             </DisplayPage>
-        )
-    } else {
-        return (
-            <Loading/>
         )
     }
 }

@@ -15,32 +15,31 @@ function validarEmail(email) {
     return regex.test(email);
 }
 
-function Login({redirectTo = "/apostila"}) {
+function Login({redirectTo = "/apostilas"}) {
     const [textLogin, setTextLogin] = useState('');
     const [password, setPassword] = useState('');
-    const [response, setResponse] = useState(null)
-    const {login, isAuthenticated} = useAuth();
+    const {login} = useAuth();
     const navigate = useNavigate();
     const [openAlertNotStudent, setOpenAlertNotStudent] = useState(false);
     const [openAlert, setOpenAlert] = useState(false)
     const [errorMessage, setErrorMessage] = useState('Email ou senha incorreta.')
     let [count, setCount] = useState(0);
-    const [loading, setLoading] = useState(false)
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        setLoading(true)
+
+        const isEmail = validarEmail(textLogin)
+
         try {
-            if (validarEmail(textLogin)) {
-                setResponse(await login(textLogin, password, true));
-            } else {
-                setResponse(await login(textLogin, password, false));
-            }
-            if (response) {
+            const response = await login(textLogin, password, isEmail)
+            
+            if (response.status === 200) {
                 navigate(redirectTo)
             } else {
-                setErrorMessage('Login ou senha incorreta.')
+                setErrorMessage(response.data.message)
+
                 setCount(count+1)
+
                 if (count >= 2) {
                     setCount(0)
                     setOpenAlertNotStudent(true)
@@ -50,19 +49,14 @@ function Login({redirectTo = "/apostila"}) {
             }
         } catch (error) {
             setCount(count+1)
+
             if (count >= 2) {
                 setCount(0)
                 setOpenAlertNotStudent(true)
             } else {
                 setOpenAlert(true)
             }
-        } finally {
-            setLoading(false)
         }
-    }
-
-    if (loading) {
-        return <Loading />
     }
     
     return (
