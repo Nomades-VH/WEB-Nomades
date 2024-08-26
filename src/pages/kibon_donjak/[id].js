@@ -24,7 +24,7 @@ export default function KibonDonjak() {
             
             loadKibonDonjak(id)
         }
-    }, [id])
+    }, [id, navigate])
 
 
     if (kibonDonjak) {

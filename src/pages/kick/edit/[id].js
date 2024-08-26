@@ -20,7 +20,7 @@ export default function EditKick() {
         }
 
         loadKick(id)
-    }, [])
+    }, [id])
 
     const defaultInputs = async () => {
         setName('')

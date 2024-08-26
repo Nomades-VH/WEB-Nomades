@@ -6,7 +6,6 @@ import CrudForm from "../CrudForm";
 function FormCreate({children, data, titlePage, messageError, messageSuccess, serviceCreate, defaultInputs, redirectTo}) {
     return (
         <CrudForm 
-            children={children} 
             data={data} 
             titlePage={titlePage} 
             messageError={messageError} 
@@ -14,7 +13,7 @@ function FormCreate({children, data, titlePage, messageError, messageSuccess, se
             crudService={serviceCreate} 
             defaultInputs={defaultInputs} 
             redirectTo={redirectTo} 
-        />
+        >{children}</CrudForm>
     )
 }
 

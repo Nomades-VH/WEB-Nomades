@@ -37,7 +37,7 @@ export default function EditBand() {
         }
         
         if (id) loadBand(id)
-    }, [])
+    }, [id])
 
     const defaultInputs = async () => {
         setGub('')
