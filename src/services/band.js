@@ -11,7 +11,7 @@ const BandService = {
                 return response.data;
             }
         } catch (error) {
-            throw error; // Propaga o erro para quem chama a função de login
+            throw error;
         }
     },
 
@@ -22,7 +22,7 @@ const BandService = {
                 return response.data;
             }
         } catch (error) {
-            throw error; // Propaga o erro para quem chama a função de login
+            throw error;
         }
     },
 
@@ -38,9 +38,6 @@ const BandService = {
     },
 
     create: async (data) => {
-
-        console.log('DADOS: ', data)
-        
         const band = {
             gub: data.gub,
             name: data.name,
@@ -60,7 +57,7 @@ const BandService = {
                 return response.data;
             }
         } catch (error) {
-            throw error; // Propaga o erro para quem chama a função de login
+            throw error;
         }
     },
 
@@ -84,7 +81,7 @@ const BandService = {
                 return response.data;
             }
         } catch (error) {
-            throw error; // Propaga o erro para quem chama a função de login
+            throw error;
         }
     },
     delete: async (id) => {

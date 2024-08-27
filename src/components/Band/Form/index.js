@@ -29,9 +29,9 @@ export default function BandForm({
     const [gettedKicks, setGettedKicks] = useState([]);
     const [gettedKibonDonjaks, setGettedKibonDonjaks] = useState([]);
     const [gettedPoomsaes, setGettedPoomsaes] = useState([]);
-    const [defaultValuePoomsaes, setDefaultValuePoomsaes] = useState([]);
-    const [defaultValueKicks, setDefaultValueKicks] = useState([]);
-    const [defaultValueKibonDonjaks, setDefaultValueKibonDonjaks] = useState([]);
+    const [defaultValuePoomsaes, setDefaultValuePoomsaes] = useState("");
+    const [defaultValueKicks, setDefaultValueKicks] = useState("");
+    const [defaultValueKibonDonjaks, setDefaultValueKibonDonjaks] = useState("");
 
     useEffect(() => {
         if (
@@ -41,7 +41,7 @@ export default function BandForm({
             const defaultPoomsaes = [];
             preloadPoomsaes.map((id) => {
                 const poomsae = gettedPoomsaes?.find((poomsae) => poomsae.id === id);
-                defaultPoomsaes.push(poomsae)
+                defaultPoomsaes.push(poomsae ? {label: poomsae.name, value: poomsae.id} : null)
             }).filter(Boolean);
 
             const defaultKicks = [];
