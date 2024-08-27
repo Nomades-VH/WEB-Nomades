@@ -1,24 +1,12 @@
 import React, {useEffect, useState} from "react";
 import FormCreate from "../../components/commons/Forms/FormCreate";
-import InputText from "../../components/commons/inputs/InputText";
-import InputPassword from "../../components/commons/inputs/InputPassword";
-import Select from "../../components/commons/inputs/Select";
 import {useNavigate} from "react-router-dom";
 import BandService from "../../services/band";
 import {useAuth} from "../../context/AuthContext";
 import UserService from "../../services/user";
 import Loading from "../../components/commons/Loading";
+import UserForm from "../../components/User/Form";
 
-class Hubs {
-    static Areias = "areias";
-    static SJBarreiro = "sjbarreiro";
-    static Piquete = "piquete";
-    static Silveiras = "silveiras";
-
-    static getKeyByValue(value) {
-        return Object.keys(Hubs).find(key => Hubs[key] === value);
-    }
-}
 
 export default function CreateUser() {
     const navigate = useNavigate();
@@ -31,7 +19,6 @@ export default function CreateUser() {
     const [fkBand, setFkBand] = useState(null)
     const [bands, setBands] = useState([]);
     const [preloadData, setPreloadData] = useState();
-    const [actualHub, setActualHub] = useState();
 
     useEffect(() => {
         const loadBand = async () => {
@@ -66,8 +53,6 @@ export default function CreateUser() {
             setHub(hub)
             setFkBand(fkBand)
         }
-
-        setActualHub(Hubs[hub])
     }, [preloadData, hub])
 
     const defaultInputs = async () => {
@@ -89,51 +74,23 @@ export default function CreateUser() {
                         titlePage={"Criar Usuário"} messageSuccess={"Continuar criando usuário?"}
                         messageError={"Erro ao criar usuário"} serviceCreate={UserService.create_user}
                         defaultInputs={defaultInputs} redirectTo={"/"}>
-                <div>
-                    <section>
-                        <InputText
-                            type="text"
-                            placeholder="Usuário"
-                            value={username}
-                            required={true}
-                            label={"Nome de usuário"}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                        <InputText
-                            type="email"
-                            placeholder="Email"
-                            value={email}
-                            label={"Email"}
-                            required={true}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <InputPassword
-                            name="password"
-                            placeholder={'Insira sua senha'}
-                            label={"Senha"} required={true}
-                            onChange={(e) => setPassword(e.target.value)}
-                            value={password}/>
-                    </section>
-                    <section style={{display: 'flex', gap: '10px'}}>
-                        <Select label={"Permissão"} options={[{label: "Aluno", value: permission}]}
-                                onChange={(e) => setPermission(e.value)} isUnique={true}>
-                        </Select>
-                        <Select label={"Cidade"} onChange={(e) => setHub(e.value)} isUnique={true}
-                                defaultValue={actualHub}
-                                options={Object.keys(Hubs).map((key) => ({
-                                    label: key,
-                                    value: Hubs[key]
-                                }))}></Select>
-                        {bands ?
-                            <Select label={"Faixa do aluno"} onChange={(e) => setFkBand(e.value)} isUnique={true}
-                                    options={bands?.map((band) => ({
-                                        label: band.name,
-                                        value: band.id
-                                    }))}></Select>
-                            : null
-                        }
-                    </section>
-                </div>
+                <UserForm 
+                    username={username} 
+                    setUsername={setUsername}
+                    email={email}
+                    setEmail={setEmail}
+                    permission={permission}
+                    setPermission={setPermission}
+                    hub={hub}
+                    setHub={setHub}
+                    bands={bands}
+                    setFkBand={setFkBand}
+                    preloadUsername={username}
+                    preloadEmail={email}
+                    preloadPermission={permission}
+                    preloadHub={hub}
+                    preloadFkBand={fkBand}
+                />
             </FormCreate>
         )
     } else {
