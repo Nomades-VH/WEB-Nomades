@@ -8,7 +8,6 @@ import {useNavigate} from "react-router-dom";
 import BandService from "../../../services/band";
 
 
-
 class Hubs {
     static Areias = "areias";
     static SJBarreiro = "sjbarreiro";
