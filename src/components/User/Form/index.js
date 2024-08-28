@@ -1,7 +1,11 @@
-import InputText from "../../commons/inputs/InputText";
-import InputText from "../../components/commons/inputs/InputText";
-import InputPassword from "../../components/commons/inputs/InputPassword";
-import Select from "../../components/commons/inputs/Select";
+import InputText from "../../../components/commons/inputs/InputText";
+import InputPassword from "../../../components/commons/inputs/InputPassword";
+import Select from "../../../components/commons/inputs/Select";
+import { useEffect, useState } from "react";
+import { useAuth } from "../../../context/AuthContext";
+import Loading from "../../commons/Loading";
+import {useNavigate} from "react-router-dom";
+import BandService from "../../../services/band";
 
 
 class Hubs {
@@ -20,13 +24,48 @@ export default function UserForm({
     setUsername,
     email,
     setEmail,
+    password,
+    setPassword,
     permission,
     setPermission,
     hub,
     setHub,
-    bands,
+    fkBand,
     setFkBand
 }) {
+
+    const {user} = useAuth();
+    const [gettedBands, setGettedBands] = useState();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const loadBand = async () => {
+            try {
+                if (parseInt(!user.permission >= 3)) {
+                    navigate("/")
+                }
+                const result = await BandService.get();
+                result ? setGettedBands(result) : setGettedBands([]);
+                
+            } catch (error) {
+                setGettedBands([])
+            }
+        };
+        loadBand();
+    }, [user, navigate]);
+
+    const band = gettedBands?.find((band) => band.id === fkBand);
+    const preloadFkBand = band ? {label: band.name, value: band.id} : "";
+    
+    const preloadHub = hub ? {
+        label: Hubs.getKeyByValue(hub),
+        value: hub
+    } : "";
+
+    if (!user) {
+        return <Loading />
+    }
+
     return (
         <div>
             <section>
@@ -54,23 +93,25 @@ export default function UserForm({
                     value={password}/>
             </section>
             <section style={{display: 'flex', gap: '10px'}}>
-                <Select label={"Permissão"} options={[{label: "Aluno", value: permission}]}
+                <Select label={"Permissão"} options={[{label: "Aluno", value: 2}]}
                         onChange={(e) => setPermission(e.value)} isUnique={true}>
                 </Select>
                 <Select label={"Cidade"} onChange={(e) => setHub(e.value)} isUnique={true}
-                        defaultValue={hub}
+                        defaultValue={preloadHub}
                         options={Object.keys(Hubs).map((key) => ({
                             label: key,
                             value: Hubs[key]
                         }))}></Select>
-                {bands ?
-                    <Select label={"Faixa do aluno"} onChange={(e) => setFkBand(e.value)} isUnique={true}
-                            options={bands?.map((band) => ({
+                
+                    <Select label={"Faixa do aluno"} 
+                    defaultValue={preloadFkBand}
+                    onChange={(e) => setFkBand(e.value)} isUnique={true}
+                            options={gettedBands?.map((band) => ({
                                 label: band.name,
                                 value: band.id
-                            }))}></Select>
-                    : null
-                }
+                            }))}>
+
+                            </Select>
             </section>
         </div>
     )
