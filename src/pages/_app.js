@@ -30,6 +30,9 @@ import EditPoomsae from './poomsae/edit/[id]';
 import EditKibonDonjak from './kibon_donjak/edit/[id]';
 import EditBand from './coursePack/edit/[id]';
 import Tests from './tests';
+import { LoadingProvider, useLoading } from '../context/LoadingContext';
+import { setupAxiosInterceptors } from '../services/base';
+import Loading from '../components/commons/Loading';
 
 
 const App = () => {
@@ -41,20 +44,23 @@ const App = () => {
         setIsClient(true)
     }, []);
 
+    
+
     if (isClient) {
         return (
-            <body className="app">
+            <div className="app">
             <Head>
                 <title>Nômades do Vale Histórico</title>
             </Head>
-                <Router>
-                    {/* O componente App está dentro do Router */}
-                    <AuthProvider>
-                        <AppContent/>
-                        <ScrollToTopButton />
-                    </AuthProvider>
-                </Router>
-            </body>
+                <LoadingProvider>
+                    <Router>
+                        <AuthProvider>
+                            <AppContent/>
+                            <ScrollToTopButton />
+                        </AuthProvider>
+                    </Router>
+                </LoadingProvider>
+            </div>
         );
     }
 
@@ -63,8 +69,12 @@ const AppContent = () => {
     const location = useLocation();
     const isLoginPage = location.pathname === "/login";
     const {isAuthenticated} = useAuth();
-
+    const { isLoading, setIsLoading} = useLoading();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        setupAxiosInterceptors(setIsLoading);
+    }, [setIsLoading]);
 
     if (isLoginPage && isAuthenticated) {
         navigate('/')
@@ -72,6 +82,7 @@ const AppContent = () => {
 
     return (
         <>
+            {isLoading && <Loading />}
             {/* Renderiza o Header apenas se a página não for a página de login */}
             {!isLoginPage && <Header/>}
 

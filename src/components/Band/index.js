@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
 
 
@@ -15,7 +16,7 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         return (
                             <div key={index}>
                                 <div className={styles.attribute}>
-                                    <h4>{index + 1}º - <a href={`/kibon_donjak/${kibon_donjak.id}`} key={index} className="link">{kibon_donjak.name}</a>
+                                    <h4>{index + 1}º - <Link to={`/kibon_donjak/${kibon_donjak.id}`} key={index} className="link">{kibon_donjak.name}</Link>
                                     </h4>
                                     <p key={index}>({kibon_donjak.description})</p>
                                 </div>
@@ -28,7 +29,7 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         return (
                             <div key={index}>
                                 <div className={styles.attribute}>
-                                    <h4>{index + 1}° - <a href={`/poomsae/${poomsae.id}`} className="link" key={index}>{poomsae.name}</a></h4>
+                                    <h4>{index + 1}° - <Link to={`/poomsae/${poomsae.id}`} className="link" key={index}>{poomsae.name}</Link></h4>
                                 </div>
                             </div>
 
@@ -39,7 +40,7 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         return (
                             <div key={index}>
                                 <div className={styles.attribute}>
-                                    <h4>{index + 1}º - <a href={`/chute/${kick.id}`} className="link" key={index}>{kick.name}</a></h4>
+                                    <h4>{index + 1}º - <Link to={`/chute/${kick.id}`} className="link" key={index}>{kick.name}</Link></h4>
                                     <p key={index}>({kick.description})</p>
                                 </div>
                             </div>
@@ -48,15 +49,15 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                     })}
                     <div className={styles.single}>
                         <h3>4° - Quebramento</h3>
-                        <a href="#" className="link">{band.breakdown}</a>
+                        <Link to="#" className="link">{band.breakdown}</Link>
                     </div>
                     <div className={styles.single}>
                         <h3>5° - Teoria</h3>
-                        <a href="#" className="link">{band.theory}</a>
+                        <Link to="#" className="link">{band.theory}</Link>
                     </div>
                     <div className={styles.single}>
                         <h3>6° - Alongamento</h3>
-                        <a href="#" className="link">{band.stretching}</a>
+                        <Link to="#" className="link">{band.stretching}</Link>
                     </div>
                 </div>
             </div>

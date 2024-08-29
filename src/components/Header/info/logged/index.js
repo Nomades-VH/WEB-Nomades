@@ -2,7 +2,6 @@ import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 import styles from "../../styles.module.scss";
 import {useAuth} from "../../../../context/AuthContext";
 import {Link} from 'react-router-dom';
-import Loading from "../../../commons/Loading";
 
 
 export default function Logged(props) {
@@ -42,8 +41,6 @@ export default function Logged(props) {
                 </Container>
             </Navbar>
         )
-    } else {
-        return <Loading />
     }
 
 

@@ -3,7 +3,6 @@ import InputPassword from "../../../components/commons/inputs/InputPassword";
 import Select from "../../../components/commons/inputs/Select";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
-import Loading from "../../commons/Loading";
 import {useNavigate} from "react-router-dom";
 import BandService from "../../../services/band";
 
@@ -61,10 +60,6 @@ export default function UserForm({
         label: Hubs.getKeyByValue(hub),
         value: hub
     } : "";
-
-    if (!user) {
-        return <Loading />
-    }
 
     return (
         <div>

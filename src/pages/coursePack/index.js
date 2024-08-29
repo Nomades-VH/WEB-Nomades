@@ -6,7 +6,6 @@ import {MdEdit} from "react-icons/md";
 import {MdDelete} from "react-icons/md";
 import DisplayPage from "../../components/DisplayPage";
 import styles from "../content.module.scss"
-import Loading from "../../components/commons/Loading";
 import Alert from "../../components/commons/Alert";
 import {Navbar, NavDropdown} from "react-bootstrap";
 
@@ -62,14 +61,8 @@ export default function CoursePackets() {
             console.error("Erro ao excluir faixa:", error);
         }
     };
-
-    if (loading || !isAuthenticated) {
-        return (
-            <Loading />
-        )
-    }
     
-    if ((bands != null || user.permission >= 3)) {
+    if (bands != null || user.permission >= 3) {
         return (
             <DisplayPage titlePage={<>
                 <h1>Apostilas</h1>
@@ -102,7 +95,6 @@ export default function CoursePackets() {
             </>} alertDelete={alertDeleteBand} setAlertDelete={setAlertDeleteBand}
                          textDelete={"Deseja mesmo deletar essa faixa?"} handleDelete={handleDeleteBand}>
                 {bands && bands.map((band, index) => (
-                    // eslint-disable-next-line react/jsx-key
                     <div key={band.id}
                          className={user.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
                         <Link to={`/apostila/${band.id}`}>

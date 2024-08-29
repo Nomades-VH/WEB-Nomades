@@ -4,7 +4,6 @@ import BandService from "../../services/band";
 import {useAuth} from "../../context/AuthContext";
 import Band from "../../components/Band";
 import {useNavigate, useParams} from 'react-router-dom';
-import Loading from "../../components/commons/Loading";
 
 
 export default function CoursePack() {
@@ -15,37 +14,29 @@ export default function CoursePack() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!id) {
-            navigate('/');
-        } else {
-            if (isAuthenticated) {
+        if (isAuthenticated) {
 
-                async function loadBand() {
-                    try {
-                        const result = await BandService.get_by_id(id)
-                        if (result) {
-                            setBand(result)
-                        } else {
-                            navigate("/")
-                        }
-                    } catch (error) {
+            async function loadBand(id) {
+                try {
+                    const result = await BandService.get_by_id(id)
+                    if (result) {
+                        setBand(result)
+                    } else {
+                        navigate("/")
                     }
-
+                } catch (error) {
                 }
 
-                loadBand()
             }
+
+            loadBand(id)
         }
-    }, [id, router, isAuthenticated, navigate]);
+        
+    }, [id, isAuthenticated, navigate]);
 
     if (band) {
         return (
             <Band band={band} kicks={band.kicks} poomsaes={band.poomsaes} kibon_donjaks={band.kibon_donjaks}/>
         )
-    } else {
-        return (
-            <Loading />
-        )
     }
-
 }

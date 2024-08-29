@@ -5,19 +5,14 @@ import React, {useEffect, useRef, useState} from "react";
 import KickService from "../../services/kick";
 import styles from "../content.module.scss"
 import {MdDelete, MdEdit} from "react-icons/md";
-import Loading from "../../components/commons/Loading";
 
 export default function Kicks() {
-    const {isAuthenticated, user} = useAuth();
+    const {user} = useAuth();
     const [kicks, setKicks] = useState(null);
-    const [logged, setLogged] = useState(false);
     const [idToDelete, setIdToDelete] = useState(null);
     const [alertDeleteKick, setAlertDeleteKick] = useState(false);
 
     useEffect(() => {
-        if (user) {
-            setLogged(true)
-        }
 
         const loadKicks = async () => {
             try {
@@ -32,7 +27,7 @@ export default function Kicks() {
         }
 
         loadKicks()
-    }, [setKicks, setLogged, user]);
+    }, [setKicks, user]);
 
     const handleDeleteKick = async () => {
         try {
@@ -44,7 +39,7 @@ export default function Kicks() {
         }
     }
 
-    if (logged && (kicks != null || user.permission >= 3)) {
+    if (kicks != null || user.permission >= 3) {
         return (
             <DisplayPage titlePage={(
                 <>
@@ -73,10 +68,6 @@ export default function Kicks() {
                     </div>
                 ))}
             </DisplayPage>
-        )
-    } else {
-        return (
-            <Loading />
         )
     }
 }

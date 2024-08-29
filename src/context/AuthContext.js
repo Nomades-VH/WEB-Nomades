@@ -3,13 +3,14 @@ import UserService from '../services/user'
 import {instance} from "../services/base";
 import Loading from "../components/commons/Loading";
 import { useNavigate } from 'react-router-dom';
+import { useLoading } from './LoadingContext';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({children}) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const {setIsLoading} = useLoading(true);
 
     async function loadUser() {
         try {
@@ -23,21 +24,20 @@ export const AuthProvider = ({children}) => {
             }
         } catch (error) {
             localStorage.removeItem("access_token");
-            setUser(result);
+            setUser(null);
             setIsAuthenticated(false);
         } finally {
-            setLoading(false);
+            setIsLoading(false);
         }
     }
 
     useEffect( () => {
         const token = localStorage.getItem('access_token');
-        console.log('EAI')
 
         if (token) {
             loadUser();
         } else {
-            setLoading(false)
+            setIsLoading(false)
         }
 
     }, [isAuthenticated]);
@@ -71,19 +71,13 @@ export const AuthProvider = ({children}) => {
             localStorage.removeItem('access_token');
             setIsAuthenticated(false);
         }
-    };
+    }; 
 
-    if (loading) {
-        return (
-            <Loading />
-        )
-    } else {
-        return (
-            <AuthContext.Provider value={{ isAuthenticated, login, logout, user, loading }}>
-                {children}
-            </AuthContext.Provider>
-        );
-    }
+    return (
+        <AuthContext.Provider value={{ isAuthenticated, login, logout, user }}>
+            {children}
+        </AuthContext.Provider>
+    );
 
 
 };

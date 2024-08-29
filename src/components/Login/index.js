@@ -7,7 +7,6 @@ import React, {useState} from "react";
 import {useAuth} from "../../context/AuthContext";
 import {useNavigate} from "react-router-dom";
 import Alert from "../commons/Alert";
-import Loading from "../commons/Loading";
 
 function validarEmail(email) {
     // Expressão regular para validar e-mails

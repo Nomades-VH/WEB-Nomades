@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext"
 import PoomsaeService from "../../services/poomsae";
-import Loading from "../../components/commons/Loading";
 import DisplayPage from "../../components/DisplayPage";
 import {Link} from "react-router-dom";
 import styles from "../content.module.scss"
@@ -9,18 +8,12 @@ import {MdDelete, MdEdit} from "react-icons/md";
 
 
 export default function Poomsaes() {
-    const {isAuthenticated, user} = useAuth();
+    const {user} = useAuth();
     const [poomsaes, setPoomsaes] = useState(null);
     const [idToDelete, setIdToDelete] = useState(null);
     const [alertDeletePoomsae, setAlertDeletePoomsae] = useState(false);
-    const [logged, setLogged] = useState(false);
-
 
     useEffect(() => {
-
-        if (user) {
-            setLogged(true)
-        }
         
         const load_poomsaes = async () => {
             try {
@@ -47,7 +40,7 @@ export default function Poomsaes() {
         }
     }
 
-    if (logged && (poomsaes != null || user.permission >= 3)) {
+    if (poomsaes != null || user.permission >= 3) {
         return (
             <DisplayPage titlePage={(
                 <>
@@ -76,10 +69,6 @@ export default function Poomsaes() {
                     </div>
                 ))}
             </DisplayPage>
-        )
-    } else {
-        return (
-            <Loading />
         )
     }
 }

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import PoomsaeService from "../../services/poomsae";
-import Loading from "../../components/commons/Loading";
 import { useNavigate} from "react-router-dom";
 import DisplayPage from "../../components/DisplayPage";
 
@@ -33,5 +32,5 @@ export default function Poomsae() {
                 <p>{poomsae.description}</p>
             </DisplayPage>
         )
-    } return <Loading />
+    }
 }

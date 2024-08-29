@@ -2,42 +2,64 @@ import axios from "axios";
 import AuthService from "./auth";
 
 export const instance = axios.create({
-	baseURL: 'https://api-nomades.onrender.com',
+	baseURL: 'http://localhost:8000',
     paramsSerializer: {
         indexes: null,
     },
     validateStatus: (status) => status !== 400,
+    timeout: 5000,
 })
 
-instance.interceptors.request.use(async (config) => {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
+export const setupAxiosInterceptors = (setIsLoading) => {
+    let count = 0;
 
-    if (Math.random() <= 0.08 && !config.url.includes("auth")) {
-        const response = await AuthService.refresh()
-        if (response) {
-            localStorage.setItem("access_token", response.access_token)
-            config.headers.Authorization = `Bearer ${response.access_token}`;
+    instance.interceptors.request.use(async (config) => {
+        count++
+        if (count > 0) setIsLoading(true)
+        config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
+
+        if (Math.random() <= 0.08 && !config.url.includes("auth")) {
+            try {
+                const response = await AuthService.refresh();
+                if (response) {
+                    localStorage.setItem("access_token", response.access_token);
+                    config.headers.Authorization = `Bearer ${response.access_token}`;
+                }
+            } catch (error) {
+                console.error('Failed to refresh token', error);
+            }
         }
-    }
 
-    return config
-})
+        return config
+    }, (error) => {
+        count--
+        if (count === 0) setIsLoading(false)
+        return Promise.reject(error)
+    })
 
-instance.interceptors.response.use(response => response, error => {
+    instance.interceptors.response.use((response) => {
+        count--
+        if (count === 0) setIsLoading(false)
 
-    if (error.response.status === 401) {
-        localStorage.removeItem('access_token')
-        window.location.href = '/login'
-    }
+        return response;
+    }, (error) => {
+        count--
+        if (count === 0) setIsLoading(false)
 
-    if (error.response.status === 403) {
-        window.location.href = '/'
-    }   
+        if (error.response.status === 401) {
+            localStorage.removeItem('access_token')
+            window.location.href = '/login'
+        }
 
-    if (error.response.status === 404) {
-        window.location.href = '/not_found'
-    }
+        if (error.response.status === 403) {
+            window.location.href = '/'
+        }   
 
-    return Promise.reject(error);
+        if (error.response.status === 404) {
+            window.location.href = '/not_found'
+        }
+            
+        return Promise.reject(error);
 
-})
+    })
+}
