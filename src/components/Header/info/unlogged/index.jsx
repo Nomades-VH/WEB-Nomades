@@ -6,13 +6,11 @@ import Alert from "../../../commons/Alert";
 import Login from "../../../Login";
 import React, {useState} from "react";
 import Contact from "../../../commons/Contact";
-import { useAuth } from "../../../../context/AuthContext";
 
 
 export default function Unlogged() {
     const [openAlert, setOpenAlert] = useState(false);
     const [navigateTo, setNavigateTo] = useState('/');
-    const {user, isAuthenticated} = useAuth();
 
     return (
         <div>
