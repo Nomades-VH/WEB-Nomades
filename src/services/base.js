@@ -7,7 +7,7 @@ export const instance = axios.create({
         indexes: null,
     },
     validateStatus: (status) => status !== 400,
-    timeout: 5000,
+    timeout: 10000,
 })
 
 export const setupAxiosInterceptors = (setIsLoading) => {
