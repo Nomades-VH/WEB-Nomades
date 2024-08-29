@@ -15,7 +15,6 @@ export default function CoursePackets() {
     const {isAuthenticated, user, loading} = useAuth();
     const [bands, setBands] = useState(null);
     const navigate = useNavigate();
-    const [logged, setLogged] = useState();
     const [idToDelete, setIdToDelete] = useState();
     const [alertNotBand, setAlertNotBand] = useState(false);
     const [messageError, setMessageError] = useState('');
@@ -30,7 +29,7 @@ export default function CoursePackets() {
                     setBands(result)
                 }
             } catch (error) {
-                if (user && user.permission < 3) {
+                if (user?.permission < 3) {
                     setBands([])
                     setAlertNotBand(true)
                     setMessageError(error.message)
@@ -38,7 +37,6 @@ export default function CoursePackets() {
             }
         }
         if (user) {
-            setLogged(true)
             loadBand()
         }
     }, [isAuthenticated, user, navigate]);
@@ -62,11 +60,11 @@ export default function CoursePackets() {
         }
     };
     
-    if (bands != null || user.permission >= 3) {
+    if (bands != null || user?.permission >= 3) {
         return (
             <DisplayPage titlePage={<>
                 <h1>Apostilas</h1>
-                {user.permission >= 3 ?
+                {user?.permission >= 3 ?
                     <Navbar className={styles.navbar} expand="lg">
                         <NavDropdown title={<h2>+</h2>} drop="start" className={styles.dropdownMenu}>
                             <NavDropdown.Item className={styles.item}>
@@ -96,12 +94,12 @@ export default function CoursePackets() {
                          textDelete={"Deseja mesmo deletar essa faixa?"} handleDelete={handleDeleteBand}>
                 {bands && bands.map((band, index) => (
                     <div key={band.id}
-                         className={user.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
+                         className={user?.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
                         <Link to={`/apostila/${band.id}`}>
                             <h4 className="link" ref={(el) => (textRefs.current[index] = el)}>{band.gub}º Gub - {band.name}</h4>
                         </Link>
 
-                        {user.permission >= 3 ?
+                        {user?.permission >= 3 ?
                             <div className={styles.buttons}>
                                 <Link to={`/apostila/editar/${band.id}`}><MdEdit/></Link>
                                 <Link to={"#"} onClick={() => {
