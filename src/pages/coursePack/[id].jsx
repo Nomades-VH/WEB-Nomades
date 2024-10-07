@@ -1,20 +1,19 @@
 import {useEffect, useState} from "react";
-import {useRouter} from "next/router";
 import BandService from "../../services/band";
 import {useAuth} from "../../context/AuthContext";
 import Band from "../../components/Band";
-import {useNavigate, useParams} from 'react-router-dom';
+import {useLocation, useNavigate, useParams} from 'react-router-dom';
 
 
 export default function CoursePack() {
-    const router = useRouter();
-    const [band, setBand] = useState();
+    const location = useLocation();
+    const [band, setBand] = useState(location.state?.band || null);
     const {isAuthenticated} = useAuth();
     const { id } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (isAuthenticated) {
+        if (isAuthenticated && !band) {
 
             async function loadBand(id) {
                 try {

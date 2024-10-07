@@ -38,7 +38,6 @@ export default function CoursePackets() {
     }, [user]);
 
     useEffect(() => {
-        console.log('Efeito executado', textRefs.current); // Verifica as referências
         textRefs.current.forEach((text) => {
             if (text && text.scrollWidth > text.clientWidth) {
                 text.classList.add('animated-text');
@@ -55,29 +54,25 @@ export default function CoursePackets() {
             console.error("Erro ao excluir faixa:", error);
         }
     };
-
-    // Talvez futuramente seja bom criar um componente separado em seu próprio arquivo
-
-    // Component para renderizar os botões de ação (editar e deletar)
-    const ActionButtons = ({ bandId }) => (
+    
+    const ActionButtons = ({ band }) => (
         <div className={styles.buttons}>
-            <Link to={`/apostila/editar/${bandId}`}><MdEdit /></Link>
+            <Link to={`/apostila/editar/${band.id}`} state={{band: band}}><MdEdit /></Link>
             <Link to={"#"} onClick={() => {
                 setAlertDeleteBand(true);
-                setIdToDelete(bandId);
+                setIdToDelete(band.id);
             }}>
                 <MdDelete style={{ color: "red" }} />
             </Link>
         </div>
     );
 
-    // Component para renderizar cada faixa
     const BandItem = ({ band }) => (
         <div key={band.id} className={user?.permission >= 3 ? styles.contentPermission : styles.contentOutPermission}>
-            <Link to={`/apostila/${band.id}`}>
+            <Link to={`/apostila/${band.id}`} state={{ band: band }}>
                 <h4 className="link">{band.gub}º Gub - {band.name}</h4>
             </Link>
-            {user?.permission >= 3 && <ActionButtons bandId={band.id} />}
+            {user?.permission >= 3 && <ActionButtons band={band} />}
         </div>
     );
 
