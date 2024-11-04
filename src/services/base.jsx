@@ -2,7 +2,7 @@ import axios from "axios";
 import AuthService from "./auth";
 
 export const instance = axios.create({
-	baseURL: 'https://api-nomades.onrender.com',
+	baseURL: 'http://localhost:8000',
     paramsSerializer: {
         indexes: null,
     },
