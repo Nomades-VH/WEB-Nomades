@@ -20,10 +20,11 @@ export default function Header() {
                 <Link to='/'>
                     <Image src={logo} width={500} height={500} alt="Logo da equipe Nômades"/>
                 </Link>
-                <h2 className={user ? styles.logged : ''}>{user ? toUpperCaseInitial(user.username) : null}</h2>
             </div>
+            <Link href="/"><h2>Nômades Vale Histórico</h2></Link>
+
+            
             <div className={styles.items}>
-                {/*<Link className={styles.default} href={'/store'}>Loja</Link>*/}
                 {
                     isAuthenticated && user ? (
                         <Logged user={user}/>
@@ -31,6 +32,7 @@ export default function Header() {
                         <Unlogged />
                     )
                 }
+                <h4>{user ? toUpperCaseInitial(user.username) : null}</h4>
             </div>
         </header>
     );
