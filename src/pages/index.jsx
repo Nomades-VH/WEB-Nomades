@@ -15,7 +15,7 @@ export default function Home() {
 
     return (
         <div className={styles.main}>
-            <h1>Nômades do Vale Histórico? Quem somos:</h1>
+            <h1>Sobre nós</h1>
             <section className={styles.about}>
                 <div className={styles.carouselContainer}>
                     <div className={styles.carousel1}>
