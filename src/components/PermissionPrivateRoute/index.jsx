@@ -11,8 +11,7 @@ const PrivateRoute = () => {
     }, []);
 
     const {user} = useAuth();
-
-    if (!token && !user?.permission >= 3) return <Navigate to="/" />;
+    if (isClient) if (!token || user?.permission <= 3) return <Navigate to="/" />;
 
     return <Outlet />;
 };

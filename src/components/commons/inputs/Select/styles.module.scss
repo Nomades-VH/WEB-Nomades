@@ -1,7 +1,11 @@
 .container {
     width: 100%;
 
-    label {   
-        width: 100%;
+    div, select, input {   
+            max-width: 100%;
+        
+        div {
+            background-color: rgb(177, 177, 177);
+        }
     }
 }
