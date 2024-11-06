@@ -1,6 +1,17 @@
 @media (min-width: 776px) {
 
     .main {
+
+        .images {
+            width: 100%;
+    
+            .image {
+                height: 250px;
+                width: auto;
+                margin: 20px 20px 0 0;
+                border-radius: 5px;
+            }
+        }
         text-align: center;
         p {
             font-size: 0.5rem;
@@ -14,12 +25,7 @@
         .about {
             margin: 0 30px;
             padding: 30px 15px;
-            background-color: rgba(128, 128, 128, 0.16);
             border-radius: 10px;
-
-            .divizona {
-                text-align: center;
-            }
         }
 
         .text {
@@ -34,7 +40,7 @@
         overflow: hidden;
     }
 
-    .carousel1 {
+    .carousel {
         margin-bottom: 20px;
     }
 
@@ -55,23 +61,19 @@
         .carouselContainer {
             display: flex;
             justify-content: space-around;
+            flex-direction: column;
 
-            .carousel1 {
-                width: 48%;
+            .carousel {
                 display: flex;
-                flex-direction: column;
-                justify-content: space-between;
+                width: 100%;
+                justify-content: space-around;
                 align-items: center;
 
-                .divizona {
-                    border-radius: 10px;
-                    padding: 15px;
-                    width: 100%;
-
-                    .carouselx {
-                        .item {
-                            overflow: hidden;
-                        }
+                .carouselx {
+                    width: 40%;
+                    .item {
+                        height: 300px;
+                        overflow: hidden;
                     }
                 }
             }
@@ -113,6 +115,14 @@
             text-align: center;
         }
 
+        .images {
+            .image {
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
+        }
+
         h2 {
             font-size: 0.85rem;
         }
@@ -126,8 +136,6 @@
         }
 
         .kiossanins {
-
-
             .personRight {
                 .person {
                     flex-direction: column-reverse;
@@ -148,6 +156,13 @@
 
 
 .main {
+    .buttonImages {
+        position: fixed;
+        z-index: 1000;
+        bottom: 10px;
+        left: 10px;
+    }
+
     display: flex;
     flex-direction: column;
     align-self: center;
@@ -155,20 +170,6 @@
 
     p {
         font-size: 0.6rem;
-    }
-
-    .about {
-        button {
-            display: none;
-        }
-        .item {
-            height: 700px;
-            img {
-                height: 100%;
-                width: 100%;
-                object-fit: contain;
-            }
-        }
     }
 
     .kiossanins {

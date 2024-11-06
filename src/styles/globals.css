@@ -17,14 +17,13 @@
 }
 
 .app {
-    background: linear-gradient(to bottom right, #F5EE40, #EB1F26);
+    background-color: rgba(0, 0, 0, 0.938);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
 a {
-    color: inherit !important;
     text-decoration: none !important;
     transition: 0.2s;
 }
@@ -38,6 +37,12 @@ p, a {
     font-size: 18px;
 }
 
+h1, h2, h3, h4, h5, p, a, ul, li{
+    background: linear-gradient(to bottom right, #F5EE40, #EB1F26);
+    -webkit-background-clip: text;
+    color: transparent!important;
+}
+
 html, body {
     max-width: 100vw;
     min-height: 100vh;
@@ -49,8 +54,39 @@ html, body {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: #a9a9a9;
+    background-color: grey;
     border-radius: 5px;
 }
 
 
+.body-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (min-width: 1200px) {
+    .body-container {
+        margin-top: 150px; 
+    }
+}
+
+@media (max-width: 1199px) and (min-width: 776px) {
+    .body-container {
+        margin-top: 200px; 
+    }
+
+    ::-webkit-scrollbar-thumb {
+        display: none;
+    }
+}
+
+@media (max-width: 775px) {
+    .body-container {
+        margin-top: 500px; 
+    }
+    ::-webkit-scrollbar-thumb {
+            display: none;
+        }
+    
+}

@@ -35,14 +35,12 @@ export default function UserForm({
 
     const {user} = useAuth();
     const [gettedBands, setGettedBands] = useState();
-    const navigate = useNavigate();
+    const [passwordIsEqual, setPasswordIsEqual] = useState(false);
+    const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
     useEffect(() => {
         const loadBand = async () => {
             try {
-                if (parseInt(!user.permission >= 3)) {
-                    navigate("/")
-                }
                 const result = await BandService.get();
                 result ? setGettedBands(result) : setGettedBands([]);
                 
@@ -51,10 +49,18 @@ export default function UserForm({
             }
         };
         loadBand();
-    }, [user, navigate]);
+    }, [user]);
 
     const band = gettedBands?.find((band) => band.id === fkBand);
     const preloadFkBand = band ? {label: band.name, value: band.id} : "";
+
+    useEffect(() => {
+        setPasswordIsEqual(password === passwordConfirmation)
+    }, [password, passwordConfirmation])
+
+    useEffect(() => {
+        passwordIsEqual ? console.log("IUHULLL") : console.log("AFF")
+    }, [passwordIsEqual])
     
     const preloadHub = hub ? {
         label: Hubs.getKeyByValue(hub),
@@ -83,20 +89,34 @@ export default function UserForm({
                 <InputPassword
                     name="password"
                     placeholder={'Insira sua senha'}
-                    label={"Senha"} required={true}
-                    onChange={(e) => setPassword(e.target.value)}
-                    value={password}/>
+                    label={"Senha"} required={!passwordIsEqual}
+                    onChange={(e) => {
+                        setPassword(e.target.value)
+                        e.target.setCustomValidity(!passwordIsEqual ? "" : "As senhas não coincidem.");
+                    }}
+                    value={password} minlength="8"/>
+                <InputPassword
+                name="confirmation"
+                placeholder={'Confirme sua senha'}
+                label={"Confirmação de senha"} required={!passwordIsEqual}
+                onChange={(e) => {
+                    setPasswordConfirmation(e.target.value);
+                    e.target.setCustomValidity(!passwordIsEqual ? "" : "As senhas não coincidem.");
+                }}
+                value={passwordConfirmation}
+                minlength="8"
+                />
             </section>
             <section style={{display: 'flex', gap: '10px'}}>
                 <Select label={"Permissão"} options={[{label: "Aluno", value: 2}]}
-                        onChange={(e) => setPermission(e.value)} isUnique={true}>
+                        onChange={(e) => setPermission(e.value)} isUnique={true} required={true}>
                 </Select>
                 <Select label={"Cidade"} onChange={(e) => setHub(e.value)} isUnique={true}
                         defaultValue={preloadHub}
                         options={Object.keys(Hubs).map((key) => ({
                             label: key,
                             value: Hubs[key]
-                        }))}></Select>
+                        }))} required={true}></Select>
                 
                     <Select label={"Faixa do aluno"} 
                     defaultValue={preloadFkBand}
@@ -104,7 +124,7 @@ export default function UserForm({
                             options={gettedBands?.map((band) => ({
                                 label: band.name,
                                 value: band.id
-                            }))}>
+                            }))} required={true}>
 
                             </Select>
             </section>

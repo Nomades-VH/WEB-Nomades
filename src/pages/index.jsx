@@ -1,8 +1,8 @@
 import styles from './index.module.scss'
 import Image from "next/image";
 import logo from "../../public/images/Logo.jpeg";
-import React, {useState} from "react";
-import {Carousel} from "react-bootstrap";
+import React, {useEffect, useState} from "react";
+import {Button, Carousel} from "react-bootstrap";
 
 const images = importAll(require.context("../../public/exames/", false, /\.(png|jpe?g|svg)$/));
 
@@ -12,15 +12,60 @@ function importAll(r) {
 
 
 export default function Home() {
+    const [windowSize, setWindowSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight,
+    });
+    const [buttonIsVisible, setButtonIsVisible] = useState(false);
+    const [visibilityPhotos, setVisibilityPhotos] = useState(true);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight,
+            });
+        };
+
+        // Adiciona o listener para capturar o resize
+        window.addEventListener('resize', handleResize);
+
+        // Remove o listener ao desmontar o componente
+        return () => window.removeEventListener('resize', handleResize);
+    }, [window]);
+
+    useEffect(() => {
+    windowSize.width >= 777 ? setButtonIsVisible(false) : setButtonIsVisible(true)
+    windowSize.width >= 755 ? setVisibilityPhotos(true) : setVisibilityPhotos(false)
+    }, [windowSize.width])
+
+    const alterVisibilityPhotos = () => {
+        visibilityPhotos ? setVisibilityPhotos(false) : setVisibilityPhotos(true)
+    }
 
     return (
         <div className={styles.main}>
             <h1>Sobre nós</h1>
             <section className={styles.about}>
                 <div className={styles.carouselContainer}>
-                    <div className={styles.carousel1}>
-                        <div className={styles.text}>
-                            <p>
+                    <div className={styles.text}>
+                        <p>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                            has
+                            been
+                            the industrys standard dummy text ever since the 1500s, when an unknown printer took a
+                            galley
+                            of type and scrambled it to make a type specimen book. It has survived not only five
+                            centuries,
+                            but also the leap into electronic typesetting, remaining essentially unchanged. It was
+                            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+                            passages,
+                            and more recently with desktop publishing software like Aldus PageMaker including
+                            versions
+                            of
+                            Lorem Ipsum.
+                        </p>
+                        <p>
                                 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
                                 has
                                 been
@@ -30,52 +75,18 @@ export default function Home() {
                                 centuries,
 
                             </p>
-                        </div>
-                        <div className={styles.divizona}>
-                            <h2>Exame de Faixa 2022</h2>
-                            <Carousel data-bs-theme="dark" interval={2500} className={styles.carouselx}>
-                                {
-                                    images.map((image, index) => (
-                                        <Carousel.Item key={index} className={styles.item}>
-                                            <Image src={image.default} alt={`Image ${index}`}/>
-                                        </Carousel.Item>
-                                    ))
-                                }
-                            </Carousel>
-                        </div>
                     </div>
-                    <div className={styles.carousel1}>
-                        <div className={styles.text}>
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has
-                                been
-                                the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                                galley
-                                of type and scrambled it to make a type specimen book. It has survived not only five
-                                centuries,
-                                but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                                popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                                passages,
-                                and more recently with desktop publishing software like Aldus PageMaker including
-                                versions
-                                of
-                                Lorem Ipsum.
-                            </p>
-                        </div>
-                        <div className={styles.divizona}>
-                            <h2>Exame de Faixa 2022</h2>
-                            <Carousel data-bs-theme="dark" interval={2500} className={styles.carouselx}>
-                                {
-                                    images.map((image, index) => (
-                                        <Carousel.Item key={index} className={styles.item}>
-                                            <Image src={image.default} alt={`Image ${index}`}/>
-                                        </Carousel.Item>
-                                    ))
-                                }
-                            </Carousel>
-                        </div>
+                    <div className={styles.images} >
+                        {
+                            images.slice(0, 15).map((image, index) => (
+                                <Image className={styles.image} src={image.default} alt={`Image ${index}`} key={index} style={visibilityPhotos ? {display: 'inline'} : {display: "none"}}/>
+                            ))
+                        }
+                        { 
+                            buttonIsVisible ? <Button className={styles.buttonImages} onClick={alterVisibilityPhotos}>Ver fotos</Button> : null
+                        }
                     </div>
+                    
                 </div>
             </section>
 

@@ -55,7 +55,7 @@ const App = () => {
                 <LoadingProvider>
                     <Router>
                         <AuthProvider>
-                            <AppContent/>
+                            <AppContent />
                             <ScrollToTopButton />
                         </AuthProvider>
                     </Router>
@@ -86,8 +86,9 @@ const AppContent = () => {
             {/* Renderiza o Header apenas se a página não for a página de login */}
             {!isLoginPage && <Header/>}
 
+            <div className='body-container'>
             <Routes>
-                <Route path="/" element={<Home/>}/>
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<LoginPage/>}/>
 
                 {/* Somente logados podem acessar */}
@@ -127,6 +128,8 @@ const AppContent = () => {
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
+            </div>
+            
 
             <Footer/>
         </>
