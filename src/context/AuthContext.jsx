@@ -1,8 +1,6 @@
 import React, {createContext, useContext, useEffect, useState} from 'react';
 import UserService from '../services/user'
 import {instance} from "../services/base";
-import Loading from "../components/commons/Loading";
-import { useNavigate } from 'react-router-dom';
 import { useLoading } from './LoadingContext';
 
 const AuthContext = createContext();

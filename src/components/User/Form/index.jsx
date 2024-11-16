@@ -3,7 +3,6 @@ import InputPassword from "../../../components/commons/inputs/InputPassword";
 import Select from "../../../components/commons/inputs/Select";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
-import {useNavigate} from "react-router-dom";
 import BandService from "../../../services/band";
 
 
@@ -30,13 +29,15 @@ export default function UserForm({
     hub,
     setHub,
     fkBand,
-    setFkBand
+    setFkBand,
+    confirmPassword,
+    setConfirmPassword
 }) {
 
     const {user} = useAuth();
     const [gettedBands, setGettedBands] = useState();
     const [passwordIsEqual, setPasswordIsEqual] = useState(false);
-    const [passwordConfirmation, setPasswordConfirmation] = useState('')
+
 
     useEffect(() => {
         const loadBand = async () => {
@@ -55,8 +56,8 @@ export default function UserForm({
     const preloadFkBand = band ? {label: band.name, value: band.id} : "";
 
     useEffect(() => {
-        setPasswordIsEqual(password === passwordConfirmation)
-    }, [password, passwordConfirmation])
+        setPasswordIsEqual(password === confirmPassword)
+    }, [password, confirmPassword])
 
     useEffect(() => {
         passwordIsEqual ? console.log("IUHULLL") : console.log("AFF")
@@ -100,33 +101,31 @@ export default function UserForm({
                 placeholder={'Confirme sua senha'}
                 label={"Confirmação de senha"} required={!passwordIsEqual}
                 onChange={(e) => {
-                    setPasswordConfirmation(e.target.value);
+                    setConfirmPassword(e.target.value);
                     e.target.setCustomValidity(!passwordIsEqual ? "" : "As senhas não coincidem.");
                 }}
-                value={passwordConfirmation}
+                value={confirmPassword}
                 minlength="8"
                 />
+                
             </section>
-            <section style={{display: 'flex', gap: '10px'}}>
-                <Select label={"Permissão"} options={[{label: "Aluno", value: 2}]}
-                        onChange={(e) => setPermission(e.value)} isUnique={true} required={true}>
-                </Select>
+            <section style={{display: "flex", gap: '10px'}}>
+                <Select value={permission} label={"Permissão"} options={[{label: "Aluno", value: 2}]}
+                        onChange={(e) => setPermission(e.value)} isUnique={true} required={true} />
                 <Select label={"Cidade"} onChange={(e) => setHub(e.value)} isUnique={true}
                         defaultValue={preloadHub}
                         options={Object.keys(Hubs).map((key) => ({
                             label: key,
                             value: Hubs[key]
-                        }))} required={true}></Select>
+                        }))} required={true} />
                 
-                    <Select label={"Faixa do aluno"} 
-                    defaultValue={preloadFkBand}
-                    onChange={(e) => setFkBand(e.value)} isUnique={true}
-                            options={gettedBands?.map((band) => ({
-                                label: band.name,
-                                value: band.id
-                            }))} required={true}>
-
-                            </Select>
+                <Select label={"Faixa do aluno"} 
+                defaultValue={preloadFkBand}
+                onChange={(e) => setFkBand(e.value)} isUnique={true}
+                        options={gettedBands?.map((band) => ({
+                            label: band.name,
+                            value: band.id
+                        }))} required={true} />
             </section>
         </div>
     )

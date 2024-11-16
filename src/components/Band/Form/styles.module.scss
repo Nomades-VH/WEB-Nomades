@@ -14,17 +14,6 @@
             margin: 0;
         }
     }
-
-    .label {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0!important;
-
-        h3 {
-            margin: 25px 10px 0;
-        }
-    }
 }
 
 @media (max-width: 1199px) {
@@ -42,13 +31,13 @@
             margin: 0;
         }
     }
+}
 
-    .label {
-        flex-direction: row;
-
-        h3 {
-            margin: 25px 10px 0;
-        }
+.containerTextArea {
+    textarea {
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
     }
 }
 

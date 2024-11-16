@@ -1,0 +1,35 @@
+@import '../inputs.module';
+
+.container {
+  @extend %basic-container;
+
+  .items {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+
+    .image {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.5s ease-in-out;
+        &:hover {
+            transform: scale(1.2);
+        }
+    }
+  }
+
+  input {
+    @extend %basic-input;
+  }
+}
+
+@media (max-width: 765px) {
+    .container {
+        .items {
+            align-items: center;
+            flex-direction: column;
+        }   
+    }
+}
