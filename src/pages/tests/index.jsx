@@ -57,9 +57,9 @@ export default function Tests() {
                         }),
                         valueContainer: (base) => ({
                           ...base,
-                          maxHeight: '48px', // Define a altura máxima para o container de valores
-                          overflowY: 'auto', // Habilita scroll vertical
-                          overflowX: 'hidden', // Evita scroll horizontal
+                          maxHeight: '48px',
+                          overflowY: 'auto', 
+                          overflowX: 'hidden',
                         }),
                       }}
                 />

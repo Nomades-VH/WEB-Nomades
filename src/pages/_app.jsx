@@ -1,4 +1,6 @@
 import '../styles/globals.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import React, {useState} from "react";
@@ -90,6 +92,7 @@ const AppContent = () => {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/usuario/criar" element={<CreateUser/>}/>
 
                 {/* Somente logados podem acessar */}
                 <Route element={<PrivateRoute/>}>
@@ -111,8 +114,6 @@ const AppContent = () => {
 
                     {/* Somente logados com permissão acima da mesa podem acessar */}
                     <Route element={<PermissionPrivateRoute />} >
-                        <Route path="/usuario/criar" element={<CreateUser/>}/>
-
                         <Route path="/apostila/criar" element={<CreateBand />} />
                         <Route path="/apostila/editar/:id" element={<EditBand />} />
 

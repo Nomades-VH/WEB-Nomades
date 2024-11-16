@@ -11,7 +11,10 @@ export default function CreateUser() {
     const [permission, setPermission] = useState(2);
     const [hub, setHub] = useState('');
     const [fkBand, setFkBand] = useState(null)
+    const [profile, setProfile] = useState();
     const [preloadData, setPreloadData] = useState();
+    const [confirmPassword, setConfirmPassword] = useState('');
+    
 
     useEffect(() => {
         setPreloadData(JSON.parse(localStorage.getItem('Criar-Usuário')))
@@ -19,12 +22,13 @@ export default function CreateUser() {
 
     useEffect(() => {
         if (preloadData) {
-            const { credentials, permission, hub, fkBand } = preloadData;
+            const { credentials, permission, hub, fkBand, profile } = preloadData;
             setUsername(credentials.username)
             setEmail(credentials.email)
             setPermission(permission)
             setHub(hub)
             setFkBand(fkBand)
+            setProfile(profile)
         }
     }, [preloadData])
 
@@ -37,11 +41,12 @@ export default function CreateUser() {
     const credentials = {
         username: username,
         email: email,
-        password: password
+        password: password,
+        confirmPassword: confirmPassword
     }
     
     return (
-        <FormCreate data={{credentials, permission, hub, fkBand}}
+        <FormCreate data={{credentials, permission, hub, fkBand, profile}}
                     titlePage={"Criar Usuário"} messageSuccess={"Continuar criando usuário?"}
                     messageError={"Erro ao criar usuário"} serviceCreate={UserService.create_user}
                     defaultInputs={defaultInputs} redirectTo={"/"}>
@@ -58,6 +63,10 @@ export default function CreateUser() {
                 setHub={setHub}
                 fkBand={fkBand}
                 setFkBand={setFkBand}
+                profile={profile}
+                setProfile={setProfile}
+                confirmPassword={confirmPassword}
+                setConfirmPassword={setConfirmPassword}
             />
         </FormCreate>
     )

@@ -23,19 +23,26 @@ export default function Select({ label, options, onChange, placeholder='Selecion
         }),
         valueContainer: (base) => ({
           ...base,
-          display: 'flex',
+          display: 'flex!important',
+          flexDirection: 'row',
           overflowY: 'auto',
           overflowX: 'auto',
           fontSize: '10px',
           width: 'auto',
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start'
         }),
         indicatorsContainer: (base) => ({
             ...base,
-            display: 'flex',
-            flexDirection: 'row'
+            display: "none"
+        }),
+        placeholder: (base) => ({
+            ...base,
+            display: "flex"
+        }), 
+        menu: (base) => ({
+            ...base,
+            borderRadius: "10px"
         })
+
     }
 
     return (

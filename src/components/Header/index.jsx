@@ -5,35 +5,32 @@ import logo from '../../../public/images/LogoAtual-removebg-preview.png'
 import {useAuth} from "../../context/AuthContext";
 import Logged from "./info/logged";
 import Unlogged from "./info/unlogged";
+import { useEffect, useState } from 'react';
+import UserService from '../../services/user';
 
 export default function Header() {
     const { user, isAuthenticated } = useAuth();
-    const toUpperCaseInitial = (text) => {
-        return text.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
-            return a.toUpperCase();
-        });
-    }
 
     return (
         <header className={styles.container}>
-            <div className={styles.logo}>
+            <section className={styles.logo}>
                 <Link to='/'>
-                    <Image src={logo} width={500} height={500} alt="Logo da equipe Nômades"/>
+                    <Image src={logo} width={100} height={100} alt="Logo da equipe Nômades"/>
                 </Link>
-            </div>
-            <Link href="/"><h2>Nômades Vale Histórico</h2></Link>
+            </section>
+            <section>
+                <Link to="/"><h2>Nômades Vale Histórico</h2></Link>
+            </section>
 
-            
-            <div className={styles.items}>
-                {
-                    isAuthenticated && user ? (
-                        <Logged user={user}/>
-                    ) : (
-                        <Unlogged />
-                    )
-                }
-                <h4>{user ? toUpperCaseInitial(user.username) : null}</h4>
-            </div>
+            <section>
+            {
+                isAuthenticated && user ? (
+                    <Logged user={user} />
+                ) : (
+                    <Unlogged />
+                )
+            }
+            </section>
         </header>
     );
 }

@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: JapanWave;
     src: url("../../public/japan_wave/JapanWave.ttf");
@@ -37,10 +38,12 @@ p, a {
     font-size: 18px;
 }
 
+textarea {
+    background-color: rgb(177, 177, 177);
+}
+
 h1, h2, h3, h4, h5, p, a, ul, li{
-    background: linear-gradient(to bottom right, #F5EE40, #EB1F26);
-    -webkit-background-clip: text;
-    color: transparent!important;
+    color: rgb(255, 102, 0)!important;
 }
 
 html, body {
@@ -83,7 +86,7 @@ html, body {
 
 @media (max-width: 775px) {
     .body-container {
-        margin-top: 500px; 
+        margin-top: 10px; 
     }
     ::-webkit-scrollbar-thumb {
             display: none;

@@ -1,10 +1,12 @@
 .container {
     width: 100%;
 
-    div, select, input {   
-            max-width: 100%;
-        
+    div {   
+        max-width: 100%;
+        color: black;
+
         div {
+            color: gray;
             background-color: rgb(177, 177, 177);
         }
     }
