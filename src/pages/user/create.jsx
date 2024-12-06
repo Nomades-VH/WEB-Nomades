@@ -49,7 +49,7 @@ export default function CreateUser() {
         <FormCreate data={{credentials, permission, hub, fkBand, profile}}
                     titlePage={"Criar Usuário"} messageSuccess={"Continuar criando usuário?"}
                     messageError={"Erro ao criar usuário"} serviceCreate={UserService.create_user}
-                    defaultInputs={defaultInputs} redirectTo={"/"}>
+                    defaultInputs={defaultInputs} redirectTo={"/apostilas"}>
             <UserForm 
                 username={username} 
                 setUsername={setUsername}

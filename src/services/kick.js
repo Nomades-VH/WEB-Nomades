@@ -12,7 +12,7 @@ const KickService = {
         try {
             const response = await instance.post(`${SERVICE}/`, kick)
 
-            if (response.status === 200) {
+            if (response.status === 201) {
                 return response.data
             }
         } catch (error) {
@@ -65,7 +65,7 @@ const KickService = {
         try {
             const response = await instance.delete(`${SERVICE}/${id}`)
 
-            if (response.status === 200) {
+            if (response.status === 204) {
                 return response
             }
         } catch (error) {
