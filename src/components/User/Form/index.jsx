@@ -1,9 +1,11 @@
 import InputText from "../../../components/commons/inputs/InputText";
 import InputPassword from "../../../components/commons/inputs/InputPassword";
+import InputImage from "../../../components/commons/inputs/InputImage";
 import Select from "../../../components/commons/inputs/Select";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import BandService from "../../../services/band";
+import Image from "next/image";
 
 
 class Hubs {
@@ -31,12 +33,15 @@ export default function UserForm({
     fkBand,
     setFkBand,
     confirmPassword,
-    setConfirmPassword
+    setConfirmPassword,
+    profile,
+    setProfile
 }) {
 
     const {user} = useAuth();
     const [gettedBands, setGettedBands] = useState();
     const [passwordIsEqual, setPasswordIsEqual] = useState(false);
+    const [previousProfile, setPreviousProfile] = useState();
 
 
     useEffect(() => {
@@ -51,6 +56,12 @@ export default function UserForm({
         };
         loadBand();
     }, [user]);
+
+    const changeProfile = (image) => {
+        const imageUrl = URL.createObjectURL(image);
+        setProfile(image)
+        setPreviousProfile(imageUrl)
+    }
 
     const band = gettedBands?.find((band) => band.id === fkBand);
     const preloadFkBand = band ? {label: band.name, value: band.id} : "";
@@ -109,6 +120,11 @@ export default function UserForm({
                 />
                 
             </section>
+            <section style={{display: "flex"}}>
+            <InputImage label="Imagem de perfil" onChange={(e) => changeProfile(e.target.files[0])}/>
+            {previousProfile && <Image src={previousProfile} width={80} height={80} alt="Previsão da foto de perfil"/>}
+            </section>
+            
             <section style={{display: "flex", gap: '10px'}}>
                 <Select value={permission} label={"Permissão"} options={[{label: "Aluno", value: 2}]}
                         onChange={(e) => setPermission(e.value)} isUnique={true} required={true} />

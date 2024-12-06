@@ -1,5 +1,6 @@
 import axios from "axios";
 import { instance } from "./base"
+import AuthService from "./auth";
 
 const SERVICE = "/user"
 
@@ -13,7 +14,7 @@ const UserService = {
             }
             
         } catch (error) {
-            throw error; // Propaga o erro para quem chama a função de login
+            throw error;
         }
     },
     get_profile_image: async () => {
@@ -26,7 +27,7 @@ const UserService = {
                 return URL.createObjectURL(response.data); // Cria a URL temporária
             }
         } catch (error) {
-            throw error; // Propaga o erro para quem chama a função de login
+            throw error;
         }
     },
     upload_profile_image: async (profile) => {
@@ -35,11 +36,11 @@ const UserService = {
             formData.append('profile', profile)
 
             const response = await instance.post(`${SERVICE}/profile`, formData)
-            if (response.status === 200) {
+            if (response.status === 201) {
                 return response.data;
             }
         } catch (error) {
-            throw error; // Propaga o erro para quem chama a função de login
+            throw error;
         }
     },
     create_user: async (data) => {
@@ -55,14 +56,29 @@ const UserService = {
             fk_band: data.fkBand ? data.fkBand.toString() : null,
         }
 
-        try {
-            const response = await instance.post(`${SERVICE}/`, user)
+        console.log('usuário: ', user)
 
-            if (response.status === 200) {
-                return response.data;
-            }
+        const formData = new FormData();
+        formData.append('profile', data.profile)
+        formData.append('username', data.credentials.username)
+        formData.append('email', data.credentials.email)
+        formData.append('password', data.credentials.password)
+        formData.append('confirm_password', data.credentials.confirmPassword)
+        formData.append('permission', parseInt(data.permission))
+        formData.append('hub', data.hub)
+        data.fkBand ? formData.append('fk_band', data.fkBand.toString()) : null
+
+        console.log(formData.values())
+
+        try {
+            const responseCreate = await instance.post(`${SERVICE}/`, formData)
+
+            if (responseCreate.status !== 201) return
+
+            return responseCreate.data;
+            
         } catch (error) {
-            throw error; // Propaga o erro para quem chama a função de login
+            throw error;
         }
     }
 };

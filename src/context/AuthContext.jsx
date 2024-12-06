@@ -51,7 +51,7 @@ export const AuthProvider = ({children}) => {
                     "password": password
                 }
             );
-            if (response.status === 200) {
+            if (response.status === 201) {
                 localStorage.setItem('access_token', response.data.access_token);
                 await loadUser()
                 setIsAuthenticated(true);

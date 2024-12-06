@@ -10,7 +10,7 @@ import UserService from "../../../../services/user";
 export default function Logged({user}) {
     const { logout } = useAuth();
     const [showOffcanvas, setShowOffcanvas] = useState(false);
-    const [profileImage, setProfileImage] = useState();
+    const [profileImage, setProfileImage] = useState(null);
 
     const toUpperCaseInitial = (text) => {
         return text?.toLowerCase().replace(/(?:^|\s)\S/g, function (a) {
@@ -22,7 +22,8 @@ export default function Logged({user}) {
         async function getProfileImage() {
             try {
                 const result = await UserService.get_profile_image();
-                setProfileImage(result)    
+                console.log('resultado', result)
+                if (result) setProfileImage(result)    
             } catch (error) {
                 throw error
             }
@@ -39,9 +40,8 @@ export default function Logged({user}) {
     const handleClose = () => setShowOffcanvas(false);
     const handleShow = () => setShowOffcanvas(true);
 
-    const imageComponent = (
-        <Image width={50} height={50} className={styles.profile} src={profileImage} alt="foto de perfil"/> || <FaUserCircle size={50} color="#ccc" />
-    )
+    console.log('profileimage: ', profileImage)
+    const imageComponent = profileImage ? <Image width={50} height={50} className={styles.profile} src={profileImage} alt="foto de perfil"/> : <FaUserCircle size={50} color="#ccc" />
 
     if (user && imageComponent) {
         return (
@@ -65,7 +65,7 @@ export default function Logged({user}) {
                         </Offcanvas.Header>
                         <Offcanvas.Body >
                             <Nav className={styles.links}>
-                                <Link className="nav-link" to="usuario/criar" onClick={handleClose}>Criar usuário</Link>
+                                {user.permission >= 3 && <Link className="nav-link" to="usuario/criar" onClick={handleClose}>Criar usuário</Link>}
                                 <Link className="nav-link" to="/apostilas" onClick={handleClose}>Apostilas</Link>
                                 <Link className="nav-link" to="/" onClick={() => { handleLogout(); handleClose(); }}>Sair</Link>
                             </Nav>
