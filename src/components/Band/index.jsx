@@ -4,7 +4,6 @@ import styles from "./index.module.scss";
 
 export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
     return (
-        <div className={styles.main}>
 
             <div className={styles.container}>
                 <h1>Prospecto de {band.name} - {band.gub}° GUB</h1>
@@ -16,7 +15,7 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         return (
                             <div key={index}>
                                 <div className={styles.attribute}>
-                                    <h4>{index + 1}º - <Link to={`/kibon_donjak/${kibon_donjak.id}`} key={index} className="link">{kibon_donjak.name}</Link>
+                                    <h4>- <Link to={`/kibon_donjak/${kibon_donjak.id}`} key={index} className="link">{kibon_donjak.name}</Link>
                                     </h4>
                                     <p key={index}>({kibon_donjak.description})</p>
                                 </div>
@@ -29,7 +28,7 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         return (
                             <div key={index}>
                                 <div className={styles.attribute}>
-                                    <h4>{index + 1}° - <Link to={`/poomsae/${poomsae.id}`} className="link" key={index}>{poomsae.name}</Link></h4>
+                                    <h4>- <Link to={`/poomsae/${poomsae.id}`} className="link" key={index}>{poomsae.name}</Link></h4>
                                 </div>
                             </div>
 
@@ -40,7 +39,7 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                         return (
                             <div key={index}>
                                 <div className={styles.attribute}>
-                                    <h4>{index + 1}º - <Link to={`/chute/${kick.id}`} className="link" key={index}>{kick.name}</Link></h4>
+                                    <h4>- <Link to={`/chute/${kick.id}`} className="link" key={index}>{kick.name}</Link></h4>
                                     <p key={index}>({kick.description})</p>
                                 </div>
                             </div>
@@ -61,10 +60,6 @@ export default function Band({band, poomsaes, kicks, kibon_donjaks}) {
                     </div>
                 </div>
             </div>
-            {/*<div className={styles.container}>*/}
-            {/*    <h1>Complemento</h1>*/}
-            {/*</div>*/}
-        </div>
     )
 
 }

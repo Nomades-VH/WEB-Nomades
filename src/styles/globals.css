@@ -18,7 +18,6 @@
 }
 
 .app {
-    background-color: rgba(0, 0, 0, 0.938);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -74,6 +73,12 @@ html, body {
     }
 }
 
+@media (min-width: 776px) {
+    .app {
+        background-color: rgba(0, 0, 0, 0.938);
+    }
+}
+
 @media (max-width: 1199px) and (min-width: 776px) {
     .body-container {
         margin-top: 200px; 
@@ -85,6 +90,9 @@ html, body {
 }
 
 @media (max-width: 775px) {
+    .app {
+        background-color: rgba(0, 0, 0);
+    }
     .body-container {
         margin-top: 10px; 
     }

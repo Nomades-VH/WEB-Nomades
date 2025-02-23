@@ -1,12 +1,11 @@
 import '../styles/globals.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Header from "../components/Header";
 import Footer from "../components/Footer";
 import React, {useState} from "react";
-import {AuthProvider, useAuth} from "../context/AuthContext";
+import {AuthProvider} from "../context/AuthContext";
 import {useEffect} from "react";
-import {Route, Routes, BrowserRouter as Router, useLocation, useNavigate} from "react-router-dom";
+import {Route, Routes, BrowserRouter as Router} from "react-router-dom";
 import Home from "./index";
 import PrivateRoute from "../components/PrivateRoute";
 import PermissionPrivateRoute from '../components/PermissionPrivateRoute'
@@ -14,7 +13,6 @@ import CreateUser from "./user/create";
 import CoursePackets from "./coursePack";
 import CoursePack from "./coursePack/[id]";
 import NotFound from "../components/commons/NotFound";
-import LoginPage from "./login";
 import ScrollToTopButton from "../components/ScrollToTopButton";
 import CreateBand from "./coursePack/create";
 import Head from "next/head";
@@ -35,6 +33,9 @@ import Tests from './tests';
 import { LoadingProvider, useLoading } from '../context/LoadingContext';
 import { setupAxiosInterceptors } from '../services/base';
 import Loading from '../components/commons/Loading';
+import ApproveUsers from './user/approve';
+import { Toaster, toast } from 'sonner'
+import Header from "../components/Header";
 
 
 const App = () => {
@@ -68,30 +69,22 @@ const App = () => {
 
 }
 const AppContent = () => {
-    const location = useLocation();
-    const isLoginPage = location.pathname === "/login";
-    const {isAuthenticated} = useAuth();
     const { isLoading, setIsLoading} = useLoading();
-    const navigate = useNavigate();
 
     useEffect(() => {
         setupAxiosInterceptors(setIsLoading);
     }, [setIsLoading]);
 
-    if (isLoginPage && isAuthenticated) {
-        navigate('/')
-    }
-
     return (
         <>
+            <Header />
+
             {isLoading && <Loading />}
-            {/* Renderiza o Header apenas se a página não for a página de login */}
-            {!isLoginPage && <Header/>}
 
             <div className='body-container'>
             <Routes>
+
                 <Route path="/" element={<Home />} />
-                <Route path="/login" element={<LoginPage/>}/>
                 <Route path="/usuario/criar" element={<CreateUser/>}/>
 
                 {/* Somente logados podem acessar */}
@@ -125,12 +118,20 @@ const AppContent = () => {
 
                         <Route path="/chute/criar" element={<CreateKick />} />
                         <Route path="/chute/editar/:id" element={<EditKick />} />
+
+                        <Route path="/usuarios/aprovar" element={<ApproveUsers toast={toast} />} />
                     </Route>
                 </Route>
                 <Route path="*" element={<NotFound/>}/>
             </Routes>
             </div>
             
+            <Toaster 
+                duration={2000} 
+                richColors 
+                position="bottom-left" 
+                expand={false} 
+            />
 
             <Footer/>
         </>

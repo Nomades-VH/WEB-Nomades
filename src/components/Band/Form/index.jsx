@@ -174,7 +174,7 @@ export default function BandForm({
                     e?.map((kick) => {
                         listKicks.push(kick.value)
                     })
-                    setKicks(e.target.value)
+                    setKicks(listKicks)
                 }}
                         options={gettedKicks?.map((kick) => ({
                             label: kick.name,

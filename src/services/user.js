@@ -17,6 +17,18 @@ const UserService = {
             throw error;
         }
     },
+    get_all: async () => {
+        try {
+            const response = await instance.get(`${SERVICE}/`)
+
+            if (response.status === 200) {
+                return response.data;
+            }
+            
+        } catch (error) {
+            throw error;
+        }
+    },
     get_profile_image: async () => {
         try {
             const response = await instance.get(`${SERVICE}/profile`, {
@@ -56,8 +68,6 @@ const UserService = {
             fk_band: data.fkBand ? data.fkBand.toString() : null,
         }
 
-        console.log('usuário: ', user)
-
         const formData = new FormData();
         formData.append('profile', data.profile)
         formData.append('username', data.credentials.username)
@@ -76,6 +86,30 @@ const UserService = {
             if (responseCreate.status !== 201) return
 
             return responseCreate.data;
+            
+        } catch (error) {
+            throw error;
+        }
+    },
+    get_deactivates: async () => {
+        try {
+            const response = await instance.get(`${SERVICE}/deactivates/`)
+
+            if (response.status === 200) {
+                return response.data;
+            }
+            
+        } catch (error) {
+            throw error;
+        }
+    },
+    approve_users_deactivates: async (list_ids) => {
+        try {
+            const response = await instance.post(`${SERVICE}/activate`, list_ids)
+
+            if (response.status === 200) {
+                return response.data;
+            }
             
         } catch (error) {
             throw error;

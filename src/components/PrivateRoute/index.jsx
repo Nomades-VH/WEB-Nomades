@@ -12,7 +12,7 @@ const PrivateRoute = () => {
     }, []);
 
     if (isClient) {
-        if (!user && !token) return <Navigate to="/login" />;
+        if (!user || !token) return <Navigate to="/" />;
         return <Outlet />;
     }
 };

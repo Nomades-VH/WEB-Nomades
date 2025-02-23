@@ -1,0 +1,62 @@
+@media (min-width: 776px) {
+    .container {
+        min-height: 80vh;
+        display: flex;
+        justify-content: center;
+        padding: 30px;
+        width: 100%;
+
+
+        .table {
+            width: 50%;
+            border-collapse: collapse;
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+.table {
+    th {
+        font-weight: bold; /* Torna o texto do cabeçalho em negrito */
+    }
+
+    tr {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    tbody {
+        align-items: center;
+        align-content: center;
+
+        tr, td {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 10px;
+            font-size: 0;
+            line-height: 1.2; // Controla a altura da linha para ser mais compacta
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+}
+
+@media (max-width: 775px) {
+    .container {
+        min-height: 50vh;
+        width: 100%;
+        padding: 30px;
+
+        .table {
+            width: 90%;
+
+            p {
+                font-size: 0.5rem;
+            }
+        }
+    }
+}
