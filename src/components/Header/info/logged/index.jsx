@@ -67,7 +67,7 @@ export default function Logged({user}) {
                             <Nav className={styles.links}>
                                 {user.permission >= 3 && <Link className="nav-link" to="usuario/criar" onClick={handleClose}>Criar usuário</Link>}
                                 <Link className="nav-link" to="/apostilas" onClick={handleClose}>Apostilas</Link>
-                                <Link className="nav-link" to="/usuarios/aprovar" onClick={handleClose}>Aprovação</Link>
+                                {user.permission >= 3 && <Link className="nav-link" to="/usuarios/aprovar" onClick={handleClose}>Aprovação</Link>}
                                 <Link className="nav-link" to="/" onClick={() => { handleLogout(); handleClose(); }}>Sair</Link>
                             </Nav>
                         </Offcanvas.Body>
