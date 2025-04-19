@@ -49,7 +49,7 @@ export default function CreateUser() {
     }
     
     return (
-        <FormCreate data={{credentials, permission, hub, fkBand, profile}}
+        <FormCreate data={{credentials, permission, hub, fkBand, profile, bio}}
                     titlePage={"Criar Usuário"} messageSuccess={"Continuar criando usuário?"}
                     messageError={"Erro ao criar usuário"} serviceCreate={UserService.create_user}
                     defaultInputs={defaultInputs} redirectTo={"/apostilas"}>
