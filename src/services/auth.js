@@ -29,7 +29,6 @@ const AuthService = {
         try {
             const response = await instance.post(`${SERVICE}`, credentials)
 
-            console.log(response.status)
             if (response.status === 201) {
                 localStorage.setItem('access_token', response.data.access_token);
                 return response.data;

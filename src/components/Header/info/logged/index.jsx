@@ -22,7 +22,6 @@ export default function Logged({user}) {
         async function getProfileImage() {
             try {
                 const result = await UserService.get_profile_image();
-                console.log('resultado', result)
                 if (result) setProfileImage(result)    
             } catch (error) {
                 throw error
@@ -40,7 +39,6 @@ export default function Logged({user}) {
     const handleClose = () => setShowOffcanvas(false);
     const handleShow = () => setShowOffcanvas(true);
 
-    console.log('profileimage: ', profileImage)
     const imageComponent = profileImage ? <Image width={50} height={50} className={styles.profile} src={profileImage} alt="foto de perfil"/> : <FaUserCircle size={50} color="#ccc" />
 
     if (user && imageComponent) {

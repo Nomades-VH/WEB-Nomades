@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import BandService from "../../../services/band";
 import Image from "next/image";
+import UserService from "../../../services/user";
 
 
 class Hubs {
@@ -30,6 +31,8 @@ export default function UserForm({
     setPermission,
     hub,
     setHub,
+    bio,
+    setBio,
     fkBand,
     setFkBand,
     confirmPassword,
@@ -42,19 +45,34 @@ export default function UserForm({
     const [gettedBands, setGettedBands] = useState();
     const [passwordIsEqual, setPasswordIsEqual] = useState(false);
     const [previousProfile, setPreviousProfile] = useState();
+    const [permissionsGroup, setPermissionsGroup] = useState([])
 
 
     useEffect(() => {
         const loadBand = async () => {
             try {
-                const result = await BandService.get();
+                const result = await BandService.get_name_bands();
                 result ? setGettedBands(result) : setGettedBands([]);
                 
             } catch (error) {
                 setGettedBands([])
             }
         };
+
+        const loadPermissions = async () => {
+            try {
+                const result = await UserService.get_permissions();
+                const options = Object.entries(result).map(([key, value]) => ({
+                    label: key,
+                    value: value,
+                }));
+                setPermissionsGroup(options)
+            } catch (error) {
+                setPermissionsGroup([])
+            }
+        }
         loadBand();
+        loadPermissions();
     }, [user]);
 
     const changeProfile = (image) => {
@@ -69,10 +87,6 @@ export default function UserForm({
     useEffect(() => {
         setPasswordIsEqual(password === confirmPassword)
     }, [password, confirmPassword])
-
-    useEffect(() => {
-        passwordIsEqual ? console.log("IUHULLL") : console.log("AFF")
-    }, [passwordIsEqual])
     
     const preloadHub = hub ? {
         label: Hubs.getKeyByValue(hub),
@@ -97,6 +111,14 @@ export default function UserForm({
                     label={"Email"}
                     required={true}
                     onChange={(e) => setEmail(e.target.value)}
+                />
+                <InputText
+                    type="text"
+                    placeholder="Biografia"
+                    value={bio}
+                    label={"Biografia"}
+                    required={true}
+                    onChange={(e) => setBio(e.target.value)}
                 />
                 <InputPassword
                     name="password"
@@ -126,7 +148,7 @@ export default function UserForm({
             </section>
             
             <section style={{display: "flex", gap: '10px'}}>
-                <Select value={permission} label={"Permissão"} options={[{label: "Aluno", value: 2}]}
+                <Select value={permission} label={"Permissão"} options={permissionsGroup}
                         onChange={(e) => setPermission(e.value)} isUnique={true} required={true} />
                 <Select label={"Cidade"} onChange={(e) => setHub(e.value)} isUnique={true}
                         defaultValue={preloadHub}
@@ -135,7 +157,7 @@ export default function UserForm({
                             value: Hubs[key]
                         }))} required={true} />
                 
-                <Select label={"Faixa do aluno"} 
+                <Select label={"Faixa"}
                 defaultValue={preloadFkBand}
                 onChange={(e) => setFkBand(e.value)} isUnique={true}
                         options={gettedBands?.map((band) => ({

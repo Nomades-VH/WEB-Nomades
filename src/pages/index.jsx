@@ -3,6 +3,7 @@ import Image from "next/image";
 import logo from "../../public/images/Logo.jpeg";
 import React, {useEffect, useState} from "react";
 import {Button, Carousel} from "react-bootstrap";
+import UserService from "../services/user";
 
 const images = importAll(require.context("../../public/exames/", false, /\.(png|jpe?g|svg)$/));
 
@@ -18,6 +19,19 @@ export default function Home() {
     });
     const [buttonIsVisible, setButtonIsVisible] = useState(false);
     const [visibilityPhotos, setVisibilityPhotos] = useState(true);
+    const [blackBands, setBlackBands] = useState([])
+
+    // fazer uma busca na api para pegar os faixas pretas
+    useEffect(() => {
+        const fetchBlackBands = async () => {
+            const response = await UserService.get_black_bands()
+            if (response) {
+                setBlackBands(response)
+            }
+        };
+
+        fetchBlackBands();
+    }, []);
 
     useEffect(() => {
         const handleResize = () => {
@@ -94,191 +108,17 @@ export default function Home() {
             <div className={styles.kiossanins}>
                 <h1>Faixas pretas da Equipe</h1>
 
-                <div className={styles.person}>
-                    <Image src={logo} alt={"L"}/>
-                    <div>
-                        <h2>Kiossanim</h2>
-                        <p id={'text-1'}>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                            has
-                            been
-                            the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley
-                            of type and scrambled it to make a type specimen book. It has survived not only five
-                            centuries,
-                            but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages,
-                            and more recently with desktop publishing software like Aldus PageMaker including
-                            versions
-                            of
-                            Lorem Ipsum.
-
-                        </p>
-                    </div>
-                </div>
-                <div className={styles.personRight}>
-                    <div className={styles.person}>
+                {blackBands && blackBands.map((blackBand, index) => (
+                    <div key={index} className={styles.person}>
+                        <Image src={blackBand.profile ? blackBand.profile : logo} alt={"L"}/>
                         <div>
-                            <h2>Kiossanim</h2>
-                            <p id={"text-2"}>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has
-                                been
-                                the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                                galley
-                                of type and scrambled it to make a type specimen book. It has survived not only five
-                                centuries,
-                                but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                                popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                                passages,
-                                and more recently with desktop publishing software like Aldus PageMaker including
-                                versions
-                                of
-                                Lorem Ipsum.
+                            <h2>{blackBand.username}</h2>
+                            <p id={'text-1'}>
+                                {blackBand.bio}
                             </p>
                         </div>
-                        <Image src={logo} alt={"L"}/>
                     </div>
-                </div>
-                <div className={styles.person}>
-                    <Image src={logo} alt={"L"}/>
-                    <div>
-                        <h2>Kiossanim</h2>
-                        <p id={"text-3"}>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                            has
-                            been
-                            the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley
-                            of type and scrambled it to make a type specimen book. It has survived not only five
-                            centuries,
-                            but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages,
-                            and more recently with desktop publishing software like Aldus PageMaker including
-                            versions
-                            of
-                            Lorem Ipsum.
-                        </p>
-                    </div>
-                </div>
-                <div className={styles.personRight}>
-                    <div className={styles.person}>
-                        <div>
-                            <h2>Kiossanim</h2>
-                            <p id={"text-2"}>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has
-                                been
-                                the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                                galley
-                                of type and scrambled it to make a type specimen book. It has survived not only five
-                                centuries,
-                                but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                                popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                                passages,
-                                and more recently with desktop publishing software like Aldus PageMaker including
-                                versions
-                                of
-                                Lorem Ipsum.
-                            </p>
-                        </div>
-                        <Image src={logo} alt={"L"}/>
-                    </div>
-                </div>
-                <div className={styles.person}>
-                    <Image src={logo} alt={"L"}/>
-                    <div>
-                        <h2>Kiossanim</h2>
-                        <p id={'text-1'}>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                            has
-                            been
-                            the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley
-                            of type and scrambled it to make a type specimen book. It has survived not only five
-                            centuries,
-                            but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages,
-                            and more recently with desktop publishing software like Aldus PageMaker including
-                            versions
-                            of
-                            Lorem Ipsum.
-                        </p>
-                    </div>
-                </div>
-                <div className={styles.personRight}>
-                    <div className={styles.person}>
-                        <div>
-                            <h2>Kiossanim</h2>
-                            <p id={"text-2"}>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has
-                                been
-                                the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                                galley
-                                of type and scrambled it to make a type specimen book. It has survived not only five
-                                centuries,
-                                but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                                popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                                passages,
-                                and more recently with desktop publishing software like Aldus PageMaker including
-                                versions
-                                of
-                                Lorem Ipsum.
-                            </p>
-                        </div>
-                        <Image src={logo} alt={"L"}/>
-                    </div>
-                </div>
-                <div className={styles.person}>
-                    <Image src={logo} alt={"L"}/>
-                    <div>
-                        <h2>Kiossanim</h2>
-                        <p id={'text-1'}>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                            has
-                            been
-                            the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley
-                            of type and scrambled it to make a type specimen book. It has survived not only five
-                            centuries,
-                            but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages,
-                            and more recently with desktop publishing software like Aldus PageMaker including
-                            versions
-                            of
-                            Lorem Ipsum.
-                        </p>
-                    </div>
-                </div>
-                <div className={styles.personRight}>
-                    <div className={styles.person}>
-                        <div>
-                            <h2>Kiossanim</h2>
-                            <p id={"text-2"}>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has
-                                been
-                                the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                                galley
-                                of type and scrambled it to make a type specimen book. It has survived not only five
-                                centuries,
-                                but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                                popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                                passages,
-                                and more recently with desktop publishing software like Aldus PageMaker including
-                                versions
-                                of
-                                Lorem Ipsum.
-                            </p>
-                        </div>
-                        <Image src={logo} alt={"L"}/>
-                    </div>
-                </div>
+                ))}
             </div>
         </div>
     )

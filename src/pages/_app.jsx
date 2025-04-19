@@ -29,7 +29,6 @@ import EditKick from './kick/edit/[id]';
 import EditPoomsae from './poomsae/edit/[id]';
 import EditKibonDonjak from './kibon_donjak/edit/[id]';
 import EditBand from './coursePack/edit/[id]';
-import Tests from './tests';
 import { LoadingProvider, useLoading } from '../context/LoadingContext';
 import { setupAxiosInterceptors } from '../services/base';
 import Loading from '../components/commons/Loading';
@@ -75,6 +74,14 @@ const AppContent = () => {
         setupAxiosInterceptors(setIsLoading);
     }, [setIsLoading]);
 
+    useEffect(() => {
+        const shown = sessionStorage.getItem("page-dev-alert")
+        if (!shown) {
+            toast("Página em desenvolvimento. Nos ajude a encontrar problemas.", { duration: 10000 })
+            sessionStorage.setItem("page-dev-alert", "true")
+        }
+    }, [])
+
     return (
         <>
             <Header />
@@ -101,8 +108,6 @@ const AppContent = () => {
 
                     <Route path="/poomsae" element={<Poomsaes />} />
                     <Route path="/poomsae/:id" element={<Poomsae />} />
-
-                    <Route path='/tests' element={<Tests />} />
 
 
                     {/* Somente logados com permissão acima da mesa podem acessar */}

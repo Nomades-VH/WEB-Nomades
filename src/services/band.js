@@ -14,7 +14,17 @@ const BandService = {
             throw error;
         }
     },
+    get_name_bands: async () => {
+        try {
+            const response = await instance.get(`${SERVICE}/get_name_bands`)
 
+            if (response.status === 200) {
+                return response.data;
+            }
+        } catch (error) {
+            throw error;
+        }
+    },
     get: async () => {
         try {
             const response = await instance.get(`${SERVICE}/`)

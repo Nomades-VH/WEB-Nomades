@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import UserService from "../../services/user";
 import styles from "./approve.module.scss"
+import Select from "../../components/commons/inputs/Select";
 
 
 export default function ApproveUsers({ toast }) {
     const [users, setUsers] = useState([]); // Inicializamos como um array vazio
+    const [permission, setPermission] = useState(2);
 
     // Função para buscar todos os usuários
     useEffect(() => {
-        UserService.get_all()
+        UserService.get_deactivates()
             .then((response) => {
-                setUsers(response); // Define o estado com a lista de usuários
+                setUsers(response);
                 toast.success('Usuários recebidos.')
             })
             .catch((error) => {
@@ -41,29 +43,33 @@ export default function ApproveUsers({ toast }) {
         <div className={styles.container}>
             <table className={styles.table}>
                 <thead>
-                    <tr>
-                        <th><p>Username</p></th>
-                        <th><p>Email</p></th>
-                        <th><p>Active</p></th>
-                    </tr>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Ativado</th>
+                    <th>Polo</th>
+                    <th>Permissão</th>
+                </tr>
                 </thead>
                 <tbody>
                 {users.map((user) => (
                     <tr key={user.id} className={styles.row}>
-                    <td><p>{user.username}</p></td>
-                    <td><p>{user.email}</p></td>
-                    <td>
-                        <input
-                        type="checkbox"
-                        checked={user.is_active}
-                        onChange={(e) => toggleUserStatus(user.id, e.target.checked)}
-                        />
-                    </td>
+                        <td data-label="Username">{user.username}</td>
+                        <td data-label="Email">{user.email}</td>
+                        <td data-label="Ativado">
+                            <input
+                                type="checkbox"
+                                checked={user.is_active}
+                                onChange={(e) => toggleUserStatus(user.id, e.target.checked)}
+                            />
+                        </td>
+                        <td data-label="Polo">{user.hub}</td>
+                        <td data-label="Permissão">{user.permission}</td>
                     </tr>
                 ))}
                 </tbody>
-            </table>
-            </div>
 
+            </table>
+        </div>
     );
 }

@@ -25,7 +25,6 @@ function CrudForm({children, data, titlePage: title, messageError, messageSucces
             if (response) {
                 setOpenAlert(true);
                 defaultInputs();
-                console.log(titlePage)
                 localStorage.removeItem(titlePage)
             } else {
                 setOpenAlertErrorCreate(true)
