@@ -19,7 +19,7 @@ const UserService = {
     },
     get_black_bands: async () => {
         try {
-            const response = await instance.get(`${SERVICE}/black-bands/`)
+            const response = await instance.get(`${SERVICE}/black-bands`)
 
             if (response.status === 200) {
                 return response.data;
@@ -105,7 +105,7 @@ const UserService = {
     },
     get_deactivates: async () => {
         try {
-            const response = await instance.get(`${SERVICE}/deactivates/`)
+            const response = await instance.get(`${SERVICE}/deactivates`)
 
             if (response.status === 200) {
                 return response.data;
