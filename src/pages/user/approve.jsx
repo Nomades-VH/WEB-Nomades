@@ -5,8 +5,7 @@ import Select from "../../components/commons/inputs/Select";
 
 
 export default function ApproveUsers({ toast }) {
-    const [users, setUsers] = useState([]); // Inicializamos como um array vazio
-    const [permission, setPermission] = useState(2);
+    const [users, setUsers] = useState([]);
 
     // Função para buscar todos os usuários
     useEffect(() => {
@@ -18,7 +17,6 @@ export default function ApproveUsers({ toast }) {
             .catch((error) => {
                 setUsers([]); // Em caso de erro, define como lista vazia
                 toast.error('Não foi possível encontrar os usuários.')
-
             });
     }, [toast]);
 

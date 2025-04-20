@@ -16,7 +16,7 @@ export const setupAxiosInterceptors = (setIsLoading) => {
     instance.interceptors.request.use(async (config) => {
         count++
         if (count > 0) setIsLoading(true)
-        config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
+        if (localStorage.getItem('access_token')) config.headers.Authorization = `Bearer ${localStorage.getItem('access_token')}`;
 
         if (Math.random() <= 0.08 && !config.url.includes("auth")) {
             try {
@@ -53,12 +53,12 @@ export const setupAxiosInterceptors = (setIsLoading) => {
 
         if (error.response.status === 403) {
             window.location.href = '/'
-        }   
+        }
 
         if (error.response.status === 404) {
             window.location.href = '/not_found'
         }
-            
+
         return Promise.reject(error);
 
     })

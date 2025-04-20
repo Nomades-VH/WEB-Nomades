@@ -8,7 +8,7 @@ export default function CreateUser() {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [permission, setPermission] = useState(2);
+    const [permission, setPermission] = useState(1);
     const [bio, setBio] = useState('');
     const [hub, setHub] = useState('');
     const [fkBand, setFkBand] = useState(null)

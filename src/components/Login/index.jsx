@@ -31,8 +31,7 @@ function Login({redirectTo = "/apostilas"}) {
 
         try {
             const response = await login(textLogin, password, isEmail)
-            
-            if (response.status === 200) {
+            if (response.status === 201) {
                 navigate(redirectTo)
             } else {
                 setErrorMessage(response.data.message)
