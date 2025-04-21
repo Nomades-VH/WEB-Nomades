@@ -91,31 +91,21 @@ export default function Home({toast}) {
                 <div className={styles.carouselContainer}>
                     <div className={styles.text}>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                            has
-                            been
-                            the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                            galley
-                            of type and scrambled it to make a type specimen book. It has survived not only five
-                            centuries,
-                            but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                            popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
-                            passages,
-                            and more recently with desktop publishing software like Aldus PageMaker including
-                            versions
-                            of
-                            Lorem Ipsum.
+                            equipe Nômades do Vale Histórico foi criadaedesenvolvida pelo Kiossanin Wellington Junior e 
+                            seu corpodegraduados, que hoje representam as cidades de Silveiras, Areias, São José do Barreiro, 
+                            Piquete e Lorena. Nós temos comoobjetivo promover o Taekwondo como filosofia devida, mostrando como 
+                            podemos através desta Arte Marcial, valorizaro praticante, fazendo com que seja potencializada as boasenergias 
+                            existentes dentro de cada criança, jovens e adultos, proporcionando desta forma um conceito diferenciadoeharmonioso na sociedade. 
+                            Visualizamos através do Taekwondo, resultados positivos entreos praticantes e apoiadores pois o Taekwondo éumamodalidade que envolve toda família.
                         </p>
                         <p>
-                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                                has
-                                been
-                                the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-                                galley
-                                of type and scrambled it to make a type specimen book. It has survived not only five
-                                centuries,
-
-                            </p>
+                            Nosso Objetivo é a valorização da educação, saúde, convíviosocial e conceitos filosóficos da Arte Marcial. Nós, os Nômades, Baseamos nossa formação, 
+                            na confiança, humildadeehonestidade, para que os praticantes tenhamtenhamcondiçõesde vivênciar situações de vitorias e derrotas, reforçandoos bonsprincípios 
+                            da vida em grupo. Somos facilitadoreseestimuladores da convivência e ampliação de atitudes positivasna sociedade e na família. Orientamos nossos praticantes, 
+                            sobre a importância deseaproveitar o tempo focando sempre em seu bemestar físicoemental com atitudes corretas, sendo assimpossível colaborarcom o crescimento 
+                            da educação e saúde através desta Arte. Nósos Nômades da Vale Histórico, focamos na valorizaçãoeintegração do praticante na sociedade através do Taekwondo, 
+                            fazendo assim com que o aluno desenvolva o espíritodeliderança e criatividade.
+                        </p>
                     </div>
                     <div className={styles.images} >
                         {
