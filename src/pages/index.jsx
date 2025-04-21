@@ -91,7 +91,7 @@ export default function Home({toast}) {
                 <div className={styles.carouselContainer}>
                     <div className={styles.text}>
                         <p>
-                            equipe Nômades do Vale Histórico foi criadaedesenvolvida pelo Kiossanin Wellington Junior e 
+                            A equipe Nômades do Vale Histórico foi criadaedesenvolvida pelo Kiossanin Wellington Junior e 
                             seu corpodegraduados, que hoje representam as cidades de Silveiras, Areias, São José do Barreiro, 
                             Piquete e Lorena. Nós temos comoobjetivo promover o Taekwondo como filosofia devida, mostrando como 
                             podemos através desta Arte Marcial, valorizaro praticante, fazendo com que seja potencializada as boasenergias 
