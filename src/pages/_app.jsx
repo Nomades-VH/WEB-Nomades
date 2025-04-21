@@ -91,7 +91,7 @@ const AppContent = () => {
             <div className='body-container'>
             <Routes>
 
-                <Route path="/" element={<Home />} />
+                <Route path="/" element={<Home toast={toast} />} />
                 <Route path="/usuario/criar" element={<CreateUser/>}/>
 
                 {/* Somente logados podem acessar */}

@@ -1,83 +1,90 @@
-import axios from "axios";
 import { instance } from "./base"
-import AuthService from "./auth";
 
 const SERVICE = "/user"
 
 const UserService = {
     get_me: async () => {
-        try {
-            const response = await instance.get(`${SERVICE}/me/`)
-
-            if (response.status === 200) {
-                return response.data;
-            }
-            
-        } catch (error) {
-            throw error;
-        }
+        return instance.get(`${SERVICE}/me/`)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.data;
+                }
+            })
+            .catch((error) => {
+                throw error;
+            });
     },
     get_black_bands: async () => {
-        try {
-            const response = await instance.get(`${SERVICE}/black-bands`)
-
-            if (response.status === 200) {
-                return response.data;
-            }
-
-        } catch (error) {
-            throw error;
-        }
+        return instance.get(`${SERVICE}/black-bands`)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.data;
+                }
+            })
+            .catch((error) => {
+                throw error;
+            });
+    },
+    get_profile_by_id: async (id) => {
+        return instance.get(`${SERVICE}/profile/${id}`, {
+            responseType: 'blob', // Indica que a resposta será um Blob
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    return URL.createObjectURL(response.data); // Cria a URL temporária
+                }
+            })
+            .catch((error) => {
+                throw error;
+            });
     },
     get_all: async () => {
-        try {
-            const response = await instance.get(`${SERVICE}/`)
-
-            if (response.status === 200) {
-                return response.data;
-            }
-            
-        } catch (error) {
-            throw error;
-        }
+        return instance.get(`${SERVICE}/`)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.data;
+                }
+            })
+            .catch((error) => {
+                throw error;
+            });
     },
     get_permissions: async() => {
-        try {
-            const response = await instance.get(`${SERVICE}/permissions`)
-
-            if (response.status === 200) {
-                return response.data;
-            }
-
-        } catch (error) {
-            throw error;
-        }
+        return instance.get(`${SERVICE}/permissions`)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.data;
+                }
+            })
+            .catch((error) => {
+                throw error;
+            });
     },
     get_profile_image: async () => {
-        try {
-            const response = await instance.get(`${SERVICE}/profile`, {
-                responseType: 'blob', // Indica que a resposta será um Blob
+        return instance.get(`${SERVICE}/profile`, {
+            responseType: 'blob', // Indica que a resposta será um Blob
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    return URL.createObjectURL(response.data); // Cria a URL temporária
+                }
             })
-            
-            if (response.status === 200) {
-                return URL.createObjectURL(response.data); // Cria a URL temporária
-            }
-        } catch (error) {
-            throw error;
-        }
+            .catch((error) => {
+                throw error;
+            });
     },
     upload_profile_image: async (profile) => {
-        try {
-            const formData = new FormData();
-            formData.append('profile', profile)
-
-            const response = await instance.post(`${SERVICE}/profile`, formData)
-            if (response.status === 201) {
-                return response.data;
-            }
-        } catch (error) {
-            throw error;
-        }
+        const formData = new FormData();
+        formData.append('profile', profile)
+        return instance.post(`${SERVICE}/profile`, formData)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.data;
+                }
+            })
+            .catch((error) => {
+                throw error;
+            });
     },
     create_user: async (data) => {
 
@@ -92,40 +99,37 @@ const UserService = {
         formData.append('hub', data.hub)
         data.fkBand ? formData.append('fk_band', data.fkBand.toString()) : null
 
-        try {
-            const responseCreate = await instance.post(`${SERVICE}/`, formData)
-
-            if (responseCreate.status !== 201) return
-
-            return responseCreate.data;
-            
-        } catch (error) {
-            throw error;
-        }
+        return instance.post(`${SERVICE}/`, formData)
+            .then((response) => {
+                if (response.status === 201) {
+                    return response.data;
+                }
+            })
+            .catch((error) => {
+                throw error;
+            });
     },
     get_deactivates: async () => {
-        try {
-            const response = await instance.get(`${SERVICE}/deactivates`)
-
-            if (response.status === 200) {
-                return response.data;
-            }
-            
-        } catch (error) {
-            throw error;
-        }
+        return instance.get(`${SERVICE}/deactivates`)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.data;
+                }
+            })
+            .catch((error) => {
+                throw error;
+            });
     },
     approve_users_deactivates: async (list_ids) => {
-        try {
-            const response = await instance.post(`${SERVICE}/activate`, list_ids)
-
-            if (response.status === 200) {
-                return response.data;
-            }
-            
-        } catch (error) {
-            throw error;
-        }
+        return instance.post(`${SERVICE}/activate`, list_ids)
+            .then((response) => {
+                if (response.status === 200) {
+                    return response.data;
+                }
+            })
+            .catch((error) => {
+                throw error;
+            });
     }
 };
 export default UserService;

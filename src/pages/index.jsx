@@ -12,7 +12,7 @@ function importAll(r) {
 }
 
 
-export default function Home() {
+export default function Home({toast}) {
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,
         height: window.innerHeight,
@@ -20,13 +20,40 @@ export default function Home() {
     const [buttonIsVisible, setButtonIsVisible] = useState(false);
     const [visibilityPhotos, setVisibilityPhotos] = useState(true);
     const [blackBands, setBlackBands] = useState([])
+    const [imageUrls, setImageUrls] = useState({});
 
-    // fazer uma busca na api para pegar os faixas pretas
+    useEffect(() => {
+        const fetchImages = async () => {
+            const urls = {};
+
+            await Promise.all(
+                blackBands.map(async (band) => {
+                    try {
+                        const blobUrl = await UserService.get_profile_by_id(band.id);
+                        urls[band.id] = blobUrl;
+                    } catch (err) {
+                        toast.error(`Erro ao carregar imagem de ${band.username}:`, err);
+                    }
+                })
+            );
+
+            setImageUrls(urls);
+        };
+
+        if (blackBands?.length) {
+            fetchImages();
+        }
+    }, [blackBands, toast]);
+
     useEffect(() => {
         const fetchBlackBands = async () => {
-            const response = await UserService.get_black_bands()
-            if (response) {
-                setBlackBands(response)
+            try {
+                const response = await UserService.get_black_bands();
+                if (response) {
+                    setBlackBands(response);
+                }
+            } catch (error) {
+                toast.error("Erro ao buscar faixas pretas.");
             }
         };
 
@@ -106,16 +133,22 @@ export default function Home() {
 
 
             <div className={styles.kiossanins}>
-                <h1>Faixas pretas da Equipe</h1>
+                {blackBands && <h1>Faixas pretas da Equipe</h1>}
 
                 {blackBands && blackBands.map((blackBand, index) => (
-                    <div key={index} className={styles.person}>
-                        <Image src={blackBand.profile ? blackBand.profile : logo} alt={"L"}/>
-                        <div>
-                            <h2>{blackBand.username}</h2>
-                            <p id={'text-1'}>
-                                {blackBand.bio}
-                            </p>
+                    <div key={index} className={index % 2 === 0 ? styles.personRight : ''}>
+                        <div  className={styles.person}>
+                            <Image
+                                src={imageUrls[blackBand.id] || logo}
+                                width={200}
+                                height={200}
+                                alt={blackBand.name} />
+                            <div>
+                                <h2>Kiossanim {blackBand.name}</h2>
+                                <p id={'text-1'}>
+                                    {blackBand.bio}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 ))}
